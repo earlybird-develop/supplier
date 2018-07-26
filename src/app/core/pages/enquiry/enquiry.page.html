@@ -1,0 +1,66 @@
+<eb-home-header blackMenu="1"></eb-home-header>
+
+<div class="content">
+  <div class="fill"></div>
+  <div class="content-block">
+    <div class="left-side">
+      <img src="assets/sky-lines.png">
+    </div>
+    <div class="right-form">
+      <h2>{{ 'core.pages.enquiry.form-title' | translate }}</h2>
+      <h3>{{ 'core.pages.enquiry.form-subtitle' | translate }}</h3>
+
+      <form novalidate>
+        <!--{{ 'core.pages.enquiry.form-firstname' | translate }} *-->
+        <label for="firstName"></label>
+        <input id="firstName" type="text" [placeholder]="('core.pages.enquiry.form-firstname' | translate) + ' *'">
+
+        <!--{{ 'core.pages.enquiry.form-lastname' | translate }} *-->
+        <label for="lastName"></label>
+        <input id="lastName" type="text" [placeholder]="('core.pages.enquiry.form-lastname' | translate) + ' *'">
+
+        <!--{{ 'core.pages.enquiry.form-company' | translate }} *-->
+        <label for="company"></label>
+        <input id="company" type="text" [placeholder]="('core.pages.enquiry.form-company' | translate) + ' *'">
+
+        <!--{{ 'core.pages.enquiry.form-select-role' | translate }} *-->
+        <eb-custom-select title=""
+                          [placeholder]="('core.pages.enquiry.form-select-role' | translate) + ' *'"
+                          [options]="roles">
+        </eb-custom-select>
+
+        <!--{{ 'core.pages.enquiry.form-email' | translate }} *-->
+        <label for="email"></label>
+        <input id="email" type="text" [placeholder]="('core.pages.enquiry.form-email' | translate) + ' *'">
+
+        <!--{{ 'core.pages.enquiry.form-phone-optional' | translate }}-->
+        <label for="phone"></label>
+        <input id="phone" type="text" [placeholder]="('core.pages.enquiry.form-phone' | translate)">
+
+        <!--{{ 'core.pages.enquiry.form-region' | translate }} *-->
+        <eb-custom-select title=""
+                          [placeholder]="('core.pages.enquiry.form-region' | translate) + ' *'"
+                          [options]="regions">
+        </eb-custom-select>
+
+        <!--{{ 'core.pages.enquiry.form-interests' | translate }} *-->
+        <eb-custom-select title=""
+                          [placeholder]="('core.pages.enquiry.form-interests' | translate) + ' *'"
+                          [options]="interests">
+        </eb-custom-select>
+
+        <!--{{ 'core.pages.enquiry.form-needs-title' | translate }}-->
+        <label for="needs"></label>
+        <textarea id="needs"
+                  rows="3"
+                  [placeholder]="'core.pages.enquiry.form-needs' | translate"></textarea>
+
+        <button class="submit" type="submit">
+          {{ 'core.pages.enquiry.form-submit' | translate }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<eb-home-footer></eb-home-footer>

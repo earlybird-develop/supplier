@@ -1,0 +1,141 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
+
+import 'rxjs/add/operator/finally';
+
+import { MarketsService, InvoiceType, SubheaderService } from '../../services';
+import { Market, Invoice, InvoicesFilter } from '../../models';
+import { MarketHeaderComponent } from '../../components';
+
+
+@Component({
+  selector: 'eb-market-invoices',
+  templateUrl: './market-invoices.page.html',
+  styleUrls: ['./market-invoices.page.scss']
+})
+
+export class MarketInvoicesPage implements OnInit {
+  public buyId: string;
+  public search = '';
+  public checkbox = false;
+  public market: Market = new Market();
+  public invoices: Invoice[] = [];
+  public filter = new InvoicesFilter();
+  public invoiceType: any;
+  public isParticipation = false;
+  public participationLoading = false;
+
+  constructor(public marketsService: MarketsService,
+              private _route: ActivatedRoute,
+              private _subheader: SubheaderService) { }
+
+  ngOnInit() {
+    this.buyId = this._route.parent.snapshot.params.id;
+
+    const subhHeader = this._subheader.show(MarketHeaderComponent);
+    subhHeader.buyId = this.buyId;
+
+    this.marketsService
+      .getStat(this.buyId)
+      .subscribe(
+        market => {
+          this.market = market;
+          console.log(this.market.buyerName);
+          subhHeader.payDate = this.market.nextPaydate;
+          subhHeader.buyerName = this.market.buyerName;
+          this.isParticipation = this.market.isParticipation === 1;
+        },
+          errors => console.error(errors)
+      );
+
+    this.setInvoiceType(InvoiceType.Eligible);
+  }
+
+  public setInvoiceType(type: InvoiceType): void {
+    this.invoiceType = type;
+    this.loadInvoices();
+  }
+
+  public loadInvoices(): void {
+    this.checkbox = false;
+
+    this.marketsService
+      .getInvoices(this.buyId, this.filter, this.invoiceType)
+      .subscribe(
+        invoices => this.invoices = invoices,
+        errors => console.error(errors)
+      );
+  }
+
+  public setIncluded(isIncluded = true): void {
+    const incIds: string[]  = this.invoices
+      .filter(x => x._checked)
+      .map(x => x.invId.toString());
+
+    if (incIds.length === 0) {
+      return;
+    }
+
+    this.marketsService
+      .setInvoicesInclude(incIds, this.buyId, isIncluded)
+      .subscribe(() => this.loadInvoices());
+  }
+
+  public toggleDpe(value: number, e: Event): void {
+    this.filter.toggleDpe(value, e);
+    this.loadInvoices();
+  }
+
+  public toggleAmount(value: number, e: Event): void {
+    this.filter.toggleAmount(value, e);
+    this.loadInvoices();
+  }
+
+  public setCheckedInvoices(e: Event): void {
+    this.invoices.map(x => x._checked = e.target['checked']);
+  }
+
+  public exportToCsv(): void {
+    const invoices = this.invoices
+      .filter(x => x._checked)
+      .map(x => x._toJSON());
+
+    const params = { useBom: false };
+    const csv = new Angular2Csv(invoices, 'Invoices', params);
+  }
+
+  public setPayAmount(amount: number): void {
+    this.marketsService
+      .setOfferApr(this.market.id, amount, this.market.offerApr)
+      .subscribe(() => this.market.minPayment = amount * 100);
+  }
+
+  public setOfferApr(apr: number): void {
+    this.participationLoading = true;
+    // todo : This hack needs to be removed when api will work
+    this.market.offerApr = apr;
+
+    this.marketsService
+      .setOfferApr(this.market.id, this.market.minPayment, apr)
+      .finally(() => this.participationLoading = false)
+      .subscribe(() => this.market.offerApr = apr);
+  }
+
+  public setParticipation(value: boolean): void {
+    this.participationLoading = true;
+    // todo : This hack needs to be removed when api will work
+    this.isParticipation = value;
+
+    // todo : This hack needs to be removed when api will work
+    if (!this.isParticipation) {
+      this.market.offerApr = null;
+    }
+
+    this.marketsService
+      .setParticipation(this.market.id, value)
+      .finally(() => this.participationLoading = false)
+      .subscribe(() => null);
+  }
+}

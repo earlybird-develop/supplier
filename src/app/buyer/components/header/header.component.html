@@ -1,0 +1,41 @@
+<header>
+  <div class="container">
+    <div class="logo pointer">
+      <img src="assets/logo.svg" class="pointer" alt="Early Bird Cash Flow" [routerLink]="['/']">
+    </div>
+    <div class="controls">
+      <div class="user-menu">
+        <div class="lang-select" dropdown [autoClose]="true">
+          <a dropdownToggle>
+            <ng-container [ngSwitch]="translate.currentLang">
+              <ng-container *ngSwitchCase="'en'">English</ng-container>
+              <ng-container *ngSwitchCase="'cn'">Chinese</ng-container>
+            </ng-container>
+            <img src="assets/icons/small-down.svg" class="small-down">
+          </a>
+          <ul class="dropdown-menu" *dropdownMenu>
+            <li><a style="color: #333 !important;" (click)="selectLang('en')">English</a></li>
+            <li><a style="color: #333 !important;" (click)="selectLang('cn')">Chinese</a></li>
+          </ul>
+        </div>
+        <div class="separator"></div>
+        <div class="logged-as">
+          {{ 'buyer.components.header.loggedAs' | translate }}&nbsp;<a class="username" [routerLink]="['/buyer', 'account', 'profile']">Raza</a>
+        </div>
+        <a href="javascript:void(0)" class="power-btn">
+          <img src="assets/icons/power.svg" alt="Logout" class="logout">
+        </a>
+      </div>
+      <ul class="header-menu">
+        <li>
+          <a [routerLink]="['/buyer', 'markets']">
+            {{ 'buyer.components.header.menu.markets' | translate }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="subheader">
+    <div #subheader></div>
+  </div>
+</header>

@@ -1,0 +1,260 @@
+{
+  "core": {
+    "pages": {
+      "language": {
+        "en" : "English",
+        "cn" : "Simplified Chinese",
+        "tw" : "Traditional Chinese"
+      },
+      "enquiry": {
+        "form-title": "INQUIRY FOR REGISTER",
+        "form-subtitle": "Please Complete all fields",
+        "form-firstname": "First name",
+        "form-lastname": "Last name",
+        "form-company": "Company",
+        "form-select-role": "Select role",
+        "form-email": "Email",
+        "form-phone-optional": "Phone number (optional)",
+        "form-phone": "Phone number",
+        "form-region": "Region",
+        "form-interests": "WHAT ARE YOU INTERESTED IN?",
+        "form-needs-title": "YOUR NEEDS",
+        "form-needs": "Tell us about your needs, we're listening",
+        "form-submit": "Submit"
+      }
+    },
+    "components": {
+      "ebcf": {
+        "title": "\"Early Bird\" is such a platform that makes the buyers and sellers better cooperation",
+        "text1": "Through the platform will be early payment program into both sides can benefit<br>the behavior.",
+        "subtitle": "EBCF makes it easier for You",
+        "text2": "The buyer only needs to simply present the original payment plan<br>on the platform and the amount and time of the early payment, and the seller provides the<br>acceptable rate for the corresponding invoice for cash.<br>By the platform for everyone to calculate the income<br>and connection matching. It is so simple.",
+        "collaborate": "Collaborate",
+        "collaborate-desc": "With our platform, buyer and seller<br>copoeration benefit the behavior.",
+        "optimize": "Optimize",
+        "optimize-desc": "This platform calculate the income<br>and connection matching."
+      },
+      "faq": {
+        "title": "Here’s a few answers to our most common questions",
+        "question1": "Is this EP-FO platform free ?",
+        "answer1": "It’s completely free to users, <br> no matter for buyer or supplier.",
+        "question2": "Is it risky for working capital on EP-FO platform?",
+        "answer2": "It’s completely risk-free. On approved invoices, <br> both sides of user don’t need to change any bank <br> information.",
+        "question3": "Does buyer or supplier <br> need to do any change on ERP/SAP ?",
+        "answer3": "None",
+        "subtitle": "Power your cash flow <br> with intelligent automation",
+        "create-account": "create your free own account now"
+      },
+      "footer": {
+        "menu": {
+          "about": "About Us",
+          "customer-service": "Customer Service",
+          "careers": "Careers",
+          "terms": "Terms of service",
+          "contact": "Contact Us"
+        },
+        "copy": "Copyright",
+        "copy_website": "Early Bird Invoice Manage Ltd. All rights reserved."
+      },
+      "free-account": {
+        "content": "If you’re ready to improve your cash flow <br> and spend more time developing your business opportunity",
+        "btn": "CREATE MY FREE ACCOUNT"
+      },
+      "header": {
+        "whatis": "What is Early Bird",
+        "why": "Why Early",
+        "benefits": "Benefits",
+        "faq": "Faq",
+        "login": "Login",
+        "lets-start": "Lets Start"
+      },
+      "hero": {
+        "slogan": "Improve your cash flow to get more business opportunity",
+        "btn-text": "JOIN WITH EARLY PAY"
+      },
+      "sides": {
+        "buyer": {
+          "title": "What’s in it for <br> Buyers?",
+          "opt1": "Increase margin &EBITDA",
+          "opt2": "Generate higher returns on cash",
+          "opt3": "Improve relationship with supply chain",
+          "opt4": "No financial risk or bank credit approval"
+        },
+        "supplier": {
+          "title": "What’s in it for <br> Suppliers?",
+          "opt1": "Improve cash flow",
+          "opt2": "Access cash on demand",
+          "opt3": "No financial risk or bank credit approval",
+          "opt4": "Simply click"
+        },
+        "lean-more": "learn more"
+      },
+      "why": {
+        "title": "WHY EARLYBIRD",
+        "buyer-title": "BUYERS",
+        "buyer-desc": "Generate higher returns on cash<br> &nbsp;",
+        "supplier-title": "SUPPLIERS",
+        "supplier-desc": "No financial risk <br> or bank credit approval"
+      }
+    }
+  },
+  "supplier": {
+    "components": {
+      "header": {
+        "logged-as": "Logged as",
+        "menu": {
+          "markets": "Markets"
+        }
+      },
+      "market-header": {
+        "menu": {
+          "invoices": "Invoices",
+          "history": "History"
+        },
+        "pay-date": "Next pay date"
+      },
+      "markets-header": {
+        "title": "Market Opportunities",
+        "closing": "Market closing"
+      }
+    },
+    "pages": {
+      "account": {
+        "menu-profile": "Profile",
+        "menu-change-pwd": "Change password"
+      },
+      "change-password": {
+        "desc": "To reset your password we will send an email with a password rest link to <a href=\"{{link}}\">{{value}}</a>.<br>The email has instructions on how to securely reset your password.",
+        "send-btn": "SEND EMAIL"
+      },
+      "history": {
+        "filter": {
+          "title": "History",
+          "last7": "Last 7 Days",
+          "last30": "Last 30 Days",
+          "last60": "Last 60 Days",
+          "last90": "Last 90 Days",
+          "custom": "Custom Range",
+          "from": "From",
+          "to": "To",
+          "go": "GO",
+          "download-csv": "Download CSV"
+        },
+        "filter-range": "Last {{fromDays}} days",
+        "awarded": "Awarded A/R",
+        "total": "Total Discount",
+        "average": "Average Discount",
+        "table": {
+          "date": "DATE",
+          "total-paid": "TOTAL PAID",
+          "total-discount": "TOTAL DISCOUNT",
+          "average-discount": "AVERAGE DISCOUNT",
+          "apr": "AVERAGE APR",
+          "dpe": "AVERAGE DPE",
+          "download": "DOWNLOAD",
+          "csv": "CSV",
+          "excel": "EXCEL"
+        }
+      },
+      "invoices": {
+        "filter": {
+          "title": "Invoices",
+          "eligible": "Eligible",
+          "ineligible": "Ineligible",
+          "adjustments": "Adjustments",
+          "awarded": "Awarded",
+          "filter": "Filter",
+          "included": "Included",
+          "included-opt": "Included",
+          "excluded": "excluded",
+          "clearing": "Clearing",
+          "yes": "Yes",
+          "no": "No",
+          "dpe": "Days Paid Early (DPE)",
+          "less15": "Less than 15 days",
+          "more15": "15 days to 30 days",
+          "more30": "30 to 45 days",
+          "more45": "45 days or more",
+          "eia": "Eligible Invoice Amount",
+          "less25k": "Less than 25,000",
+          "more25k": "25,000 to 50,000",
+          "more50k": "50,000 to 75,000",
+          "more75k": "75,000 or more"
+        },
+        "updating": "Updating...",
+        "none": "None",
+        "available-ar": "of your available A/R is currently available",
+        "offer": "Offer",
+        "blocked-editing": "Market statis is waiting. You can not edit this field",
+        "mpa": "Minimum Pay Amount",
+        "requiring": "You are requiring atleast",
+        "participation": "Participation",
+        "ar": "Avaliable A/R",
+        "avg-dpe": "AVG DPE",
+        "clearing": "Clearing",
+        "non-clearing": "Non-Clearing",
+        "discount": "Discount",
+        "disc": "Disc",
+        "apr": "APR",
+        "ar-a": "Total A/R",
+        "include": "INCLUDE",
+        "exclude": "EXCLUDE",
+        "search-ph": "Search Invoice Id’s",
+        "download": "DOWNLOAD",
+        "table": {
+          "include": "INCLUDED",
+          "clearing": "CLEARING",
+          "invoice-id": "INVOICE ID",
+          "pay-date": "ORIGINAL PAY DATE",
+          "dpe": "DPE",
+          "amount": "INVOICE AMOUNT",
+          "discount": "DISCOUNT %",
+          "discount-value": "DISCOUNT (USD)",
+          "yes": "YES",
+          "no": "NO",
+          "included_tip": "该发票将会参与竞价计算，若不想参与竞价可设置其为‘排除’",
+          "noincluded_tip": "该发票将不会参与竞价计算，若想参与竞价可设置其为‘包括’"
+        }
+      },
+      "markets": {
+        "table": {
+          "participation": "PARTICIPATION",
+          "division": "DIVISION",
+          "ar": "AVAILBALE A/R",
+          "offer": "OFFER",
+          "clearing": "CLEARING",
+          "non-clearing": "NON CLEARING",
+          "discount": "DISCOUNT",
+          "dpe": "DPE",
+          "pay-date": "PAY DATE"
+        },
+        "view": "View Invoices",
+        "subtext": "You have {{value}} of eligible invoices with {{buyer}} ({{currency}}). Set an offer to get paid early by an average of {{dpe}} days.",
+        "config-offer": "CONFIGURE OFFER",
+        "waiting-status": "Market status is waiting. You can not edit this field",
+        "turn-on": "Turn ON participation to enter the market"
+      },
+      "profile": {
+        "title": "Profile",
+        "labels": {
+          "name": "Name",
+          "job": "Job Title",
+          "email": "A/R Department Email Address",
+          "industry": "Industry",
+          "country": "Country",
+          "submit": "SUBMIT",
+          "lastName": "Last Name",
+          "phone": "Primary Phone Number",
+          "year": "Fiscal Year End"
+        }
+      },
+      "signin": {
+        "title": "Supplier Sign in",
+        "email": "EMAIL",
+        "password": "PASSWORD",
+        "remember": "Remember email",
+        "forgot": "Forgot your password"
+      }
+    }
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "core": {
+    "pages": {
+      "language": {
+        "en" : "英文",
+        "cn" : "简体中文",
+        "tw" : "繁体中文"
+      },
+      "enquiry": {
+        "form-title": "注册所需",
+        "form-subtitle": "请填写所有选项",
+        "form-firstname": "名字",
+        "form-lastname": "姓氏",
+        "form-company": "公司",
+        "form-select-role": "选择角色",
+        "form-email": "邮箱",
+        "form-phone-optional": "电话号码(可选)",
+        "form-phone": "联系电话",
+        "form-region": "地区",
+        "form-interests": "您对什么感兴趣?",
+        "form-needs-title": "您的需求",
+        "form-needs": "告诉我们你的需求，我们正在倾听",
+        "form-submit": "提交"
+      }
+    },
+    "components": {
+      "ebcf": {
+        "title": "\"早鸟\" 是这样一个平台，他使得买卖双方更好地进行合作.",
+        "text1": "通过平台将\"早付\"计划转变为双方都能获益的行为。",
+        "subtitle": "早鸟金流让您的操作更简单",
+        "text2": "买方只需要简单地在平台上提出原来的付款计划以及进行\"早付\"的金额和时间,<br> 卖方为对应的发票提供为获取现金而可接受的利率。<br> 由平台为大家计算收益并进行连接匹配。就是如此的简单。",
+        "collaborate": "合作",
+        "collaborate-desc": "在我们的平台上，买方和卖方之间的合作是互惠互利",
+        "optimize": "最大化",
+        "optimize-desc": "平台为大家计算收益并进行连接匹配。"
+      },
+      "faq": {
+        "title": "以下是我们最常见的问题的一些答案",
+        "question1": "这个平台免费吗？",
+        "answer1": "平台，无论对买家还是供应商都是完全免费的。",
+        "question2": "使用EB-CF 对于流动资金是否有风险？",
+        "answer2": "完全无风险，平台既不会改变买家和供应商之间原来的付款路径， 平台只是协助买家和供应商重新安排了付款的具体时间和金额。",
+        "question3": "使用这个系统我们是否需要去改变自己的ERP/SAP？",
+        "answer3": "不需要",
+        "subtitle": "用智能自动化控制您的现金流",
+        "create-account": "现在创建您的免费帐户"
+      },
+      "footer": {
+        "menu": {
+          "about": "关于我们",
+          "customer-service": "客户服务",
+          "careers": "发展历程",
+          "terms": "服务协议",
+          "contact": "联系我们"
+        },
+        "copy": "版权所有",
+        "copy_website": "早鸟企业发票管理系统."
+      },
+      "free-account": {
+        "content": "如果您已经准备好提高现金流 <br> 并开始花费更多的时间去开发商业机会",
+        "btn": "创建我的帐户"
+      },
+      "header": {
+        "whatis": "早鸟金流是什么",
+        "why": "为何选早鸟",
+        "benefits": "平台益处",
+        "faq": "常见问题",
+        "login": "登录",
+        "lets-start": "马上开始"
+      },
+      "hero": {
+        "slogan": "改善你的现金流使你可以获取更多生意机会",
+        "btn-text": "马上体验"
+      },
+      "sides": {
+        "buyer": {
+          "title": "对买家的好处?",
+          "opt1": "提升利润收益",
+          "opt2": "获取更高的现金回报",
+          "opt3": "提升供应链关系",
+          "opt4": "无金融风险或银行信用审核"
+        },
+        "supplier": {
+          "title": "对卖家的好处?",
+          "opt1": "提升现金流",
+          "opt2": "在需要的时候获得现金",
+          "opt3": "无金融风险或银行信用审核",
+          "opt4": "操作简单"
+        },
+        "lean-more": "获取更多"
+      },
+      "why": {
+        "title": "为何选我们",
+        "buyer-title": "买家",
+        "buyer-desc": "获得更高的现金回报<br> &nbsp;",
+        "supplier-title": "供应商",
+        "supplier-desc": "无金融风险 <br> 或银行信用审核"
+      }
+    }
+  },
+  "supplier": {
+    "components": {
+      "header": {
+        "logged-as": "登录为",
+        "menu": {
+          "markets": "市场"
+        }
+      },
+      "market-header": {
+        "menu": {
+          "invoices": "发票",
+          "history": "历史"
+        },
+        "pay-date": "下个付款日"
+      },
+      "markets-header": {
+        "title": "市场机会",
+        "closing": "市场收市"
+      }
+    },
+    "pages": {
+      "account": {
+        "menu-profile": "个人资料",
+        "menu-change-pwd": "修改密码"
+      },
+      "change-password": {
+        "desc": "要重置您的密码，我们将发送一封带有密码超链接的电子邮件给您的邮件 <a href=\"email: {{link}}\">{{value}}</a>。<br> 邮件内有关于如何安全重置密码的说明。",
+        "send-btn": "发送邮件"
+      },
+      "history": {
+        "filter": {
+          "title": "历史",
+          "last7": "近7天",
+          "last30": "近30天",
+          "last60": "近60天",
+          "last90": "近90天",
+          "custom": "自定义时间",
+          "from": "从",
+          "to": "到",
+          "go": "查询",
+          "download-csv": "下载csv表格"
+        },
+        "filter-range": "最近 {{fromDays}} 天",
+        "awarded": "清算应收",
+        "total": "总折扣",
+        "average": "平均折扣率",
+        "table": {
+          "date": "日期",
+          "total-paid": "总结算发票",
+          "total-discount": "总折扣",
+          "average-discount": "平均折扣率",
+          "apr": "平均年化率",
+          "dpe": "平均提早天数",
+          "download": "下载",
+          "csv": "CSV",
+          "excel": "EXCEL"
+        }
+      },
+      "invoices": {
+        "filter": {
+          "title": "发票",
+          "eligible": "有效发票",
+          "ineligible": "无效发票",
+          "adjustments": "调整发票",
+          "awarded": "早付发票",
+          "filter": "筛选",
+          "included": "是否包括",
+          "included-opt": "包括",
+          "excluded": "排除",
+          "clearing": "是否清算",
+          "yes": "是",
+          "no": "否",
+          "dpe": "提早天数",
+          "less15": "小于15天",
+          "more15": "15到30天",
+          "more30": "30到45天",
+          "more45": "45天以上",
+          "eia": "有效发票金额",
+          "less25k": "25,000以下",
+          "more25k": "25,000 到 50,000",
+          "more50k": "50,000 到 75,000",
+          "more75k": "75,000 以上"
+        },
+        "updating": "正在更新...",
+        "none": "无",
+        "available-ar": "的可付应收将会被清算",
+        "offer": "开价",
+        "blocked-editing": "市场目前为等待状态，您不能修改该字段",
+        "mpa": "最小起付线",
+        "requiring": "您目前最小清理金额设置是",
+        "participation": "参加",
+        "ar": "可付应收",
+        "avg-dpe": "平均提早天数",
+        "clearing": "清算",
+        "non-clearing": "未清算",
+        "discount": "折扣",
+        "disc": "折扣率",
+        "apr": "APR",
+        "ar-a": "共有应收",
+        "include": "包括",
+        "exclude": "排除",
+        "search-ph": "搜索发票号",
+        "download": "下载",
+        "table": {
+          "include": "包括",
+          "clearing": "清算",
+          "invoice-id": "发票编号",
+          "pay-date": "原定付款日",
+          "dpe": "提早天数",
+          "amount": "发票金额",
+          "discount": "折扣率 %",
+          "discount-value": "折扣金额",
+          "yes": "是",
+          "no": "否",
+          "included_tip": "该发票将会参与竞价计算，若不想参与竞价可设置其为‘排除’",
+          "noincluded_tip": "该发票将不会参与竞价计算，若想参与竞价可设置其为‘包括’"
+        }
+      },
+      "markets": {
+        "table": {
+          "participation": "参加",
+          "division": "分部",
+          "ar": "应收机会",
+          "offer": "开价",
+          "clearing": "清理金额",
+          "non-clearing": "未清理金额",
+          "discount": "折扣金额",
+          "dpe": "提早天数",
+          "pay-date": "付款时间"
+        },
+        "view": "查看发票",
+        "subtext": "您有 {{value}} 的可用发票来自于买家 {{buyer}} ({{currency}})。您可以开价争取一个平均{{dpe}}天的提早回款机会。",
+        "config-offer": "设置开价",
+        "waiting-status": "市场目前为等待状态，您不能修改该字段",
+        "turn-on": "打开参与开关进入市场"
+      },
+      "profile": {
+        "title": "个人资料",
+        "labels": {
+          "name": "名字",
+          "job": "职位",
+          "email": "应收部门电邮",
+          "industry": "行业",
+          "country": "国家",
+          "submit": "提交",
+          "lastName": "姓氏",
+          "phone": "联系电话",
+          "year": "财年截止日"
+        }
+      },
+      "signin": {
+        "title": "供应商登录",
+        "email": "邮箱",
+        "password": "密码",
+        "remember": "记住邮箱",
+        "forgot": "忘记密码"
+      }
+    }
+  }
+}

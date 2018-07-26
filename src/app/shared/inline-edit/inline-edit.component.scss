@@ -1,0 +1,23 @@
+input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px dashed #ddb458;
+  color: #888585;
+  cursor: text;
+  font-size: 12px;
+  outline: none;
+  height: 16px;
+  width: 50px;
+  text-align: center;
+}
+
+.action-btn {
+  color: #fff;
+  cursor: pointer;
+  margin: 0 2px;
+
+  img {
+    width: 12px;
+    height: 12px;
+  }
+}

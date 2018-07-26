@@ -1,0 +1,155 @@
+:host {
+  display: block;
+  padding-top: 115px;
+  padding-bottom: 133px;
+}
+
+.title {
+  color: #000;
+  font-size: 28px;
+  text-align: center;
+}
+
+.container {
+  align-items: stretch;
+  justify-content: center;
+  display: flex;
+  margin-top: 75px;
+
+  .center-block {
+    margin: 0 180px;
+  }
+
+  .question {
+    color: #3a1fa8;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .answer {
+    color: #1f1919;
+    font-size: 20px;
+    line-height: 34px;
+    margin-top: 47px;
+  }
+}
+
+.subtitle {
+  color: #172246;
+  line-height: 49px;
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 110px;
+  text-align: center;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 30px;
+
+  .btn {
+    background-color: #30195a;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    height: 52px;
+    line-height: 52px;
+    padding: 0 35px;
+  }
+}
+
+@media(max-width: 1500px) {
+  :host {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .container {
+    .block.center-block {
+      margin: 0 50px;
+
+      .question,
+      .answer {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media(max-width: 1150px) {
+  :host {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .container {
+    .block {
+      margin: 0;
+
+      .question,
+      .answer {
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      .answer {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+@media(max-width: 950px) {
+  .container {
+    display: block;
+
+    .block {
+      display: block;
+      margin: 0 auto !important;
+      width: 280px;
+
+      .question,
+      .answer {
+        font-size: 12px !important;
+        line-height: 20px;
+      }
+
+      .answer {
+        margin-top: 10px;
+      }
+
+      .question {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+@media(max-width: 700px) {
+  :host {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .title,
+  .subtitle {
+    font-size: 16px !important;
+    line-height: 30px;
+  }
+
+  .subtitle {
+    margin-top: 40px;
+  }
+
+  .button-container {
+    .btn {
+      font-size: 12px;
+      padding: 0;
+      height: 40px;
+      line-height: 40px;
+      width: 100%;
+    }
+  }
+}
