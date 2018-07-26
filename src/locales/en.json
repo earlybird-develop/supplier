@@ -232,7 +232,8 @@
         "subtext": "You have {{value}} of eligible invoices with {{buyer}} ({{currency}}). Set an offer to get paid early by an average of {{dpe}} days.",
         "config-offer": "CONFIGURE OFFER",
         "waiting-status": "Market status is waiting. You can not edit this field",
-        "turn-on": "Turn ON participation to enter the market"
+        "turn-on": "Turn ON participation to enter the market",
+        "offer-processing": "Processing invoices totalling"
       },
       "profile": {
         "title": "Profile",

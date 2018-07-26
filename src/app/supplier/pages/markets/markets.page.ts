@@ -70,6 +70,10 @@ export class MarketsPage implements OnInit, OnDestroy {
       );
   }
 
+  public showProcessing(market: Market): boolean{
+      return market.showProcess;
+  }
+
   public setParticipation(market: Market, value: boolean): void {
     this._marketsService
       .setParticipation(market.id, value)
@@ -95,14 +99,14 @@ export class MarketsPage implements OnInit, OnDestroy {
   }
 
   public configureOffer(market: Market): void {
-    this.processingLoading = true;
+    market.showProcess = true;
     this._marketsService.configureOffer(
       this.offerType.value,
       this.offerPercent,
       0,
       market.id
     )
-    .finally(() => this.processingLoading = false)
+    .finally(() => market.showProcess = false)
     .subscribe(() => {})
   }
 }

@@ -35,10 +35,10 @@
                         (click)="hideMe[market.id] = !hideMe[market.id]">
                   {{ 'supplier.pages.markets.config-offer' | translate }}
                 </button>
-                <div class="loader" *ngIf="processingLoading">
+                <div class="loader" *ngIf="showProcessing(market)">
                   {{ 'supplier.pages.markets.offer-processing' | translate }} {{market.availableAmount | currency: market.currencySign }}
                 </div>
-                <div class="filters" [hidden]="!hideMe[market.id] || processingLoading">
+                <div class="filters" [hidden]="!hideMe[market.id] || showProcessing(market)">
                     <div class="offer-filter">
                       <div class="input-group offer-persentage">
                         <input type="number"
