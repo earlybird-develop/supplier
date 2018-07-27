@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { AccountService } from '../../services';
 
 
 @Component({
@@ -9,9 +10,15 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ChangePasswordPage {
 
-  constructor(private _toastr: ToastrService) { }
+  constructor(private _toastr: ToastrService,
+              private _accountService: AccountService) {
+
+  }
 
   public changePassword(): void {
-    this._toastr.error('Api isn\'t working');
+    this._accountService
+      .changePassword()
+      .subscribe(() => this._toastr.success('Reset Password Email had seen!'));
+
   }
 }
