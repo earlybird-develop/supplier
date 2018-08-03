@@ -8,7 +8,7 @@ import { MarketHeaderComponent } from '../../components';
 import { SubheaderService, MarketHistoryService } from '../../services';
 
 import { Angular2Csv } from 'angular2-csv';
-import { BaseChartDirective } from 'ng2-charts';
+// import { BaseChartDirective } from 'ng2-charts';
 
 
 @Component({
@@ -23,28 +23,28 @@ export class MarketHistoryPage implements OnInit {
   public isCustomRange = false;
   public awards: Award[] = [];
   public market: HistoryMarket;
-  public graphData: Object[] = [];
+  // public graphData: Object[] = [];
   public customFrom: string;
   public customTo: string;
 
-  @ViewChild(BaseChartDirective)
-  private _chart: BaseChartDirective;
+  // @ViewChild(BaseChartDirective)
+  // private _chart: BaseChartDirective;
 
   // Chart configuration
-  public barChartType = 'bar';
-  public barChartLabels: string[] = [];
-  public barChartData: Object[];
-  public barChartOptions: any = {
-    responsive: true,
-    legend: false,
-    scales: {
-      xAxes: [{
-        gridLines: {
-          display: false
-        }
-      }]
-    }
-  };
+  // public barChartType = 'bar';
+  // public barChartLabels: string[] = [];
+  // public barChartData: Object[];
+  // public barChartOptions: any = {
+  //   responsive: true,
+  //   legend: false,
+  //   scales: {
+  //     xAxes: [{
+  //       gridLines: {
+  //         display: false
+  //       }
+  //     }]
+  //   }
+  // };
 
   constructor(private _marketHistory: MarketHistoryService,
               private _subheader: SubheaderService,
@@ -68,9 +68,9 @@ export class MarketHistoryPage implements OnInit {
       .getAwardedList(this.buyId, this.filter)
       .subscribe(x => this.awards = x);
 
-    this._marketHistory
-      .getMarketGraph(this.buyId, this.filter)
-      .subscribe(x => this.chartHandler(x));
+    // this._marketHistory
+    //   .getMarketGraph(this.buyId, this.filter)
+    //   .subscribe(x => this.chartHandler(x));
   }
 
   public downloadAwardedDetailsCsv(id: string): void {
@@ -108,25 +108,25 @@ export class MarketHistoryPage implements OnInit {
       );
   }
 
-  public chartHandler(data: Object[]): void {
-    this.graphData = data;
-    this.barChartLabels = this.graphData.map(x => x['date']);
+  // public chartHandler(data: Object[]): void {
+  //   this.graphData = data;
+  //   this.barChartLabels = this.graphData.map(x => x['date']);
 
-    this.barChartData = [
-      {
-        data: this.graphData.map(x => x['awarded_amount']),
-        label: 'Amount',
-        hoverBackgroundColor: '#4f7dc9'
-      },
-      {
-        data: this.graphData.map(x => x['awarded_discount']),
-        label: 'Discount',
-        hoverBackgroundColor: '#e6f0ff'
-      }
-    ];
+  //   this.barChartData = [
+  //     {
+  //       data: this.graphData.map(x => x['awarded_amount']),
+  //       label: 'Amount',
+  //       hoverBackgroundColor: '#4f7dc9'
+  //     },
+  //     {
+  //       data: this.graphData.map(x => x['awarded_discount']),
+  //       label: 'Discount',
+  //       hoverBackgroundColor: '#e6f0ff'
+  //     }
+  //   ];
 
-    setTimeout(() => this._chart['refresh'](), 0);
-  }
+  //   setTimeout(() => this._chart['refresh'](), 0);
+  // }
 
   public setDays(days: number): void {
     this.isCustomRange = false;

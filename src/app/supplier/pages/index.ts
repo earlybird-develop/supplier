@@ -7,3 +7,4 @@ export * from './profile/profile.page';
 export * from './account/account.page';
 export * from './change-password/change-password.page';
 export * from './signin/signin.page';
+export * from './forget-password/forget-password.page';

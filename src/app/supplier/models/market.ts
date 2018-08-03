@@ -25,6 +25,7 @@ export class Market extends Model {
   public discountMarket: MarketDiscount;
   public discount: number;
   public clearingPercentage;
+  public showProcess;
 
   @Alias() public currency: string;
   @Alias() public buyer: string;

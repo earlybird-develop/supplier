@@ -10,7 +10,8 @@ import {
   ProfilePage,
   AccountPage,
   ChangePasswordPage,
-  SigninPage
+  SigninPage,
+  ForgetPasswordPage
 } from './pages';
 
 
@@ -19,6 +20,10 @@ const routes: Routes = [
     path: 'supplier',
     children: [
       { path: 'signin', component: SigninPage },
+      {
+        path:'forget-password',
+        component : ForgetPasswordPage
+      },
       {
         path: '',
         component: WrapperPage,

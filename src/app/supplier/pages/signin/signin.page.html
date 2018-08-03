@@ -31,8 +31,7 @@
       </div>
 
       <div class="forgot">
-        <a href="javascript:void(0);">{{ 'supplier.pages.signin.forgot' | translate }}</a>
-      </div>
+        <a [routerLink]="['/supplier','forget-password']" href="javascript:void(0);">{{ 'supplier.pages.signin.forgot' | translate }}</a>      </div>
 
       <button type="submit" class="submit"></button>
     </form>

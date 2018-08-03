@@ -24,7 +24,8 @@ import {
   ProfilePage,
   AccountPage,
   ChangePasswordPage,
-  SigninPage
+  SigninPage,
+  ForgetPasswordPage
 } from './pages';
 
 import {
@@ -68,6 +69,7 @@ import { SharedModule } from '../shared/shared.module';
     AccountPage,
     ChangePasswordPage,
     SigninPage,
+    ForgetPasswordPage,
 
     HeaderComponent,
     MarketsHeaderComponent,
