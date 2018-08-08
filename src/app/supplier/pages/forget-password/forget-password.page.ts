@@ -11,21 +11,21 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ForgetPasswordPage implements OnInit {
 
-  public showForgetPasswordMessage:boolean;
+  public showEmail: String = '';
   constructor(private router: Router,
-              private _accountService: AccountService,
-              private _toastr: ToastrService) { }
+    private _accountService: AccountService,
+    private _toastr: ToastrService) { }
 
   ngOnInit() {
   }
 
-  forgetPassword(forgetPasswordForm: NgForm):void{
+  forgetPassword(forgetPasswordForm: NgForm): void {
     this._accountService
-    .postForgetPasswordMail(forgetPasswordForm.value)
-    .subscribe(
-      () => this.showForgetPasswordMessage = true,
-      () => this._toastr.error('Invalid Email Error')
-    );  
+      .postForgetPasswordMail(forgetPasswordForm.value)
+      .subscribe(
+        () => this.showEmail = forgetPasswordForm.value.email,
+        () => this._toastr.error('Invalid Email Error')
+      );
   }
 
 }

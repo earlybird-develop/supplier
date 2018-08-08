@@ -4,6 +4,15 @@
       <img src="assets/logo.svg" class="pointer" alt="Early Bird Cash Flow" [routerLink]="['/']">
     </div>
     <div class="controls">
+      <div class="header-menu">
+        <ul>
+          <li>
+            <a [routerLink]="['/supplier', 'markets']">
+              {{ 'supplier.components.header.menu.markets' | translate }}
+            </a>
+          </li>
+        </ul>
+      </div>
       <div class="user-menu">
         <div class="lang-select" dropdown [autoClose]="true">
           <a dropdownToggle>
@@ -15,9 +24,15 @@
             <img src="assets/icons/small-down.svg" class="small-down">
           </a>
           <ul class="dropdown-menu" *dropdownMenu>
-            <li><a style="color: #333 !important;" (click)="selectLang('en')">{{ 'core.pages.language.en' | translate }}</a></li>
-            <li><a style="color: #333 !important;" (click)="selectLang('cn')">{{ 'core.pages.language.cn' | translate }}</a></li>
-            <li><a style="color: #333 !important;" (click)="selectLang('tw')">{{ 'core.pages.language.tw' | translate }}</a></li>
+            <li>
+              <a style="color: #333 !important;" (click)="selectLang('en')">{{ 'core.pages.language.en' | translate }}</a>
+            </li>
+            <li>
+              <a style="color: #333 !important;" (click)="selectLang('cn')">{{ 'core.pages.language.cn' | translate }}</a>
+            </li>
+            <li>
+              <a style="color: #333 !important;" (click)="selectLang('tw')">{{ 'core.pages.language.tw' | translate }}</a>
+            </li>
           </ul>
         </div>
         <div class="separator"></div>
@@ -31,16 +46,10 @@
           <img src="assets/icons/power.svg" alt="Logout" class="logout">
         </a>
       </div>
-      <ul class="header-menu">
-        <li>
-          <a [routerLink]="['/supplier', 'markets']">
-            {{ 'supplier.components.header.menu.markets' | translate }}
-          </a>
-        </li>
-      </ul>
+      <div class="subheader">
+        <div #subheader></div>
+      </div>
+
     </div>
-  </div>
-  <div class="subheader">
-    <div #subheader></div>
   </div>
 </header>
