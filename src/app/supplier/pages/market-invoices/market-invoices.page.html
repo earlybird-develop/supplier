@@ -1,6 +1,6 @@
 <eb-sidebarable-page>
   <ng-container sidebar>
-    <div class="sidebar-menu-title">{{ 'supplier.pages.invoices.filter.title' | translate }}</div>
+    <div class="sidebar-menu-title" (click)="setInvoiceType('allInvoices')">{{ 'supplier.pages.invoices.filter.title' | translate }}</div>
     <ul class="sidebar-menu">
       <li [class.active]="invoiceType === 'eligible'">
         <a (click)="setInvoiceType('eligible')">{{ 'supplier.pages.invoices.filter.eligible' | translate }}</a>
@@ -178,14 +178,13 @@
       <!--<div class="offer-btn"><a class="btn btn-secondary">Try 12% Apr</a></div>-->
     </div>
     <div class="pay-amount text-center">
-      <div class="title">{{ 'supplier.pages.invoices.mpa' | translate }}</div>
+      <div class="title edit-pencil">{{ 'supplier.pages.invoices.mpa' | translate }}<img (click)="payAmountEdit.open()" *ngIf="!payAmountEdit.isOpen" src="assets/icons/pencil.svg"></div>
       <div class="value">
         {{ 'supplier.pages.invoices.requiring' | translate }}
         <ng-container *ngIf="!payAmountEdit.isOpen">
           <span class="colored-number">{{ market?.minPayment | currency: market?.currencySign }}</span>
-          <a class="edit-btn pointer" (click)="payAmountEdit.open()" *ngIf="!payAmountEdit.isOpen">
-            <img src="assets/icons/pencil.svg">
-          </a>
+          <!-- <a class="edit-btn pointer" (click)="payAmountEdit.open()" *ngIf="!payAmountEdit.isOpen">
+          </a> -->
         </ng-container>
         <eb-inline-edit [ngModel]="market.minPayment"
                         (ngModelChange)="setPayAmount($event)"

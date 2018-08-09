@@ -450,3 +450,14 @@
     }
   }
 }
+.edit-pencil{
+  position: relative;
+}
+.edit-pencil img{
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  padding-left: 4px;
+  bottom: 0;
+}

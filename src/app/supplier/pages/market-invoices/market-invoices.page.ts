@@ -30,6 +30,8 @@ export class MarketInvoicesPage implements OnInit,OnDestroy {
 
   private _interval: any;
 
+  public allInvoices = [];
+  public isStatusInvoice: boolean = false;
   constructor(public marketsService: MarketsService,
               private _route: ActivatedRoute,
               private _subheader: SubheaderService) { }
@@ -80,9 +82,21 @@ export class MarketInvoicesPage implements OnInit,OnDestroy {
 
   }
 
-  public setInvoiceType(type: InvoiceType): void {
-    this.invoiceType = type;
-    this.loadInvoices();
+  public setInvoiceType(type): void {
+    let allInvoices;
+    this.allInvoices = [];
+    this.isStatusInvoice = false;
+    allInvoices = ['eligible','ineligible','adjustments','awarded'];
+    if(type == 'allInvoices'){
+      this.isStatusInvoice = true;
+      allInvoices.forEach(element => {
+        this.invoiceType = element;
+        this.loadInvoices();
+      });
+    }else{
+      this.invoiceType = type;
+      this.loadInvoices();
+    }
   }
 
 
@@ -91,11 +105,17 @@ export class MarketInvoicesPage implements OnInit,OnDestroy {
     this.marketsService
       .getInvoices(this.buyId, this.filter, this.invoiceType)
       .subscribe(
-        invoices => this.invoices = invoices,
+        invoices =>{
+          if(this.isStatusInvoice == true){
+            this.allInvoices = this.allInvoices.concat(invoices);
+            this.invoices = this.allInvoices;
+          }else{
+            this.invoices = invoices
+          }
+        },
         errors => console.error(errors)
       );
   }
-
 
   public setIncluded(isIncluded = true): void {
     const incIds: string[]  = this.invoices
