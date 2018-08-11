@@ -455,9 +455,39 @@
 }
 .edit-pencil img{
   position: absolute;
-  width: 15px;
-  height: 15px;
+  width: 19px;
+  height: 17px;
   cursor: pointer;
   padding-left: 4px;
-  bottom: 0;
+  bottom: 2px;
+}
+.sidebar-menu-title{
+  cursor: pointer;
+}
+.left-btn{
+  padding: 0px 23px 0px 23px;
+  color: white;
+  margin-right: 25px;
+}
+.right-btn{
+  color: white;
+}
+
+.btn-container{
+  padding-top: 30px;
+}
+
+.container .edit{
+   position: relative;
+}
+
+.main-min-pay{
+  padding-top: 20px;
+}
+
+.fixed-line{
+  position: absolute;
+  bottom: 2px;
+  width: 24px;
+  right: -17px;
 }

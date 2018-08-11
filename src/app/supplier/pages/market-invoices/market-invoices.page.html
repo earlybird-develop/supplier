@@ -178,7 +178,7 @@
       <!--<div class="offer-btn"><a class="btn btn-secondary">Try 12% Apr</a></div>-->
     </div>
     <div class="pay-amount text-center">
-      <div class="title edit-pencil">{{ 'supplier.pages.invoices.mpa' | translate }}<img (click)="payAmountEdit.open()" *ngIf="!payAmountEdit.isOpen" src="assets/icons/pencil.svg"></div>
+      <div class="title edit-pencil">{{ 'supplier.pages.invoices.mpa' | translate }}<img (click)="payAmountEdit.open();openMinAmountModal()" *ngIf="!payAmountEdit.isOpen" src="assets/icons/pencil.svg"></div>
       <div class="value">
         {{ 'supplier.pages.invoices.requiring' | translate }}
         <ng-container *ngIf="!payAmountEdit.isOpen">

@@ -8,7 +8,9 @@ import 'rxjs/add/operator/finally';
 import { MarketsService, InvoiceType, SubheaderService } from '../../services';
 import { Market, Invoice, InvoicesFilter } from '../../models';
 import { MarketHeaderComponent } from '../../components';
-
+import { MinPayAmountModal } from '../../pages/market-invoices/min-pay-amount-modal'
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'eb-market-invoices',
@@ -25,6 +27,7 @@ export class MarketInvoicesPage implements OnInit,OnDestroy {
   public invoiceType: any;
   public isParticipation = false;
   public participationLoading = false;
+  public bsModalRef: BsModalRef;
 
   private refresh_time = 30000;
 
@@ -34,7 +37,8 @@ export class MarketInvoicesPage implements OnInit,OnDestroy {
   public isStatusInvoice: boolean = false;
   constructor(public marketsService: MarketsService,
               private _route: ActivatedRoute,
-              private _subheader: SubheaderService) { }
+              private _subheader: SubheaderService,
+              private modalService: BsModalService) { }
 
   ngOnInit() {
     this.buyId = this._route.parent.snapshot.params.id;
@@ -80,6 +84,24 @@ export class MarketInvoicesPage implements OnInit,OnDestroy {
 
     clearInterval(this._interval);
 
+  }
+
+  openMinAmountModal(){
+    let ref = this;
+    const initialState = {
+      market: this.market,
+      call: function call(val) {
+        ref.onSubmit(val);
+      }
+    };
+    this.bsModalRef = this.modalService.show(MinPayAmountModal,Object.assign({},{ class: 'modal-initial-pay', initialState }));
+  }
+  public onSubmit(val){
+    this.marketsService
+    .setOfferApr(this.buyId, val.min_payment,val.offer_value)
+    .finally(() => this.participationLoading = false)
+    .subscribe(() => null);
+    this.bsModalRef.hide()
   }
 
   public setInvoiceType(type): void {

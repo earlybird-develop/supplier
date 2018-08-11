@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { MinPayAmountModal } from  './pages/market-invoices/min-pay-amount-modal';
 
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -11,6 +12,7 @@ import { ChartsModule } from 'ng2-charts';
 import { ToastrModule } from 'ngx-toastr';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { SupplierRoutingModule } from './supplier-routing.module';
 
@@ -25,7 +27,7 @@ import {
   AccountPage,
   ChangePasswordPage,
   SigninPage,
-  ForgetPasswordPage
+  ForgetPasswordPage,
 } from './pages';
 
 import {
@@ -57,7 +59,8 @@ import { SharedModule } from '../shared/shared.module';
     TooltipModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot()
   ],
   declarations: [
     WrapperPage,
@@ -73,7 +76,8 @@ import { SharedModule } from '../shared/shared.module';
 
     HeaderComponent,
     MarketsHeaderComponent,
-    MarketHeaderComponent
+    MarketHeaderComponent,
+    MinPayAmountModal
   ],
   providers: [
     AccountService,
@@ -83,7 +87,8 @@ import { SharedModule } from '../shared/shared.module';
   ],
   entryComponents: [
     MarketsHeaderComponent,
-    MarketHeaderComponent
+    MarketHeaderComponent,
+    MinPayAmountModal
   ]
 })
 export class SupplierModule { }

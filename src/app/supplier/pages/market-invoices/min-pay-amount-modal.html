@@ -1,0 +1,40 @@
+<ng-container>
+    <div *ngIf="marketValue.showConfirmPage == false" class="container">
+        <h4>Minimum Payment  Amount Setting</h4>
+        <div class="form-group row main-min-pay">
+            <div class="col-md-7">
+                <select class="form-control" (click)="onSelectValue($event)">
+                        <option value="1" [selected]="marketValue.showFixedLine == true">Fixed Line</option>
+                        <option value="2" [selected]="marketValue.showFixedLine == false">Minimum Invoice Amount</option>
+                </select>
+            </div>
+            <div class="edit col-md-4" *ngIf="marketValue.showFixedLine">
+                <input class="form-control" (input)="onChangeMinPayment($event)" [(ngModel)]="paymentValue" type="text"/>
+                <img class="fixed-line" src="assets/icons/fixedline.png">
+            </div>
+        </div>
+        <div class="btn-container text-center">
+            <button (click)="onSet()" class="left-btn btn btn-info">Set</button>
+            <button (click)="bsModalRef.hide()" class="right-btn btn">Cancel</button>
+        </div>
+    </div>
+    <div *ngIf="marketValue.showConfirmPage == true" class="container">
+            <div>
+                <p *ngIf="marketValue.showFixedLine == true" class="main-min-pay">
+                        You are setting a fixed line amount at   {{paymentValue}}, 
+                        you can set the line according to your need . 
+                        But be awared a higher fixed line may decrease your chance
+                         to win more early payment amount.
+                </p>
+                <p *ngIf="marketValue.showFixedLine == false" class="main-min-pay">
+                        You are choosing minimum invoice amount , 
+                        it means you agree to clear every eligible invoice.
+                </p>
+                <h4 class="text-center">Are you sure to proceed ?</h4>
+                <div class="btn-container text-center">
+                    <button (click)="onSubmitValue()" class="left-btn btn btn-info">Submit</button>
+                    <button (click)="goBack()" class="right-btn btn">Back</button>
+                </div>
+            </div>
+        </div>
+</ng-container>
