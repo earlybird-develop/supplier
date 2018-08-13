@@ -37,7 +37,7 @@ export class Market extends Model {
   @Alias('currency_sign') public currencySign: string;
   @Alias('is_participation') public isParticipation: number;
 
-  @Alias('offer_apr') public offerApr: number;
+  @Alias('offer_value') public offerApr: number;
   @Alias('avg_dpe') public DPE: number;
 
   @Alias('next_paydate') public nextPaydate: string;
