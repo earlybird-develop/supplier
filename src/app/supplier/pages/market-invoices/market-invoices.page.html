@@ -165,7 +165,7 @@
                         #offerAprEdit>
         </eb-inline-edit>
         <ng-container *ngIf="!offerAprEdit.isOpen">
-          <span class="colored-number">{{ market?.offerApr }}%</span> {{ 'supplier.pages.invoices.apr' | translate }}
+          <span class="colored-number">{{ market?.offerValue }}%</span> {{ 'supplier.pages.invoices.apr' | translate }}
           <a class="edit-btn pointer"
              (click)="offerAprEdit.open()"
              tooltip="{{ 'supplier.pages.invoices.blocked-editing' | translate }}"
@@ -178,18 +178,18 @@
       <!--<div class="offer-btn"><a class="btn btn-secondary">Try 12% Apr</a></div>-->
     </div>
     <div class="pay-amount text-center">
-      <div class="title edit-pencil">{{ 'supplier.pages.invoices.mpa' | translate }}<img (click)="payAmountEdit.open();openMinAmountModal()" *ngIf="!payAmountEdit.isOpen" src="assets/icons/pencil.svg"></div>
+      <div class="title edit-pencil">{{ 'supplier.pages.invoices.mpa' | translate }}<img (click)="openMinAmountModal()"  src="assets/icons/pencil.svg"></div>
       <div class="value">
         {{ 'supplier.pages.invoices.requiring' | translate }}
-        <ng-container *ngIf="!payAmountEdit.isOpen">
+        <ng-container>
           <span class="colored-number">{{ market?.minPayment | currency: market?.currencySign }}</span>
           <!-- <a class="edit-btn pointer" (click)="payAmountEdit.open()" *ngIf="!payAmountEdit.isOpen">
           </a> -->
         </ng-container>
-        <eb-inline-edit [ngModel]="market.minPayment"
+        <!-- <eb-inline-edit [ngModel]="market.minPayment"
                         (ngModelChange)="setPayAmount($event)"
                         #payAmountEdit>
-        </eb-inline-edit>
+        </eb-inline-edit> -->
       </div>
     </div>
     <div class="market-status text-center">

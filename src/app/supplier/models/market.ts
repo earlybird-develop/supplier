@@ -43,6 +43,7 @@ export class Market extends Model {
   @Alias('next_paydate') public nextPaydate: string;
   @Alias('min_payment') public minPayment: number;
   @Alias('offer_status') public offerStatus: number;
+  @Alias('offer_value') public offerValue: number;
 
   @Alias('total_amount') public totalAmount: number;
   @Alias('avaibale_amount') public availableAmount: number;

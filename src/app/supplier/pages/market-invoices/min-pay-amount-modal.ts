@@ -12,14 +12,14 @@ export class MinPayAmountModal implements OnInit {
   public marketValue : any;
   public call: any;
   public values: any;
-  @Input() public market: any;
+  @Input() public market: Market;
   constructor(public bsModalRef: BsModalRef) { }
 
   ngOnInit() {
     this.marketValue = {};
     this.marketValue.showConfirmPage = false;
     if(this.market){
-      this.marketValue.offer_value = this.marketValue && this.marketValue.offer_value ? this.marketValue.offer_value : "0";
+      this.marketValue.offer_value = this.market && this.market.offerValue ? this.market.offerValue : "0";
       if(this.market.minPayment > 0){
         this.marketValue.showFixedLine = true;
         this.paymentValue = this.market.minPayment
