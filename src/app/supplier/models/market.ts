@@ -36,7 +36,7 @@ export class Market extends Model {
   @Alias('buyer_name') public buyerName: string;
   @Alias('currency_sign') public currencySign: string;
   @Alias('is_participation') public isParticipation: number;
-
+  
   @Alias('offer_value') public offerApr: number;
   @Alias('avg_dpe') public DPE: number;
 
