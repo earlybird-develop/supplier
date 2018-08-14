@@ -178,19 +178,19 @@ export class MarketInvoicesPage implements OnInit,OnDestroy {
 
   public setPayAmount(amount: number): void {
     this.marketsService
-      .setOfferApr(this.market.id, amount, this.market.offerApr)
+      .setOfferApr(this.market.id, amount, this.market.offerValue)
       .subscribe(() => this.market.minPayment = amount * 100);
   }
 
   public setOfferApr(apr: number): void {
     this.participationLoading = true;
     // todo : This hack needs to be removed when api will work
-    this.market.offerApr = apr;
+    this.market.offerValue = apr;
 
     this.marketsService
       .setOfferApr(this.market.id, this.market.minPayment, apr)
       .finally(() => this.participationLoading = false)
-      .subscribe(() => this.market.offerApr = apr);
+      .subscribe(() => this.market.offerValue = apr);
   }
 
   public setParticipation(value: boolean): void {
@@ -200,7 +200,7 @@ export class MarketInvoicesPage implements OnInit,OnDestroy {
 
     // todo : This hack needs to be removed when api will work
     if (!this.isParticipation) {
-      this.market.offerApr = null;
+      this.market.offerValue = null;
     }
 
     this.marketsService

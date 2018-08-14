@@ -37,7 +37,6 @@ export class Market extends Model {
   @Alias('currency_sign') public currencySign: string;
   @Alias('is_participation') public isParticipation: number;
 
-  @Alias('offer_value') public offerApr: number;
   @Alias('avg_dpe') public DPE: number;
 
   @Alias('next_paydate') public nextPaydate: string;
@@ -85,7 +84,7 @@ export class Market extends Model {
   }
 
   public isNewMarket(): boolean {
-    return this.offerApr === 0;
+    return this.offerValue === 0;
   }
 
   private isObject(item): boolean {

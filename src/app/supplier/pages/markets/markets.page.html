@@ -83,14 +83,14 @@
           </td>
           <td>{{ market.availableAmount | currency: market.currencySign }}</td>
           <td>
-            <eb-inline-edit [ngModel]="market.offerApr"
+            <eb-inline-edit [ngModel]="market.offerValue"
                             (ngModelChange)="setOfferApr(market, $event)"
                             [disabled]="market.isLocked()"
                             black
                             #offerAprEdit>
             </eb-inline-edit>
             <ng-container *ngIf="!offerAprEdit.isOpen">
-              {{ market?.offerApr }}% APR
+              {{ market?.offerValue }}% APR
               <a class="edit-btn pointer"
                  (click)="offerAprEdit.open()"
                  tooltip="{{ 'supplier.pages.markets.waiting-status' | translate }}"

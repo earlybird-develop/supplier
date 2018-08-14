@@ -159,7 +159,7 @@
     <div class="offer">
       <div class="offer-title">{{ 'supplier.pages.invoices.offer' | translate }}</div>
       <div class="apr">
-        <eb-inline-edit [ngModel]="market.offerApr"
+        <eb-inline-edit [ngModel]="market.offerValue"
                         (ngModelChange)="setOfferApr($event)"
                         [disabled]="market.isLocked()"
                         #offerAprEdit>
