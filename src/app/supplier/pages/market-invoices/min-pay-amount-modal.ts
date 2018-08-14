@@ -19,7 +19,7 @@ export class MinPayAmountModal implements OnInit {
     this.marketValue = {};
     this.marketValue.showConfirmPage = false;
     if(this.market){
-      this.marketValue.offer_value = this.market && this.market.offerValue ? this.market.offerValue : "0";
+      this.marketValue.offer_value = this.market && this.market.offerApr ? this.market.offerApr : "0";
       if(this.market.minPayment > 0){
         this.marketValue.showFixedLine = true;
         this.paymentValue = this.market.minPayment

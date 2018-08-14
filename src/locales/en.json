@@ -2,9 +2,9 @@
   "core": {
     "pages": {
       "language": {
-        "en" : "English",
-        "cn" : "Simplified Chinese",
-        "tw" : "Traditional Chinese"
+        "en": "English",
+        "cn": "Simplified Chinese",
+        "tw": "Traditional Chinese"
       },
       "enquiry": {
         "form-title": "INQUIRY FOR REGISTER",
@@ -233,7 +233,17 @@
         "config-offer": "CONFIGURE OFFER",
         "waiting-status": "Market status is waiting. You can not edit this field",
         "turn-on": "Turn ON participation to enter the market",
-        "offer-processing": "Processing invoices totalling"
+        "offer-processing": "Processing invoices totalling",
+        "minimum-pay-amount-popup": {
+          "minimum-pay-amount": "Minimum Payment  Amount Setting",
+          "set": "Set",
+          "cancel": "Cancel",
+          "minimum-invoice": "You are choosing minimum invoice amount, it means you agree to clear every eligible invoice.",
+          "fixed-inline": "You are setting a fixed line amount at {{paymentValue}}, you can set the line according to your need. But be awared a higher fixed line may decrease your chance to win more early payment amount.",
+          "are-you-sure-to-proceed": "Are you sure to proceed ?",
+          "submit": "Submit",
+          "back": "Back"
+        }
       },
       "profile": {
         "title": "Profile",
@@ -259,16 +269,16 @@
       "forget": {
         "title": "Get help signing in to your account",
         "instructions": "Please enter your email and we will send you a link with instructions to change your password.",
-        "label" : {
-          "email" : "Email Address"
+        "label": {
+          "email": "Email Address"
         },
-        "back-to-login":"Back to Log In", 
-        "continue":"CONTINUE"
+        "back-to-login": "Back to Log In",
+        "continue": "CONTINUE"
       },
       "forget-password-message": {
         "title": "Check your email",
         "message": "If we have an account on file linked to <a class='emailLink' href=\"forgetmail: {{forgetmail}}\">{{forgetmail}}</a>, we have sent an email with instructions to reset your password. Please contact <a class='emailLink' href=\"email: {{email}}\">{{email}}</a> for any additional questions.",
-        "back-to-login":"Back to Log In"
+        "back-to-login": "Back to Log In"
       }
     }
   }

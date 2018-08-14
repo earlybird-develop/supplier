@@ -165,7 +165,7 @@
                         #offerAprEdit>
         </eb-inline-edit>
         <ng-container *ngIf="!offerAprEdit.isOpen">
-          <span class="colored-number">{{ market?.offerValue }}%</span> {{ 'supplier.pages.invoices.apr' | translate }}
+          <span class="colored-number">{{ market?.offerApr }}%</span> {{ 'supplier.pages.invoices.apr' | translate }}
           <a class="edit-btn pointer"
              (click)="offerAprEdit.open()"
              tooltip="{{ 'supplier.pages.invoices.blocked-editing' | translate }}"

@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
@@ -17,7 +17,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
   templateUrl: './market-invoices.page.html',
   styleUrls: ['./market-invoices.page.scss']
 })
-export class MarketInvoicesPage implements OnInit,OnDestroy {
+export class MarketInvoicesPage implements OnInit, OnDestroy {
   public buyId: string;
   public search = '';
   public checkbox = false;
@@ -36,9 +36,9 @@ export class MarketInvoicesPage implements OnInit,OnDestroy {
   public allInvoices = [];
   public isStatusInvoice: boolean = false;
   constructor(public marketsService: MarketsService,
-              private _route: ActivatedRoute,
-              private _subheader: SubheaderService,
-              private modalService: BsModalService) { }
+    private _route: ActivatedRoute,
+    private _subheader: SubheaderService,
+    private modalService: BsModalService) { }
 
   ngOnInit() {
     this.buyId = this._route.parent.snapshot.params.id;
@@ -62,22 +62,26 @@ export class MarketInvoicesPage implements OnInit,OnDestroy {
     this._interval = setInterval(
       () => {
 
-        this.marketsService
-          .getStat(this.buyId)
-          .subscribe(
-            market => {
-              this.market = market;
-            },
-            errors => console.error(errors)
-          );
+        this.getStat();
 
         this.loadInvoices();
 
-        }, this.refresh_time
-      );
+      }, this.refresh_time
+    );
 
 
     this.setInvoiceType(InvoiceType.Eligible);
+  }
+
+  getStat() {
+    this.marketsService
+      .getStat(this.buyId)
+      .subscribe(
+        market => {
+          this.market = market;
+        },
+        errors => console.error(errors)
+      );
   }
 
   ngOnDestroy() {
@@ -86,7 +90,7 @@ export class MarketInvoicesPage implements OnInit,OnDestroy {
 
   }
 
-  openMinAmountModal(){
+  openMinAmountModal() {
     let ref = this;
     const initialState = {
       market: this.market,
@@ -94,28 +98,29 @@ export class MarketInvoicesPage implements OnInit,OnDestroy {
         ref.onSubmit(val);
       }
     };
-    this.bsModalRef = this.modalService.show(MinPayAmountModal,Object.assign({},{ class: 'modal-initial-pay', initialState }));
+    this.bsModalRef = this.modalService.show(MinPayAmountModal, Object.assign({}, { class: 'modal-initial-pay', initialState }));
   }
-  public onSubmit(val){
+  public onSubmit(val) {
     this.marketsService
-    .setOfferApr(this.buyId, val.min_payment,val.offer_value)
-    .finally(() => this.participationLoading = false)
-    .subscribe(() => null);
-    this.bsModalRef.hide()
+      .setOfferApr(this.buyId, val.min_payment, val.offer_value)
+      .finally(() => this.participationLoading = false)
+      .subscribe(() => null);
+    this.bsModalRef.hide();
+    this.getStat()
   }
 
   public setInvoiceType(type): void {
     let allInvoices;
     this.allInvoices = [];
     this.isStatusInvoice = false;
-    allInvoices = ['eligible','ineligible','adjustments','awarded'];
-    if(type == 'allInvoices'){
+    allInvoices = ['eligible', 'ineligible', 'adjustments', 'awarded'];
+    if (type == 'allInvoices') {
       this.isStatusInvoice = true;
       allInvoices.forEach(element => {
         this.invoiceType = element;
         this.loadInvoices();
       });
-    }else{
+    } else {
       this.invoiceType = type;
       this.loadInvoices();
     }
@@ -127,11 +132,11 @@ export class MarketInvoicesPage implements OnInit,OnDestroy {
     this.marketsService
       .getInvoices(this.buyId, this.filter, this.invoiceType)
       .subscribe(
-        invoices =>{
-          if(this.isStatusInvoice == true){
+        invoices => {
+          if (this.isStatusInvoice == true) {
             this.allInvoices = this.allInvoices.concat(invoices);
             this.invoices = this.allInvoices;
-          }else{
+          } else {
             this.invoices = invoices
           }
         },
@@ -140,7 +145,7 @@ export class MarketInvoicesPage implements OnInit,OnDestroy {
   }
 
   public setIncluded(isIncluded = true): void {
-    const incIds: string[]  = this.invoices
+    const incIds: string[] = this.invoices
       .filter(x => x._checked)
       .map(x => x.invId.toString());
 
