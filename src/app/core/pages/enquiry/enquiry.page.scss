@@ -25,7 +25,7 @@
   display: flex;
   justify-content: center;
   margin: 0 auto;
-  width: 60%;
+  width: 62%;
 
   .left-side {
     align-items: center;
@@ -54,6 +54,7 @@
   margin-top: 20px;
   height: 30px;
   width: 70px;
+  font-size: 14px;
 }
 
 .right-form {
@@ -62,7 +63,7 @@
   position: relative;
   padding: 20px 40px;
   z-index: 2;
-  width:40%;
+  width:54%;
 
   input,
   textarea {
@@ -102,6 +103,11 @@ eb-home-header {
   z-index: 9999 !important;
 }
 
+.enquiry-title{
+  margin-bottom: 0;
+  line-height: 0.7;
+}
+
 @media(max-width: 1200px) {
   .content-block {
     width: 100% !important;
@@ -110,7 +116,7 @@ eb-home-header {
 
 @media(max-width: 900px) {
   .right-form {
-    width: 50% !important;
+    width: 70% !important;
   }
 
   .left-side {
