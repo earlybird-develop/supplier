@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   color: #fff;
   margin-left: 20px;
@@ -16,8 +16,14 @@
   }
 
   &.second {
+    color: #fff;
+    cursor: pointer;
     margin-top: 32px;
     font-weight: 500;
+    &:hover {
+      color: #fff;
+      font-weight: 700;
+    }
   }
 }
 
@@ -25,9 +31,9 @@
   margin-left: 24px;
 
   li {
-    margin-bottom: 15px;
 
     &.active a {
+      color: #fada61;
       font-weight: 700;
     }
 
@@ -38,14 +44,14 @@
     a {
       color: #fff;
       cursor: pointer;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 500;
     }
   }
 }
 
 .custom-range-filter {
-  margin: 20px 16px 0 15px;
+  margin: 0px 38px 0 26px;
 
   label {
     color: #cecfd0;
@@ -53,9 +59,6 @@
     font-size: 13px;
     font-weight: 400;
 
-    &.to {
-      margin-top: 10px;
-    }
 
     input {
       border: 1px solid #E8E9EC;
@@ -64,8 +67,8 @@
       padding: 0 16px;
       box-sizing: border-box;
       display: block;
-      margin-top: 7px;
-      height: 40px;
+      margin-top: 5px;
+      height: 34px;
       outline: none;
       width: 100%;
     }
@@ -76,11 +79,10 @@
     height: 34px;
     line-height: 34px;
     width: 69px;
-    margin-left: 10px;
     border: none;
     padding: 0;
     font-size: 14px;
-    margin-top: 38px;
+    margin-top: 20px;
     outline: none;
   }
 }
@@ -101,7 +103,7 @@
 .filter-range {
   background-color: #f5f6f7;
   font-weight: 300;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 25px;
   padding: 12px 50px 5px;
 

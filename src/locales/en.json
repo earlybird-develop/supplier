@@ -181,11 +181,11 @@
           "more50k": "50,000 to 75,000",
           "more75k": "75,000 or more"
         },
-        "updating": "Updating...",
+        "updating": "We will return the result after 60 seconds...",
         "none": "None",
         "available-ar": "of your available A/R is currently available",
         "offer": "Offer",
-        "blocked-editing": "Market statis is waiting. You can not edit this field",
+        "blocked-editing": "Please wait a moment,we will return the result quickly",
         "mpa": "Minimum Pay Amount",
         "requiring": "You are requiring atleast",
         "participation": "Participation",

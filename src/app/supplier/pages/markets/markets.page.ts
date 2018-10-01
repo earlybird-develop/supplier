@@ -88,18 +88,20 @@ export class MarketsPage implements OnInit, OnDestroy {
 
   public setOfferApr(market, val: number): void {
     market.offerApr = val;
-
+    market.offerStatus = 1;
     this._marketsService
       .setOfferApr(market.id, market.minPayment, val)
-      .subscribe(
+        .subscribe(
         () => {
           market.offerApr = val;
           this._toastr.success('Market updated!');
-        });
+        })
+
   }
 
   public configureOffer(market: Market): void {
     market.showProcess = true;
+
     this._marketsService.configureOffer(
       this.offerType.value,
       this.offerPercent,

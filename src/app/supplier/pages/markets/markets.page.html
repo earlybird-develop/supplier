@@ -38,6 +38,7 @@
                 <div class="loader" *ngIf="showProcessing(market)">
                   {{ 'supplier.pages.markets.offer-processing' | translate }} {{market.availableAmount | currency: market.currencySign }}
                 </div>
+
                 <div class="filters" [hidden]="!hideMe[market.id] || showProcessing(market)">
                     <div class="offer-filter">
                       <div class="input-group offer-persentage">
@@ -106,12 +107,20 @@
           <td class="turn-on text-center" colspan="3" *ngIf="!market.isParticipation">
             {{ 'supplier.pages.markets.turn-on' | translate }}
           </td>
-          <ng-container *ngIf="market.isParticipation">
+          <ng-container *ngIf="market.isParticipation && !market.isLocked()">
+
             <td>{{ market.clearingAmount | currency: market.currencySign }}</td>
             <td>{{ market.noclearingAmount | currency: market.currencySign }}</td>
             <td>{{ market.discount | currency: market.currencySign }}</td>
             <!--<td><span *ngIf="market.discount !== 0">{{ market.discount }}</span></td>-->
           </ng-container>
+
+          <td colspan="3" *ngIf="market.isLocked()">
+                <div style="width:100%;color:#33cc33 !important;text-align: center;">
+                  {{ 'supplier.pages.markets.offer-processing' | translate }} {{market.availableAmount | currency: market.currencySign }}
+                </div>
+          </td>
+
           <td class="text-center">{{ market.DPE }}</td>
           <td>{{ market.paydate }}</td>
         </tr>

@@ -5,6 +5,7 @@ export class HistoryMarket extends Model {
   @Alias('awarded_discount') public awardedDiscount: number;
   @Alias('average_discount') public averageDiscount: number;
   @Alias() public currency: string;
+  @Alias('currency_sign') public currencySign: string;
 
   constructor(data?) {
     super();

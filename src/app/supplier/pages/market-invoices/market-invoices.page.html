@@ -1,6 +1,6 @@
 <eb-sidebarable-page>
   <ng-container sidebar>
-    <div class="sidebar-menu-title" (click)="setInvoiceType('allInvoices')">{{ 'supplier.pages.invoices.filter.title' | translate }}</div>
+    <div [class.active]="invoiceType === 'all'" class="sidebar-menu-title" (click)="setInvoiceType('all')">{{ 'supplier.pages.invoices.filter.title' | translate }}</div>
     <ul class="sidebar-menu">
       <li [class.active]="invoiceType === 'eligible'">
         <a (click)="setInvoiceType('eligible')">{{ 'supplier.pages.invoices.filter.eligible' | translate }}</a>
@@ -18,11 +18,11 @@
 
     <div class="sidebar-separator"></div>
 
-    <ng-container *ngIf="invoiceType === 'eligible'">
-      <div class="filter-title">{{ 'supplier.pages.invoices.filter.filter' | translate }}</div>
+    <ng-container *ngIf="invoiceType === 'all' || invoiceType === 'eligible'">
+      <!--<div class="filter-title">{{ 'supplier.pages.invoices.filter.filter' | translate }}</div>-->
 
       <div class="filter-block">
-        <div class="filter-block-title first">{{ 'supplier.pages.invoices.filter.included' | translate }}</div>
+        <div class="filter-block-title">{{ 'supplier.pages.invoices.filter.included' | translate }}</div>
         <ul>
           <li>
             <label>
@@ -35,8 +35,8 @@
           <li>
             <label>
               <input type="checkbox"
-                     (change)="loadInvoices()"
-                     [(ngModel)]="filter.excluded">
+                     [(ngModel)]="filter.excluded"
+                     (change)="loadInvoices()">
               {{ 'supplier.pages.invoices.filter.excluded' | translate }}
             </label>
           </li>
@@ -235,7 +235,7 @@
       </div>
       <div class="controls">
         <div class="buttons">
-          <ng-container *ngIf="invoiceType === 'eligible'">
+          <ng-container *ngIf="invoiceType === 'all' || invoiceType === 'eligible'">
             <a (click)="setIncluded()" class="btn btn-secondary">{{ 'supplier.pages.invoices.include' | translate }}</a>
             <a (click)="setIncluded(false)" class="btn btn-secondary">{{ 'supplier.pages.invoices.exclude' | translate }}</a>
           </ng-container>

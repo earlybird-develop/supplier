@@ -10,7 +10,7 @@ export class InvoicesFilter extends Model {
   @Alias('is_included') private _isIncluded;
   @Alias('is_clearing') private _isClearing;
   @Alias('invoice_dpe') public dpe: number[] = [];
-  @Alias('invlice_amount') public amount: number[] = [];
+  @Alias('invoice_amount') public amount: number[] = [];
 
   // Override
   public _toJSON(): Object {

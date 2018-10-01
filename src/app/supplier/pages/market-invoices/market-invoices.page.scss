@@ -31,7 +31,7 @@
     display: flex;
     align-items: center;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 450;
 
     .pink {
       color: #e68585;
@@ -44,8 +44,8 @@
 
     .offer-title {
       color: #b7b7b7;
-      font-size: 12px;
-      font-weight: 300;
+      font-size: 13px;
+      font-weight: 600;
     }
 
     .apr {
@@ -79,8 +79,9 @@
 
      .title {
       color: #b7b7b7;
-      font-size: 12px;
+      font-size: 13px;
       margin-bottom: 10px;
+       font-weight: 600;
     }
 
     .value {
@@ -101,8 +102,8 @@
 
   .market-status {
     .title {
-      font-size: 12px;
-      font-weight: 300;
+      font-size: 13px;
+      font-weight: 500;
       margin-bottom: 10px;
     }
   }
@@ -129,7 +130,7 @@
 
   .average {
     color: #6e6e6e;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
   }
 
@@ -151,7 +152,7 @@
 
   .list-header {
     .title {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       margin-bottom: 17px;
       color: rgba(23, 23, 23, .7);
@@ -168,7 +169,7 @@
         width: 50%;
 
         .btn {
-          font-size: 12px;
+          font-size: 13px;
           margin: 0 10px;
           width: 114px;
           padding: 0;
@@ -179,7 +180,7 @@
 
       .search {
         .export-btn {
-          font-size: 12px;
+          font-size: 13px;
           margin-left: 34px;
           padding: 0 25px;
         }
@@ -205,7 +206,7 @@
             margin-left: 25px;
             width: 146px;
             border: 0;
-            font-size: 12px;
+            font-size: 13px;
             outline: none;
             border-bottom: 1px solid rgba(149, 152, 154, .36);
             height: 23px;
@@ -248,22 +249,28 @@
 }
 
 .sidebar-menu-title {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   color: #fff;
   margin-left: 20px;
   margin-bottom: 15px;
+  &.active {
+    color: #fada61 !important;
+    text-decoration: underline;
+  }
 }
 
 .sidebar-menu {
   margin-left: 24px;
 
   li {
-    margin-bottom: 10px;
+    font-size: 13px !important;
+    font-weight:500;
+    margin-bottom: 5px !important;
 
     &.active a {
       color: #fada61 !important;
-      text-decoration: underline;
+      font-weight: 700 !important;
     }
 
     &:last-child {
@@ -271,10 +278,10 @@
     }
 
     a {
-      color: #f0e4b6 !important;
+      color: #fff !important;
       cursor: pointer;
-      font-size: 12px;
-      font-weight: 700;
+      font-size: 13px;
+      font-weight: 500;
     }
   }
 }
@@ -287,37 +294,47 @@
 }
 
 .filter-title {
-  margin-left: 41px;
-  font-size: 12px;
+  margin-left: 20px;
+  font-size: 13px;
   font-weight: 700;
   color: #fff;
   margin-bottom: 10px;
 }
 
 .filter-block {
-  margin-left: 41px;
-  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-bottom: 10px;
 
   .filter-block-title {
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
     color: #fff;
 
-    &.first {
-      font-weight: 400;
+  }
+
+
+  ul {
+    margin-left:4px;
+    li {
+      margin-top: 10px;
+      color: #fff;
+      font-size: 13px !important;
+      font-weight: 400 !important;
+
+      * {
+        cursor: pointer;
+      }
+      label {
+        margin-bottom: 0px !important;
+      }
+      input[type="checkbox"]{
+        vertical-align:text-bottom !important;
+        *margin-bottom:-4px;
+      }
     }
   }
 
-  ul li {
-    margin-top: 10px;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 400;
 
-    * {
-      cursor: pointer;
-    }
-  }
 }
 
 @media(max-width: 1200px) {

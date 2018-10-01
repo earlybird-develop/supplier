@@ -181,11 +181,11 @@
           "more50k": "50,000 到 75,000",
           "more75k": "75,000 以上"
         },
-        "updating": "正在更新...",
+        "updating": "市场将会在60秒后返回竞价结果...",
         "none": "无",
         "available-ar": "的可付应收将会被清算",
         "offer": "开价",
-        "blocked-editing": "市场目前为等待状态，您不能修改该字段",
+        "blocked-editing": "市场目前正在计算中，稍后我们将返回竞价结果给您",
         "mpa": "最小起付线",
         "requiring": "您目前最小清理金额设置是",
         "participation": "参加",

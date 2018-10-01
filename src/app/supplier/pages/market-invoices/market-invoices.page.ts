@@ -110,20 +110,24 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
   }
 
   public setInvoiceType(type): void {
+
     let allInvoices;
     this.allInvoices = [];
     this.isStatusInvoice = false;
     allInvoices = ['eligible', 'ineligible', 'adjustments', 'awarded'];
-    if (type == 'allInvoices') {
+
+    if (type == 'all') {
       this.isStatusInvoice = true;
       allInvoices.forEach(element => {
         this.invoiceType = element;
         this.loadInvoices();
       });
+      this.invoiceType = 'all';
     } else {
       this.invoiceType = type;
       this.loadInvoices();
     }
+
   }
 
 
@@ -191,7 +195,7 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     this.participationLoading = true;
     // todo : This hack needs to be removed when api will work
     this.market.offerApr = apr;
-
+    this.market.offerStatus = 1;
     this.marketsService
       .setOfferApr(this.market.id, this.market.minPayment, apr)
       .finally(() => this.participationLoading = false)
