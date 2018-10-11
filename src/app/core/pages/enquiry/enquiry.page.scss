@@ -4,6 +4,30 @@
   height: 100%;
 }
 
+.enq-header{
+      background: linear-gradient(125deg, #312a86, #449fd8, #a0e9fa);
+  display: block;
+  position: relative;
+  height: 170px;
+}
+
+.enq-home-header{
+    z-index: 9999 !important;
+}
+
+.graphic {
+
+}
+
+.content {
+  padding-top: 26px;
+  margin-left: 110px;
+  }
+
+  .logo {
+    width: 111px;
+  }
+
 .fill {
   bottom: 0;
   display: block;
@@ -97,11 +121,11 @@ textarea {
   line-height: 17px;
 }
 
-eb-home-footer,
-eb-home-header {
-  position: relative;
+eb-home-footer{
+      position: relative;
   z-index: 9999 !important;
 }
+
 
 .enquiry-title{
   margin-bottom: 0;
