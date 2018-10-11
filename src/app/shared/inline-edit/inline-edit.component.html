@@ -1,5 +1,6 @@
 <div *ngIf="isOpen">
   <input type="text" [placeholder]="placeholder" [(ngModel)]="value">
+    <span>%</span>
   <a class="action-btn" (click)="apply()">
     <img src="./assets/icons/save.svg" *ngIf="!black">
     <img src="./assets/icons/save-black.svg" *ngIf="black">
