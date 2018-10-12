@@ -47,7 +47,15 @@ export class EnquiryComponent {
     { id: 5, value: 'Interest 5' }
   ];
 
+  public roleType = this.roles[0];
+  public regionType = this.regions[0];
+  public interestType = this.interests[0];
+
   public make(form: NgForm): void {
+      form.value["workrole"] = this.roleType.value;
+      form.value["region"] = this.regionType.value;
+      form.value["interested"] = this.interestType.value; 
+
       this._enquiryService
           .make(form.value)
           .subscribe(

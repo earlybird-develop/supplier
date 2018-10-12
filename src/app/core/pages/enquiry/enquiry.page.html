@@ -33,7 +33,7 @@
         <input id="company" type="text" name="company" ngModel #company="ngModel"  [placeholder]="('core.pages.enquiry.form-company' | translate) + ' *'">
 
         <!--{{ 'core.pages.enquiry.form-select-role' | translate }} *-->
-        <eb-custom-select title="" name="workrole" ngModel #workrole="ngModel" 
+        <eb-custom-select title="" [(ngModel)]="roleType"  [ngModelOptions]="{standalone: true}"
                           [placeholder]="('core.pages.enquiry.form-select-role' | translate) + ' *'"
                           [options]="roles">
         </eb-custom-select>
@@ -47,15 +47,15 @@
         <input id="phone" type="text" name="phonenumber" ngModel #phonenumber="ngModel"  [placeholder]="('core.pages.enquiry.form-phone' | translate)">
 
         <!--{{ 'core.pages.enquiry.form-region' | translate }} *-->
-        <eb-custom-select title=""  name="region" ngModel #region="ngModel" 
+        <eb-custom-select title=""  [(ngModel)]="regionType"  [ngModelOptions]="{standalone: true}"
                           [placeholder]="('core.pages.enquiry.form-region' | translate) + ' *'"
                           [options]="regions">
         </eb-custom-select>
 
         <!--{{ 'core.pages.enquiry.form-interests' | translate }} *-->
-        <eb-custom-select title="" name="interested" ngModel #interested="ngModel" 
+        <eb-custom-select title="" [(ngModel)]="interestType"  [ngModelOptions]="{standalone: true}"
                           [placeholder]="('core.pages.enquiry.form-interests' | translate) + ' *'"
-                          [options]="interests">
+                          [options]="interests"> 
         </eb-custom-select>
 
         <!--{{ 'core.pages.enquiry.form-needs-title' | translate }}-->
