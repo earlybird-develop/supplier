@@ -19,48 +19,48 @@
       <p class="enquiry-title">{{ 'core.pages.enquiry.form-title' | translate }}</p>
       <p>{{ 'core.pages.enquiry.form-subtitle' | translate }}</p>
 
-      <form novalidate>
+      <form novalidate #makeForm="ngForm" (ngSubmit)="make(makeForm)">
         <!--{{ 'core.pages.enquiry.form-firstname' | translate }} *-->
         <label for="firstName"></label>
-        <input id="firstName" type="text" [placeholder]="('core.pages.enquiry.form-firstname' | translate) + ' *'">
+        <input id="firstName" type="text" name="firstname" ngModel #firstname="ngModel" [placeholder]="('core.pages.enquiry.form-firstname' | translate) + ' *'">
 
         <!--{{ 'core.pages.enquiry.form-lastname' | translate }} *-->
         <label for="lastName"></label>
-        <input id="lastName" type="text" [placeholder]="('core.pages.enquiry.form-lastname' | translate) + ' *'">
+        <input id="lastName" type="text" name="lastname" ngModel #lastname="ngModel"  [placeholder]="('core.pages.enquiry.form-lastname' | translate) + ' *'">
 
         <!--{{ 'core.pages.enquiry.form-company' | translate }} *-->
         <label for="company"></label>
-        <input id="company" type="text" [placeholder]="('core.pages.enquiry.form-company' | translate) + ' *'">
+        <input id="company" type="text" name="company" ngModel #company="ngModel"  [placeholder]="('core.pages.enquiry.form-company' | translate) + ' *'">
 
         <!--{{ 'core.pages.enquiry.form-select-role' | translate }} *-->
-        <eb-custom-select title=""
+        <eb-custom-select title="" name="workrole" ngModel #workrole="ngModel" 
                           [placeholder]="('core.pages.enquiry.form-select-role' | translate) + ' *'"
                           [options]="roles">
         </eb-custom-select>
 
         <!--{{ 'core.pages.enquiry.form-email' | translate }} *-->
         <label for="email"></label>
-        <input id="email" type="text" [placeholder]="('core.pages.enquiry.form-email' | translate) + ' *'">
+        <input id="email" type="text" name="email" ngModel #email="ngModel"  [placeholder]="('core.pages.enquiry.form-email' | translate) + ' *'">
 
         <!--{{ 'core.pages.enquiry.form-phone-optional' | translate }}-->
         <label for="phone"></label>
-        <input id="phone" type="text" [placeholder]="('core.pages.enquiry.form-phone' | translate)">
+        <input id="phone" type="text" name="phonenumber" ngModel #phonenumber="ngModel"  [placeholder]="('core.pages.enquiry.form-phone' | translate)">
 
         <!--{{ 'core.pages.enquiry.form-region' | translate }} *-->
-        <eb-custom-select title=""
+        <eb-custom-select title=""  name="region" ngModel #region="ngModel" 
                           [placeholder]="('core.pages.enquiry.form-region' | translate) + ' *'"
                           [options]="regions">
         </eb-custom-select>
 
         <!--{{ 'core.pages.enquiry.form-interests' | translate }} *-->
-        <eb-custom-select title=""
+        <eb-custom-select title="" name="interested" ngModel #interested="ngModel" 
                           [placeholder]="('core.pages.enquiry.form-interests' | translate) + ' *'"
                           [options]="interests">
         </eb-custom-select>
 
         <!--{{ 'core.pages.enquiry.form-needs-title' | translate }}-->
         <label for="needs"></label>
-        <textarea id="needs"
+        <textarea id="needs"  name="memo" ngModel #memo="ngModel" 
                   rows="3"
                   [placeholder]="'core.pages.enquiry.form-needs' | translate"></textarea>
 

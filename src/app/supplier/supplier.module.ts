@@ -31,7 +31,8 @@ import {
 } from './pages';
 
 import {
-  AccountService,
+    AccountService,
+    EnquiryService,
   MarketsService,
   SubheaderService,
   MarketHistoryService
@@ -83,7 +84,8 @@ import { SharedModule } from '../shared/shared.module';
     AccountService,
     MarketsService,
     SubheaderService,
-    MarketHistoryService
+      MarketHistoryService,
+      EnquiryService
   ],
   entryComponents: [
     MarketsHeaderComponent,
