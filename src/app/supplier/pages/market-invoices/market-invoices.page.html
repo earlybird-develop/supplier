@@ -1,7 +1,7 @@
 <eb-sidebarable-page>
   <ng-container sidebar>
     <div [class.active]="invoiceType === 'all'" class="sidebar-menu-title" (click)="setInvoiceType('all')">{{ 'supplier.pages.invoices.filter.title' | translate }}</div>
-    <ul class="sidebar-menu">
+    <ul class="sidebar-menu nomargin">
       <li [class.active]="invoiceType === 'eligible'">
         <a (click)="setInvoiceType('eligible')">{{ 'supplier.pages.invoices.filter.eligible' | translate }}</a>
       </li>
@@ -23,7 +23,7 @@
 
       <div class="filter-block">
         <div class="filter-block-title">{{ 'supplier.pages.invoices.filter.included' | translate }}</div>
-        <ul>
+        <ul class="nomargin">
           <li>
             <label>
               <input type="checkbox"
@@ -45,7 +45,7 @@
 
       <div class="filter-block">
         <div class="filter-block-title">{{ 'supplier.pages.invoices.filter.clearing' | translate }}</div>
-        <ul>
+        <ul class="nomargin">
           <li>
             <label>
               <input type="checkbox"
@@ -67,7 +67,7 @@
 
       <div class="filter-block">
         <div class="filter-block-title">{{ 'supplier.pages.invoices.filter.dpe' | translate }}</div>
-        <ul>
+        <ul class="nomargin">
           <li>
             <label>
               <input type="checkbox"
@@ -105,7 +105,7 @@
 
       <div class="filter-block">
         <div class="filter-block-title">{{ 'supplier.pages.invoices.filter.eia' | translate }}</div>
-        <ul>
+        <ul class="nomargin">
           <li>
             <label>
               <input type="checkbox"
@@ -142,7 +142,7 @@
       </div>
 
       <div class="filter-block">
-          <div class="row">
+          <div class="row wid95">
               <div class="col-md-6 color-white">{{ 'supplier.pages.invoices.filter.from' | translate }}</div>
               <div class="col-md-6 color-white">{{ 'supplier.pages.invoices.filter.to' | translate }}</div>
               <div class="col-md-6 nopadding">
