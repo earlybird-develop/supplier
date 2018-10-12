@@ -273,7 +273,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let invoice of invoices | searchFilter: 'invoiceId' : search">
+          <tr *ngFor="let invoice of invoices | searchFilter: 'invoiceId' : search" [class.clearno]="invoice?.isClearing()==false">
             <td><input type="checkbox" [(ngModel)]="invoice._checked"></td>
             <td class="text-center">
 
@@ -281,7 +281,7 @@
                 <span class="{{invoice?.isIncludedClass()}}"  *ngIf="invoice?.isIncluded()"></span>
               </a>
             </td>
-            <td>{{ invoice?.isClearing() ? ('supplier.pages.invoices.table.yes' | translate) : ('supplier.pages.invoices.table.no' | translate) }}</td>
+            <td class="clear-status">{{ invoice?.isClearing() ? ('supplier.pages.invoices.table.yes' | translate) : ('supplier.pages.invoices.table.no' | translate) }}</td>
             <td>{{ invoice?.invoiceId }}</td>
             <td>{{ invoice?.originalPaydate }}</td>
             <td>{{ invoice?.invDpe }}</td>
