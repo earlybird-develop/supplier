@@ -179,7 +179,7 @@
     </div>
     <div class="pay-amount text-center">
       <div class="title edit-pencil">{{ 'supplier.pages.invoices.mpa' | translate }}<img (click)="openMinAmountModal()"  src="assets/icons/pencil.svg"></div>
-      <div class="value">
+      <div class="value" *ngIf="market?.minPayment != -1">
         {{ 'supplier.pages.invoices.requiring' | translate }}
         <ng-container>
           <span class="colored-number">{{ market?.minPayment | currency: market?.currencySign }}</span>
@@ -191,6 +191,9 @@
                         #payAmountEdit>
         </eb-inline-edit> -->
       </div>
+        <div class="value" *ngIf="market?.minPayment == -1">
+            {{ 'supplier.pages.invoices.cmia' | translate }}
+        </div>
     </div>
     <div class="market-status text-center">
       <div class="title">{{ 'supplier.pages.invoices.participation' | translate }}</div>
