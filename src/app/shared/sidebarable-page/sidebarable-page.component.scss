@@ -7,11 +7,11 @@
   background: linear-gradient(-45deg, #24457c, #24457c, #24457c, #4c6791, #4c6791);
   box-shadow: 0 0 4px #000;
   z-index: 1;
-  max-width: 229px;
-  min-width: 229px;
+  max-width: 260px;
+  min-width: 260px;
   //overflow-y: scroll;
-  width: 229px;
-  padding: 25px 10px 25px 33px;
+  width: 260px;
+  padding: 5px 0px 5px 5px;
   box-sizing: border-box;
   position: fixed;
   bottom: 0;
@@ -20,7 +20,7 @@
 }
 
 .main {
-  margin-left: 229px;
+  margin-left: 260px;
   width: 100%;
 }
 

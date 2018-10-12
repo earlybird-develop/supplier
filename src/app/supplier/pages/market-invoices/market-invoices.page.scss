@@ -253,7 +253,7 @@
   font-weight: 700;
   color: #fff;
   margin-left: 20px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   &.active {
     color: #fada61 !important;
     text-decoration: underline;
@@ -290,7 +290,7 @@
   background-color: rgba(222, 222, 222, .2);
   display: block;
   height: 1px;
-  margin: 20px 0;
+  margin: 5px 0;
 }
 
 .filter-title {
@@ -515,3 +515,11 @@
   .clearno{
       background:#e5e2e2
   }
+
+.color-white{
+    color:white;
+}
+ .nopadding{
+    padding-left:0px;
+    padding-right:0px;
+}

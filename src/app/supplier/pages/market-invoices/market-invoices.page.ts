@@ -11,6 +11,7 @@ import { MarketHeaderComponent } from '../../components';
 import { MinPayAmountModal } from '../../pages/market-invoices/min-pay-amount-modal'
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'eb-market-invoices',
@@ -32,6 +33,9 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
   private refresh_time = 30000;
 
   private _interval: any;
+
+  public startDate: string;
+  public endDate: string;
 
   public allInvoices = [];
   public isStatusInvoice: boolean = false;
@@ -170,6 +174,14 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
   public toggleAmount(value: number, e: Event): void {
     this.filter.toggleAmount(value, e);
     this.loadInvoices();
+  }
+
+  public goCustomRange(): void {
+      const pipe = new DatePipe('EN');
+      this.filter.startDate = pipe.transform(this.startDate, 'yyyy-MM-dd');
+      this.filter.endDate = pipe.transform(this.endDate, 'yyyy-MM-dd');
+
+      this.loadInvoices();
   }
 
   public setCheckedInvoices(e: Event): void {

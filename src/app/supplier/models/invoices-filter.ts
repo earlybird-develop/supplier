@@ -11,6 +11,8 @@ export class InvoicesFilter extends Model {
   @Alias('is_clearing') private _isClearing;
   @Alias('invoice_dpe') public dpe: number[] = [];
   @Alias('invoice_amount') public amount: number[] = [];
+  @Alias('start_date') public startDate: string;
+  @Alias('end_date') public endDate: string;
 
   // Override
   public _toJSON(): Object {
