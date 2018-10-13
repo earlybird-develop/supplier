@@ -20,7 +20,8 @@
         "form-interests": "您对什么感兴趣?",
         "form-needs-title": "您的需求",
         "form-needs": "告诉我们你的需求，我们正在倾听",
-        "form-submit": "提交"
+        "form-submit": "提交",
+        "success-tip": "您的请求已经提交，我们客服将与您联系确认信息"
       }
     },
     "components": {

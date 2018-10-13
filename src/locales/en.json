@@ -20,7 +20,8 @@
         "form-interests": "WHAT ARE YOU INTERESTED IN?",
         "form-needs-title": "YOUR NEEDS",
         "form-needs": "Tell us about your needs, we're listening",
-        "form-submit": "Submit"
+        "form-submit": "Submit",
+        "success-tip": "Your request has been submitted. Our customer service will contact you to confirm the information"
       }
     },
     "components": {

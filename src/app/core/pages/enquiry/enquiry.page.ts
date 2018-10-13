@@ -8,6 +8,7 @@ import {
 } from '../../../shared/custom-select/custom-select.component';
 
 import { EnquiryService } from '../../../supplier/services';
+import { TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-enquiry',
@@ -17,7 +18,8 @@ import { EnquiryService } from '../../../supplier/services';
 export class EnquiryComponent {
     constructor(private router: Router,
         private _enquiryService: EnquiryService,
-        private _toastr: ToastrService) {
+        private _toastr: ToastrService,
+        private translate: TranslateService) {
 
     }
 
@@ -54,12 +56,15 @@ export class EnquiryComponent {
   public make(form: NgForm): void {
       form.value["workrole"] = this.roleType.value;
       form.value["region"] = this.regionType.value;
-      form.value["interested"] = this.interestType.value; 
+      form.value["interested"] = this.interestType.value;
 
       this._enquiryService
           .make(form.value)
           .subscribe(
-          () => this._toastr.error('Make Success'),
+          () => this.translate.get("core.pages.enquiry.success-tip")
+              .subscribe(res => {
+                  this._toastr.success(res);
+              }),
           () => this._toastr.error('Make Error')
           );
   }
