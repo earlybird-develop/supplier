@@ -233,6 +233,15 @@
           "dpe": "DPE",
           "pay-date": "PAY DATE"
         },
+        "dialog-participation": {
+          "title": "Participating Can Save Your Time & Money",
+          "info1": "By altering this setting, I ",
+          "info2": "choose to participate",
+          "info3": " in all current and future clearings.",
+          "participate": "Participate",
+          "cancel": "Cancel",
+          "tip": "You can turn OFF participation any time you want to quit clearing."
+        },
         "view": "View Invoices",
         "subtext": "You have {{value}} of eligible invoices with {{buyer}} ({{currency}}). Set an offer to get paid early by an average of {{dpe}} days.",
         "config-offer": "CONFIGURE OFFER",

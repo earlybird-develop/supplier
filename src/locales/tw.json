@@ -233,6 +233,15 @@
           "dpe": "提早天数",
           "pay-date": "付款时间"
         },
+        "dialog-participation": {
+          "title": "打开参与开关可以节省您的时间和金钱",
+          "info1": "打开参与开关后，我",
+          "info2": "同意参加",
+          "info3": "当前以及将来的清算。",
+          "participate": "参与",
+          "cancel": "取消",
+          "tip": "任何时候您想退出清算计划，您都可以通过关闭参与开关进行操作。"
+        },
         "view": "查看发票",
         "subtext": "您有 {{value}} 的可用发票来自于买家 {{buyer}} ({{currency}})。您可以开价争取一个平均{{dpe}}天的提早回款机会。",
         "config-offer": "设置开价",

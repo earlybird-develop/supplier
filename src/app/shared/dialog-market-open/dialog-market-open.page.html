@@ -2,20 +2,22 @@
     <div class="dialog-title">
         <img src="assets/checked.png"/>
         <br />
-        <span>Participating Can Save Your Time & Money</span>
+        <span>{{ 'supplier.pages.markets.dialog-participation.title' | translate }}</span>
 
         <img class="closeico" src="assets/close.png" (click)="bsModalRef.hide()"/> 
     </div>
     <div class="dialog-body">
         <div>
-            By altering this setting, I <span class="weightbold">choose to participate</span> in all current and future clearings.
+            <span>{{ 'supplier.pages.markets.dialog-participation.info1' | translate }}</span>
+            <span class="weightbold">{{ 'supplier.pages.markets.dialog-participation.info2' | translate }}</span>
+            <span>{{ 'supplier.pages.markets.dialog-participation.info3' | translate }}</span>
         </div>
         <div class="m15">
-            <span class="btn1">Participate</span>
-            <span class="btn2" (click)="bsModalRef.hide()">Cancel</span>
+            <span class="btn1">{{ 'supplier.pages.markets.dialog-participation.participate' | translate }}</span>
+            <span class="btn2" (click)="bsModalRef.hide()">{{ 'supplier.pages.markets.dialog-participation.cancel' | translate }}</span>
         </div>
         <div>
-            You can turn OFF participation any time you want to quit clearing.
+            {{ 'supplier.pages.markets.dialog-participation.tip' | translate }}
         </div>
     </div>
-</ng-container>
+</ng-container> 
