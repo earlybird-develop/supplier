@@ -12,6 +12,8 @@ import { MinPayAmountModal } from '../../pages/market-invoices/min-pay-amount-mo
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { DatePipe } from '@angular/common';
+import { DialogMarketOpen } from '../../../shared/dialog-market-open/dialog-market-open.page'
+
 
 @Component({
   selector: 'eb-market-invoices',
@@ -226,7 +228,13 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
 
     this.marketsService
       .setParticipation(this.buyId, value)
-      .finally(() => this.participationLoading = false)
+        .finally(() => {
+            this.participationLoading = false;
+            const initialState = {};
+            if (this.isParticipation) {
+                this.bsModalRef = this.modalService.show(DialogMarketOpen, Object.assign({}, { class: 'dialog-market-open', initialState }));
+            }
+        })
       .subscribe(() => null);
   }
 }
