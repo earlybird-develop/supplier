@@ -2,6 +2,9 @@ import {
   Component, Input, forwardRef, Output, EventEmitter, Attribute
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { DialogOffer } from '../dialog-offer/dialog-offer.page'
 
 @Component({
   selector: 'eb-inline-edit',
@@ -30,14 +33,20 @@ export class InlineEditComponent implements ControlValueAccessor {
   public change: EventEmitter<number> = new EventEmitter();
 
   private _propagateChange: Function = () => null;
+  public bsModalRef: BsModalRef;
 
-  constructor(@Attribute('black') _black: string) {
+
+  constructor( @Attribute('black') _black: string, private modalService: BsModalService) {
     this.black = typeof _black === 'string';
   }
 
   public apply(): void {
     this._propagateChange(this.value);
     this.close();
+
+    const initialState = {};
+    this.bsModalRef = this.modalService.show(DialogOffer, Object.assign({}, { class: 'dialog-offer', initialState })); 
+    
   }
 
   public cancel(): void {

@@ -18,6 +18,7 @@ import {
 
 import { InlineEditComponent } from './inline-edit/inline-edit.component';
 import { DialogMarketOpen } from './dialog-market-open/dialog-market-open.page'; 
+import { DialogOffer } from './dialog-offer/dialog-offer.page'; 
 
 import {
   SearchFilterPipe,
@@ -47,6 +48,7 @@ import { CustomSelectComponent } from './custom-select/custom-select.component';
     FooterComponent,
       DialogComponent,
       DialogMarketOpen,
+      DialogOffer,
 
     SearchFilterPipe,
     CapitalizePipe,
@@ -71,7 +73,8 @@ import { CustomSelectComponent } from './custom-select/custom-select.component';
   ],
   entryComponents: [
       DialogComponent,
-      DialogMarketOpen
+      DialogMarketOpen,
+      DialogOffer
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,49 @@
+﻿<ng-container>
+    <div class="dialog-title">
+        <span class="title1">Your offer of 0.50% DISC is now active</span>
+        <br />
+        <span class="title2">Keep it active through the upcoming market clear</span>
+        <table class="tabinfo">
+            <tr>
+                <td>
+                    <img class="closeico" src="assets/clock.png"/> 
+                </td>
+                <td>
+                    <img class="closeico" src="assets/right.png" />
+                </td>
+                <td>
+                    <img class="closeico" src="assets/checked.png" />
+                </td>
+                <td>
+                    <img class="closeico" src="assets/right.png" />
+                </td>
+                <td>
+                    <img class="closeico" src="assets/calendar.png" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    19h 28m to market clear
+                </td>
+                <td></td>
+                <td>
+                    If your offer is accepted, you will be paid the clearing amount net of discount
+                </td>
+                <td></td>
+                <td>
+                    Your customer will initiate payment on 2017-01-24
+                </td>
+            </tr>
+        </table>
+        <div class="title3">
+            <span>Cancel this offer by turning participation off, otherwise it will be applied to all current and future</span>
+            <br />
+            <span>invoices your customer loads into EBCF. </span>
+        </div>
+    </div>
+    <div class="dialog-body">
+        <input type="checkbox"/>
+        <span class="btn1">DO NOT SHOW THIS AGAIN</span>
+        <span class="btn2" (click)="bsModalRef.hide()">I UNDERSTAND</span>
+    </div>
+</ng-container> 

@@ -1,0 +1,56 @@
+﻿.dialog-title{
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
+    position:relative;
+
+    .title1{
+        font-weight:bold;
+        font-size:18px;
+    }
+
+    .title2{
+        font-size:14px;
+    }
+
+    .title3{
+        margin-top:10px;
+    }
+
+    .tabinfo{
+        width:70%;
+        margin-left:auto;
+        margin-right:auto;
+        margin-top:20px;
+    }
+
+    .tabinfo tr{
+        border-bottom:none;
+    }
+
+        .tabinfo tr td{
+        padding:0px;
+    }
+}
+
+.dialog-body{
+    text-align:right;
+    padding-top:20px;
+    padding-bottom:20px;
+    padding-right:20px;
+    background:#EFEEF0;
+
+    .btn1{
+        padding:5px 10px;
+        cursor:pointer;
+    }
+
+    .btn2{
+        padding:5px 10px;
+        margin-left:10px;
+        cursor:pointer;
+        background:#2C92C3;
+        color:white;
+    }
+}
+
