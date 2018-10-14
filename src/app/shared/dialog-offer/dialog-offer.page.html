@@ -1,8 +1,8 @@
 ﻿<ng-container>
     <div class="dialog-title">
-        <span class="title1">Your offer of 0.50% DISC is now active</span>
+        <span class="title1">{{ 'supplier.pages.markets.dialog-offer.title1' | translate }}</span>
         <br />
-        <span class="title2">Keep it active through the upcoming market clear</span>
+        <span class="title2">{{ 'supplier.pages.markets.dialog-offer.title2' | translate }}</span>
         <table class="tabinfo">
             <tr>
                 <td>
@@ -23,27 +23,25 @@
             </tr>
             <tr>
                 <td>
-                    19h 28m to market clear
+                    {{ 'supplier.pages.markets.dialog-offer.tab1' | translate }}
                 </td>
                 <td></td>
                 <td>
-                    If your offer is accepted, you will be paid the clearing amount net of discount
+                    {{ 'supplier.pages.markets.dialog-offer.tab2' | translate }}
                 </td>
                 <td></td>
                 <td>
-                    Your customer will initiate payment on 2017-01-24
+                    {{ 'supplier.pages.markets.dialog-offer.tab3' | translate }}
                 </td>
             </tr>
         </table>
         <div class="title3">
-            <span>Cancel this offer by turning participation off, otherwise it will be applied to all current and future</span>
-            <br />
-            <span>invoices your customer loads into EBCF. </span>
+            {{ 'supplier.pages.markets.dialog-offer.title3' | translate }}
         </div>
     </div>
     <div class="dialog-body">
         <input type="checkbox"/>
-        <span class="btn1">DO NOT SHOW THIS AGAIN</span>
-        <span class="btn2" (click)="bsModalRef.hide()">I UNDERSTAND</span>
+        <span class="btn1">{{ 'supplier.pages.markets.dialog-offer.btn1' | translate }}</span>
+        <span class="btn2" (click)="bsModalRef.hide()">{{ 'supplier.pages.markets.dialog-offer.btn2' | translate }}</span> 
     </div>
 </ng-container> 
