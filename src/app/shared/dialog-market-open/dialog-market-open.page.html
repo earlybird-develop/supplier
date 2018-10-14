@@ -1,0 +1,21 @@
+﻿<ng-container>
+    <div class="dialog-title">
+        <img src="assets/checked.png"/>
+        <br />
+        <span>Participating Can Save Your Time & Money</span>
+
+        <img class="closeico" src="assets/close.png" (click)="bsModalRef.hide()"/> 
+    </div>
+    <div class="dialog-body">
+        <div>
+            By altering this setting, I <span class="weightbold">choose to participate</span> in all current and future clearings.
+        </div>
+        <div class="m15">
+            <span class="btn1">Participate</span>
+            <span class="btn2" (click)="bsModalRef.hide()">Cancel</span>
+        </div>
+        <div>
+            You can turn OFF participation any time you want to quit clearing.
+        </div>
+    </div>
+</ng-container>

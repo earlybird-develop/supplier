@@ -12,6 +12,9 @@ import {
   MarketsService,
   SubheaderService
 } from '../../services';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { DialogMarketOpen } from '../../../shared/dialog-market-open/dialog-market-open.page'
 
 
 @Component({
@@ -33,10 +36,13 @@ export class MarketsPage implements OnInit, OnDestroy {
 
   private refresh_time = 30000;
   private _interval: any;
+  public bsModalRef: BsModalRef;
 
   constructor(private _marketsService: MarketsService,
               private _subheader: SubheaderService,
-              private _toastr: ToastrService) { }
+              private _toastr: ToastrService,
+              private modalService: BsModalService) {
+      }
 
   ngOnInit() {
 
@@ -81,6 +87,11 @@ export class MarketsPage implements OnInit, OnDestroy {
         () => {
           market.isParticipation = value ? 1 : 0;
           this._toastr.success('Market updated!');
+
+          const initialState = {};
+          if (market.isParticipation == 1) {
+              this.bsModalRef = this.modalService.show(DialogMarketOpen, Object.assign({}, { class: 'dialog-market-open', initialState }));
+          }
         },
         () => this._toastr.error('Internal server error')
       );

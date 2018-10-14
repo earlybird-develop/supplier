@@ -1,0 +1,45 @@
+﻿.dialog-title{
+    text-align:center;
+    font-weight:bold;
+    font-size:18px;
+    margin-top:10px;
+    padding-bottom:10px;
+    border-bottom:2px solid #e3e3e3;
+    position:relative;
+}
+
+.dialog-title .closeico{
+    position:absolute;
+    top:0px;
+    right:10px;
+    cursor:pointer;
+}
+
+.dialog-body{
+    text-align:center;
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+.dialog-body .weightbold{
+    font-weight:bold;
+}
+
+.dialog-body .btn1{
+    padding:5px 10px;
+    color:white;
+    background:#297983;
+    cursor:pointer;
+}
+
+.dialog-body .btn2{
+    color:#297983;
+    text-decoration:underline;
+    margin-left:10px;
+    cursor:pointer;
+}
+
+.dialog-body .m15{
+    margin-top:15px;
+}
+

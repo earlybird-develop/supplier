@@ -16,6 +16,7 @@ import {
 } from './sidebarable-page/sidebarable-page.component';
 
 import { InlineEditComponent } from './inline-edit/inline-edit.component';
+import { DialogMarketOpen } from './dialog-market-open/dialog-market-open.page'; 
 
 import {
   SearchFilterPipe,
@@ -42,7 +43,8 @@ import { CustomSelectComponent } from './custom-select/custom-select.component';
     SidebarablePageComponent,
     InlineEditComponent,
     FooterComponent,
-    DialogComponent,
+      DialogComponent,
+      DialogMarketOpen,
 
     SearchFilterPipe,
     CapitalizePipe,
@@ -66,7 +68,8 @@ import { CustomSelectComponent } from './custom-select/custom-select.component';
     KeysPipe
   ],
   entryComponents: [
-    DialogComponent
+      DialogComponent,
+      DialogMarketOpen
   ]
 })
 export class SharedModule { }
