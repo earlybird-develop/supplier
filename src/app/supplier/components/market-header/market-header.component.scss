@@ -39,7 +39,6 @@
 .info {
   display: flex;
   align-items: stretch;
-  margin-right: 53px;
   height: 57px;
 
   .pay-date {
@@ -54,6 +53,13 @@
       height: 12px;
       width: 12px;
     }
+  }
+
+  .buyer-name{
+      line-height:57px;
+      color:white;
+      padding-right:20px;
+      font-size:12px;
   }
 }
 
