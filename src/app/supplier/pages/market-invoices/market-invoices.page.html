@@ -104,6 +104,29 @@
       </div>
 
       <div class="filter-block">
+        <div class="filter-block-title">{{ 'supplier.pages.invoices.filter.opd' | translate }}</div>
+        <div class="custom-range-filter">
+        <div class="row">
+          <div class="col-md-6 color-white">{{ 'supplier.pages.invoices.filter.from' | translate }}</div>
+          <div class="col-md-6 color-white">{{ 'supplier.pages.invoices.filter.to' | translate }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <input type="text" placeholder="dd/mm/yy" class="form-control datebox" bsDatepicker [(ngModel)]="startDate"
+                   placement="right" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+          </div>
+          <div class="col-md-6">
+            <input type="text" placeholder="dd/mm/yy" class="form-control datebox" bsDatepicker [(ngModel)]="endDate"
+                   placement="right" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+          </div>
+        </div>
+        <button class="btn btn-primary" (click)="goCustomRange()">
+          {{ 'supplier.pages.invoices.filter.go' | translate }}
+        </button>
+      </div>
+      </div>
+
+      <div class="filter-block">
         <div class="filter-block-title">{{ 'supplier.pages.invoices.filter.eia' | translate }}</div>
         <ul class="nomargin">
           <li>
@@ -141,23 +164,7 @@
         </ul>
       </div>
 
-      <div class="filter-block">
-          <div class="row wid95">
-              <div class="col-md-6 color-white">{{ 'supplier.pages.invoices.filter.from' | translate }}</div>
-              <div class="col-md-6 color-white">{{ 'supplier.pages.invoices.filter.to' | translate }}</div>
-              <div class="col-md-6 nopadding">
-                  <input type="text" placeholder="dd/mm/yy" class="form-control datebox" bsDatepicker [(ngModel)]="startDate"
-                         placement="right" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
-              </div>
-              <div class="col-md-6 nopadding">
-                  <input type="text" placeholder="dd/mm/yy" class="form-control datebox" bsDatepicker [(ngModel)]="endDate"
-                         placement="right" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
-              </div>
-          </div>
-          <button class="btn btn-primary" (click)="goCustomRange()">
-              {{ 'supplier.pages.invoices.filter.go' | translate }}
-          </button>
-      </div>
+
     </ng-container>
   </ng-container>
 

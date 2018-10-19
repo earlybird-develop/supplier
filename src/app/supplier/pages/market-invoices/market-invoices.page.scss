@@ -262,11 +262,11 @@
 
 .sidebar-menu {
   margin-left: 24px;
-
+  margin-bottom:10px !important;
   li {
     font-size: 13px !important;
     font-weight:500;
-    margin-bottom: 5px !important;
+    margin-bottom: 3px !important;
 
     &.active a {
       color: #fada61 !important;
@@ -303,20 +303,19 @@
 
 .filter-block {
   margin-left: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
 
   .filter-block-title {
     font-size: 13px;
     font-weight: 600;
     color: #fff;
-
   }
-
 
   ul {
     margin-left:4px;
+    margin-bottom: 5px !important;
     li {
-      margin-top: 2px;
+      margin-top: 1px;
       color: #fff;
       font-size: 13px !important;
       font-weight: 400 !important;
@@ -516,25 +515,63 @@
       background:#e5e2e2
   }
 
-.color-white{
+
+.custom-range-filter {
+  margin: 2px 38px 15px 5px;
+
+  label {
+    color: #cecfd0;
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+
+    input {
+      border: 1px solid #E8E9EC;
+      border-radius: 4px;
+      color: #acad90;
+      padding: 0 16px;
+      box-sizing: border-box;
+      display: block;
+      margin-top: 5px;
+      height: 34px;
+      outline: none;
+      width: 100%;
+    }
+  }
+
+  .color-white{
     color:white;
-}
- .nopadding{
-    padding-left:5px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .nomargin{
+    margin-bottom:10px;
+  }
+
+  .nopadding{
+    padding-left:0px;
     padding-right:0px;
+  }
+
+  .datebox{
+    width:78px;
+    height:30px;
+    font-size:12px;
+    padding-left:6px;
+    padding-right:3px;
+  }
+
+
+  button {
+    display: block;
+    height: 32px !important;
+    line-height: 32px !important;
+    width: 68px;
+    border: none;
+    padding: 0 !important;
+    font-size: 14px;
+    margin-top: 12px;
+    outline: none;
+  }
 }
-
- .nomargin{
-     margin-bottom:10px;
- }
-
- .wid95{
-     width:95%;
- }
-
- .datebox{
-     width:65px;
-     height:30px;
-     font-size:12px;
-     padding:3px;
- }
