@@ -14,14 +14,12 @@
 </ul>
 
 <div class="info">
-    <span class="buyer-name">{{buyerName}}</span>
-
-  <eb-timer></eb-timer>
-
+  <span class="buyer-name">{{buyerName}}</span>
   <div class="pay-date"
        tooltip="{{ 'supplier.components.market-header.pay-date' | translate }}: {{ payDate }}"
        placement="left">
     <img class="pointer" src="./assets/icons/calendar.svg">
     <span>{{ 'supplier.components.market-header.pay-date' | translate }}: {{ payDate }}</span>
   </div>
+  <eb-timer></eb-timer>
 </div>

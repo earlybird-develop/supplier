@@ -116,7 +116,8 @@
       },
       "markets-header": {
         "title": "Market Opportunities",
-        "closing": "Market closing"
+        "closing": "To Market Close",
+        "closed": "Market Closed"
       }
     },
     "pages": {
@@ -181,9 +182,10 @@
           "more25k": "25,000 to 50,000",
           "more50k": "50,000 to 75,000",
           "more75k": "75,000 or more",
-          "from": "从",
-          "to": "到",
-          "go": "查询"
+          "opd": "Original Paydate",
+          "from": "From",
+          "to": "To",
+          "go": "GO"
         },
         "updating": "We will return the result after 60 seconds...",
         "none": "None",
