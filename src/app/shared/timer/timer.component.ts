@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { TimerService } from './timer.service';
 
+import { DialogOffer } from '../dialog-offer/dialog-offer.page';
+
+
 @Component({
   selector: 'eb-timer',
   templateUrl: './timer.component.html',
@@ -15,7 +18,10 @@ export class TimerComponent implements OnInit {
   public minutes = 0;
   public hours = 0;
 
-  constructor(private _timer: TimerService) { }
+  constructor(private _timer: TimerService) {
+  }
+
+  ngOnChanges(){}
 
   ngOnInit() {
 
@@ -59,6 +65,9 @@ export class TimerComponent implements OnInit {
               this.isClosed = true;
           }
       }
-
+      // this.DialogOffer.emit()
+      // console.log(this.hours);
+      // console.log(this.minutes);
   }
 }
+

@@ -245,12 +245,15 @@
           "tip": "You can turn OFF participation any time you want to quit clearing."
         },
         "dialog-offer": {
+          "hours": "h",
+          "minutes": "m",
           "title1": "Your offer of 0.50% DISC is now active",
           "title2": "Keep it active through the upcoming market clear",
           "title3": "Cancel this offer by turning participation off, otherwise it will be applied to all current and future invoices your customer loads into EBCF. ",
-          "tab1": "19h 28m to market clear",
+          "tab1": " to market clear",
           "tab2": "If your offer is accepted, you will be paid the clearing amount net of discount",
-          "tab3": "Your customer will initiate payment on 2017-01-24",
+          "tab3-title": "Your customer will initiate payment on ",
+          "tab3": "",
           "btn1": "DO NOT SHOW THIS AGAIN",
           "btn2": "I UNDERSTAND"
         },

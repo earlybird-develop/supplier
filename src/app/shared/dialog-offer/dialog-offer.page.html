@@ -1,6 +1,6 @@
 ﻿<ng-container>
     <div class="dialog-title">
-        <span class="title1">{{ 'supplier.pages.markets.dialog-offer.title1' | translate }}</span>
+        <span class="title1">您的开价 {{ values }}{{ 'supplier.pages.markets.dialog-offer.title1' | translate }}</span>
         <br />
         <span class="title2">{{ 'supplier.pages.markets.dialog-offer.title2' | translate }}</span>
         <table class="tabinfo">
@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <td>
-                    {{ 'supplier.pages.markets.dialog-offer.tab1' | translate }}
+                    {{ hours | number: '2.0' }} {{ 'supplier.pages.markets.dialog-offer.hours' | translate }} {{ minutes | number: '2.0' }} {{ 'supplier.pages.markets.dialog-offer.minutes' | translate }} {{ 'supplier.pages.markets.dialog-offer.tab1' | translate }}
                 </td>
                 <td></td>
                 <td>
@@ -31,7 +31,7 @@
                 </td>
                 <td></td>
                 <td>
-                    {{ 'supplier.pages.markets.dialog-offer.tab3' | translate }}
+                    {{ 'supplier.pages.markets.dialog-offer.tab3-title' | translate }}{{ payDate }}{{ 'supplier.pages.markets.dialog-offer.tab3' | translate }}
                 </td>
             </tr>
         </table>

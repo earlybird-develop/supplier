@@ -22,7 +22,7 @@
 }
 
 span {
-  background-color: #eaf0f4;
+  background-color: #fff;
   border: none;
   padding: 0;
   padding-left: 10px;
@@ -35,6 +35,13 @@ span {
   line-height: 25px;
   outline: none;
   width: 100%;
+  height: calc(2.25rem + 2px);
+  line-height: 35px;
+  padding-left: 10px;
+  border-radius: .25rem;
+  border: 1px solid #dedede;
+  outline: none;
+  font-size: 1rem;
 }
 
 label {

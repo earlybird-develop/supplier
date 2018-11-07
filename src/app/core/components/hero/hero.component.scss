@@ -22,10 +22,12 @@
     font-size: 40px;
     font-weight: 400;
     margin-top: 100px;
+    margin-left: 6rem;
   }
 
   .join {
     margin-top: 40px;
+    margin-left: 6rem;
 
     .btn {
       color: #fff;
@@ -42,9 +44,28 @@
   }
 }
 
+
+@media (min-width: 1200px) {
+  .links{
+    padding-right: 12rem !important;
+  }
+
+  .content {
+    margin-left: 5rem !important;
+
+    .slogan{
+      margin-left: 11rem !important;
+    }
+    .join{
+      margin-left: 11rem !important;
+    }
+  }
+}
+
+
 @media (max-width: 1100px) {
   .content {
-    margin-left: 40px !important;
+    margin-left: 4rem !important;
 
     .logo {
       width: 70px !important;

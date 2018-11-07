@@ -44,9 +44,11 @@ export class InlineEditComponent implements ControlValueAccessor {
     this._propagateChange(this.value);
     this.close();
 
-    const initialState = {};
-    this.bsModalRef = this.modalService.show(DialogOffer, Object.assign({}, { class: 'dialog-offer', initialState })); 
-    
+    const initialState = {
+      values: this.value
+    };
+    this.bsModalRef = this.modalService.show(DialogOffer, Object.assign({initialState}, { class: 'dialog-offer', initialState }));
+
   }
 
   public cancel(): void {

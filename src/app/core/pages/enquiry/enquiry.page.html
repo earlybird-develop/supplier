@@ -10,7 +10,7 @@
   <div class="fill"></div>
   <div class="content-block">
     <div class="left-side">
-      <img src="assets/sky-lines.png">
+      <img src="assets/sky-lines2.png">
     </div>
     <div class="right-form">
       <p class="enquiry-title">{{ 'core.pages.enquiry.form-title' | translate }}</p>
@@ -19,15 +19,15 @@
       <form novalidate #makeForm="ngForm" (ngSubmit)="make(makeForm)">
         <!--{{ 'core.pages.enquiry.form-firstname' | translate }} *-->
         <label for="firstName"></label>
-        <input id="firstName" type="text" name="firstname" ngModel #firstname="ngModel" [placeholder]="('core.pages.enquiry.form-firstname' | translate) + ' *'">
+        <input class="form-control" id="firstName" type="text" name="firstname" ngModel #firstname="ngModel" [placeholder]="('core.pages.enquiry.form-firstname' | translate) + ' *'">
 
         <!--{{ 'core.pages.enquiry.form-lastname' | translate }} *-->
         <label for="lastName"></label>
-        <input id="lastName" type="text" name="lastname" ngModel #lastname="ngModel"  [placeholder]="('core.pages.enquiry.form-lastname' | translate) + ' *'">
+        <input class="form-control" id="lastName" type="text" name="lastname" ngModel #lastname="ngModel"  [placeholder]="('core.pages.enquiry.form-lastname' | translate) + ' *'">
 
         <!--{{ 'core.pages.enquiry.form-company' | translate }} *-->
         <label for="company"></label>
-        <input id="company" type="text" name="company" ngModel #company="ngModel"  [placeholder]="('core.pages.enquiry.form-company' | translate) + ' *'">
+        <input class="form-control" id="company" type="text" name="company" ngModel #company="ngModel"  [placeholder]="('core.pages.enquiry.form-company' | translate) + ' *'">
 
         <!--{{ 'core.pages.enquiry.form-select-role' | translate }} *-->
         <eb-custom-select title="" [(ngModel)]="roleType"  [ngModelOptions]="{standalone: true}"
@@ -37,11 +37,11 @@
 
         <!--{{ 'core.pages.enquiry.form-email' | translate }} *-->
         <label for="email"></label>
-        <input id="email" type="text" name="email" ngModel #email="ngModel"  [placeholder]="('core.pages.enquiry.form-email' | translate) + ' *'">
+        <input class="form-control" id="email" type="text" name="email" ngModel #email="ngModel"  [placeholder]="('core.pages.enquiry.form-email' | translate) + ' *'">
 
         <!--{{ 'core.pages.enquiry.form-phone-optional' | translate }}-->
         <label for="phone"></label>
-        <input id="phone" type="text" name="phonenumber" ngModel #phonenumber="ngModel"  [placeholder]="('core.pages.enquiry.form-phone' | translate)">
+        <input class="form-control" id="phone" type="text" name="phonenumber" ngModel #phonenumber="ngModel"  [placeholder]="('core.pages.enquiry.form-phone' | translate)">
 
         <!--{{ 'core.pages.enquiry.form-region' | translate }} *-->
         <eb-custom-select title=""  [(ngModel)]="regionType"  [ngModelOptions]="{standalone: true}"
@@ -57,11 +57,11 @@
 
         <!--{{ 'core.pages.enquiry.form-needs-title' | translate }}-->
         <label for="needs"></label>
-        <textarea id="needs"  name="memo" ngModel #memo="ngModel" 
+        <textarea class="form-control" id="needs"  name="memo" ngModel #memo="ngModel" 
                   rows="3"
                   [placeholder]="'core.pages.enquiry.form-needs' | translate"></textarea>
 
-        <button class="submit" type="submit">
+        <button class="submit btn btn-default" type="submit">
           {{ 'core.pages.enquiry.form-submit' | translate }}
         </button>
       </form>

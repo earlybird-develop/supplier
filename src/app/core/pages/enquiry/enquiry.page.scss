@@ -8,7 +8,7 @@
       background: linear-gradient(125deg, #312a86, #449fd8, #a0e9fa);
   display: block;
   position: relative;
-  height: 170px;
+  height: 120px;
 }
 
 .enq-home-header{
@@ -28,12 +28,13 @@
   bottom: 0;
   display: block;
   background-image: url('/assets/2.jpg');
-  background-size: cover;
+  background-size: 100% 100%;
   position: absolute;
   opacity: .1;
   top: 0;
   right: 0;
   left: 0;
+  margin-left: -110px;
 }
 
 .content {
@@ -50,6 +51,7 @@
   .left-side {
     align-items: center;
     position: relative;
+    right: 50px;
     display: flex;
     justify-content: center;
     width: 75%;
@@ -64,26 +66,18 @@
 }
 
 .submit {
-  background: #fff;
-  border-radius: 15px;
-  border: 1px solid #ddd;
-  color: #666;
-  cursor: pointer;
-  outline: none;
-  text-transform: uppercase;
   margin-top: 20px;
-  height: 30px;
-  width: 70px;
-  font-size: 14px;
 }
 
 .right-form {
   background-color: #fff;
-  box-shadow: -15px 0 65px 36px #fff;
+  /*box-shadow: -15px 0 65px 36px #fff;*/
   position: relative;
   padding: 20px 40px;
   z-index: 2;
-  width:54%;
+  width:60%;
+  margin-right: 5%;
+  margin-bottom: 30px;
 
   input,
   textarea {
@@ -114,12 +108,12 @@ label {
 }
 
 textarea {
-  line-height: 17px;
+  /*line-height: 17px;*/
 }
 
 eb-home-footer{
-      position: relative;
-  z-index: 9999 !important;
+  position: relative;
+  /*z-index: 9999 !important;*/
 }
 
 
