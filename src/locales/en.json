@@ -247,7 +247,8 @@
         "dialog-offer": {
           "hours": "h",
           "minutes": "m",
-          "title1": "Your offer of 0.50% DISC is now active",
+          "title1-title": "Your offer of ",
+          "title1": "% DISC is now active",
           "title2": "Keep it active through the upcoming market clear",
           "title3": "Cancel this offer by turning participation off, otherwise it will be applied to all current and future invoices your customer loads into EBCF. ",
           "tab1": " to market clear",

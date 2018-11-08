@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Injectable, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
@@ -13,6 +13,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { DatePipe } from '@angular/common';
 import { DialogMarketOpen } from '../../../shared/dialog-market-open/dialog-market-open.page'
+import { DialogOffer } from '../../../shared/dialog-offer/dialog-offer.page'
 
 
 @Component({
