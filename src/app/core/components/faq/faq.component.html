@@ -1,16 +1,25 @@
 <div class="title" [innerHTML]="'core.components.faq.title' | translate"></div>
 <div class="container">
-  <div class="block">
-    <div class="question" [innerHTML]="'core.components.faq.question1' | translate"></div>
-    <div class="answer" [innerHTML]="'core.components.faq.answer1' | translate"></div>
+  <div class="block questionBox">
+    <div class="questions">
+      <div [innerHTML]="'core.components.faq.number1' | translate" class="question-number inline-block"></div>
+      <div class="inline-block">{{ 'core.components.faq.question1' | translate }}</div>
+    </div>
+    <div class="answers" [innerHTML]="'core.components.faq.answer1' | translate"></div>
   </div>
-  <div class="block center-block">
-    <div class="question" [innerHTML]="'core.components.faq.question2' | translate"></div>
-    <div class="answer" [innerHTML]="'core.components.faq.answer2' | translate"></div>
+  <div class="block questionBox">
+    <div class="questions">
+      <div [innerHTML]="'core.components.faq.number2' | translate" class="question-number inline-block"></div>
+      <div class="inline-block">{{ 'core.components.faq.question2' | translate }}</div>
+    </div>
+    <div class="answers" [innerHTML]="'core.components.faq.answer2' | translate"></div>
   </div>
-  <div class="block">
-    <div class="question" [innerHTML]="'core.components.faq.question3' | translate"></div>
-    <div class="answer" [innerHTML]="'core.components.faq.answer3' | translate"></div>
+  <div class="block questionBox">
+    <div class="questions">
+      <div [innerHTML]="'core.components.faq.number3' | translate" class="question-number inline-block"></div>
+      <div class="inline-block">{{ 'core.components.faq.question3' | translate }}</div>
+    </div>
+    <div class="answers" [innerHTML]="'core.components.faq.answer3' | translate"></div>
   </div>
 </div>
 

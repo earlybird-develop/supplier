@@ -2,8 +2,8 @@
   background: linear-gradient(20deg, #1E3095, #8447AB, #DB75B4, #DB75B4);
   display: block;
   margin-top: -3px;
-  padding-top: 178px;
-  padding-bottom: 118px;
+  padding-top: 130px;
+  padding-bottom: 8px;
 }
 
 .content {
@@ -78,7 +78,7 @@
 @media(max-width: 1250px) {
   :host {
     padding-top: 128px;
-    padding-bottom: 68px;
+    padding-bottom: 20px;
   }
 
   .side1 {

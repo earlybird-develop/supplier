@@ -1,7 +1,7 @@
 :host {
   background-color: #fff;
   display: block;
-  padding-top: 117px;
+  padding-top: 50px;
   background: linear-gradient(0, #dbfbff, #fff);
   background-size: 100% 45%;
   background-repeat: no-repeat;
@@ -42,15 +42,15 @@
   background-image: url('/assets/map.svg');
   background-repeat: no-repeat;
   background-position: top center;
-  background-size: 1900px;
+  background-size: 2250px;
   display: flex;
   justify-content: center;
-  padding-top: 40px;
-  padding-left: 100px;
-  height: 600px;
+  padding-bottom: 40px;
+  height: 450px;
 
   .sky {
-    width: 519px;
+    width: 420px;
+    padding-left: 15px;
   }
 
   .desc-block {
@@ -71,12 +71,12 @@
       font-size: 14px;
       line-height: 24px;
       margin-top: 10px;
+      max-width: 150px;
     }
   }
 
   .dashed-line {
-    width: 112px;
-    margin: 0 20px;
+    width: 80px;
   }
 }
 

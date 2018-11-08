@@ -37,6 +37,9 @@
       },
       "faq": {
         "title": "Here’s a few answers to our most common questions",
+        "number1": "1",
+        "number2": "2",
+        "number3": "3",
         "question1": "Is this EP-FO platform free ?",
         "answer1": "It’s completely free to users, <br> no matter for buyer or supplier.",
         "question2": "Is it risky for working capital on EP-FO platform?",
