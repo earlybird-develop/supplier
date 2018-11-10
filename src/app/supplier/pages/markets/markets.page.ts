@@ -72,7 +72,7 @@ export class MarketsPage implements OnInit, OnDestroy {
       .getList()
       .subscribe(
         markets => this.markets = markets,
-        errors => console.error(errors)
+        error => console.error(error)
       );
   }
 
@@ -81,32 +81,48 @@ export class MarketsPage implements OnInit, OnDestroy {
   }
 
   public setParticipation(market: Market, value: boolean): void {
+
     this._marketsService
       .setParticipation(market.id, value)
       .subscribe(
-        () => {
-          market.isParticipation = value ? 1 : 0;
-          this._toastr.success('Market updated!');
+        sucess => {
 
-          const initialState = {};
+            market.isParticipation = value ? 1 : 0;
+
+           const initialState = {};
           if (market.isParticipation == 1) {
               this.bsModalRef = this.modalService.show(DialogMarketOpen, Object.assign({}, { class: 'dialog-market-open', initialState }));
           }
+
+            this._toastr.success('提交成功!');
+            this.load();
         },
-        () => this._toastr.error('Internal server error')
-      );
+        error => {
+            this._toastr.error('提交失败!')
+            this.load();
+        }
+      )
+
   }
 
   public setOfferApr(market, val: number): void {
-    market.offerApr = val;
-    market.offerStatus = 1;
+
+     market.offerApr = val;
     this._marketsService
       .setOfferApr(market.id, market.minPayment, val)
         .subscribe(
-        () => {
-          market.offerApr = val;
-          this._toastr.success('Market updated!');
-        })
+            success => {
+
+              market.offerStatus = 1;
+              this._toastr.success('提交成功!');
+              this.load()
+
+            },
+            error => {
+                this._toastr.error('提交失败');
+                this.load();
+            }
+        );
 
   }
 
@@ -119,7 +135,11 @@ export class MarketsPage implements OnInit, OnDestroy {
       0,
       market.id
     )
-    .finally(() => market.showProcess = false)
-    .subscribe(() => {})
+    .subscribe(
+        () => {
+            market.showProcess = false;
+            this.load();
+        }
+    )
   }
 }

@@ -41,7 +41,7 @@ export class MarketsService {
             observer.next(response['data']['list'].map(x => new Market(x)));
             //observer.complete();
           },
-          errors => observer.error(errors)
+            error => observer.error(error)
       );
     });
   }
@@ -58,7 +58,7 @@ export class MarketsService {
             observer.next(new Market(response['data']));
             observer.complete();
           },
-          errors => observer.error(errors)
+            error => observer.error(error)
         );
     });
   }
@@ -91,7 +91,7 @@ export class MarketsService {
             observer.next(response['data']['list'].map(x => new Invoice(x)));
             observer.complete();
           },
-          errors => observer.error(errors)
+            error => observer.error(error)
         );
     });
   }
@@ -111,7 +111,7 @@ export class MarketsService {
             observer.next(true);
             observer.complete();
           },
-          error => observer.error
+           error => observer.error(error)
         );
     });
   }
@@ -134,7 +134,7 @@ export class MarketsService {
             observer.next(resp);
             observer.complete();
           },
-          error => observer.error
+          error => observer.error(error)
         );
     });
   }

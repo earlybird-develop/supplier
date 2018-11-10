@@ -98,6 +98,12 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
   }
 
   openMinAmountModal() {
+
+      if(this.market.buyerStatus == 0)
+      {
+          return;
+      }
+
     let ref = this;
     const initialState = {
       market: this.market,
@@ -105,13 +111,18 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
         ref.onSubmit(val);
       }
     };
+
     this.bsModalRef = this.modalService.show(MinPayAmountModal, Object.assign({}, { class: 'modal-initial-pay', initialState }));
   }
+
   public onSubmit(val) {
     this.marketsService
       .setOfferApr(this.buyId, val.min_payment, val.offer_value)
       .finally(() => this.participationLoading = false)
-      .subscribe(() => null);
+      .subscribe(
+          () => null
+      )
+    ;
     this.bsModalRef.hide();
     this.getStat()
   }
@@ -211,21 +222,29 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     // todo : This hack needs to be removed when api will work
     this.market.offerApr = apr;
     this.market.offerStatus = 1;
+
     this.marketsService
       .setOfferApr(this.market.id, this.market.minPayment, apr)
-      .finally(() => this.participationLoading = false)
-      .subscribe(() => this.market.offerApr = apr);
+      .subscribe(
+          () => {
+              this.market.offerApr = apr;
+              this.participationLoading = false;
+          }
+      );
   }
 
   public setParticipation(value: boolean): void {
-    this.participationLoading = true;
+
+   if( this.market.buyerStatus == 1)
+   {
+      this.participationLoading = true;
+   }
+
     // todo : This hack needs to be removed when api will work
     this.isParticipation = value;
 
-    // todo : This hack needs to be removed when api will work
-    if (!this.isParticipation) {
-      this.market.offerApr = null;
-    }
+    //这里打开关闭参与的市场时，都要将 开价禁用
+    this.market.offerStatus = 1;
 
     this.marketsService
       .setParticipation(this.buyId, value)

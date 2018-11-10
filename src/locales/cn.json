@@ -119,7 +119,7 @@
       },
       "markets-header": {
         "title": "市场机会",
-        "closing": "将要收市",
+        "closing": "市场清算",
         "closed": "市场收市"
       }
     },

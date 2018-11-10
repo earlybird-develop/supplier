@@ -69,9 +69,13 @@
             </div>
           </td>
         </tr>
-        <tr *ngSwitchCase="false">
-          <td class="participation-block">
-            <eb-checkbox (ngModelChange)="setParticipation(market, $event)" [ngModel]="market.isParticipation === 1"></eb-checkbox>
+        <tr *ngSwitchCase="false" [ngClass]="{'row-gray':market.buyerStatus == 0}">
+          <td class="participation-block" >
+            <eb-checkbox (ngModelChange)="setParticipation(market, $event)"
+                         [ngModel]="market.isParticipation === 1"
+                       >
+
+            </eb-checkbox>
           </td>
           <td>
             <div>
@@ -86,7 +90,7 @@
           <td>
             <eb-inline-edit [ngModel]="market.offerApr"
                             (ngModelChange)="setOfferApr(market, $event)"
-                            [disabled]="market.isLocked()"
+                            [disabled]="market.isLocked() || market.buyerStatus == 0"
                             black
                             #offerAprEdit>
             </eb-inline-edit>

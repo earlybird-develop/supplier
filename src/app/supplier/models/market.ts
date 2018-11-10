@@ -34,6 +34,7 @@ export class Market extends Model {
   @Alias() public paydate: string;
   @Alias('buyer_id') public id: string;
   @Alias('buyer_name') public buyerName: string;
+  @Alias('buyer_status') public buyerStatus: number;
   @Alias('currency_sign') public currencySign: string;
   @Alias('is_participation') public isParticipation: number;
   
