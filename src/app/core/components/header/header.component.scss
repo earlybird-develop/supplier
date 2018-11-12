@@ -56,7 +56,7 @@
   display: flex;
   justify-content: flex-start;
   width: 42%;
-  margin-top: -20px;
+  margin-top: -25px;
 
   img{
     width: 65px;
@@ -66,14 +66,14 @@
 
 .links {
     display: flex;
+    position: relative;
     justify-content: flex-end;
-    padding-top: 20px;
-    padding-bottom: 6px;
     padding-right: 10.5%;
     background: #02186c;
+    height:50px;
+    line-height:50px;
 
   li {
-    line-height: 35px;
     margin: 0 28px;
   }
 
