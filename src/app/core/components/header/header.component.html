@@ -1,34 +1,37 @@
-<ul class="links">
-    <li>
-        <div class="logo">
-            <a href="#/"><img src="./assets/logo.svg"></a>
-        </div> 
-    </li>
-  <li><a scrollTo (click)="goToHome()" href="#whatis">{{ 'core.components.header.whatis' | translate }}</a></li>
-  <li><a scrollTo (click)="goToHome()" href="#why">{{ 'core.components.header.why' | translate }}</a></li>
-  <li><a scrollTo (click)="goToHome()" href="#benefits">{{ 'core.components.header.benefits' | translate }}</a></li>
-  <li><a scrollTo (click)="goToHome()" href="#faq">{{ 'core.components.header.faq' | translate }}</a></li>
-
-  <li class="separator"></li>
-
-  <li><a [routerLink]="['/supplier', 'signin']">{{ 'core.components.header.login' | translate }}</a></li>
-  <li><a class="lets-start" [routerLink]="['/enquiry']">{{ 'core.components.header.lets-start' | translate }}</a></li>
-  <li class="locale-picker pointer" dropdown>
+<div class="top-nav">
+  <div class="locale-picker pointer" dropdown>
     <div dropdownToggle>
-      <img src="./assets/icons/arrow-white.svg">
       <ng-container [ngSwitch]="translate.currentLang">
         <a *ngSwitchCase="'en'">{{ 'core.pages.language.en' | translate }}</a>
         <a *ngSwitchCase="'cn'">{{ 'core.pages.language.cn' | translate }}</a>
         <a *ngSwitchCase="'tw'">{{ 'core.pages.language.tw' | translate }}</a>
       </ng-container>
-    </div>
+      <img src="./assets/icons/languageDown.svg">
 
-    <ul class="dropdown-menu" *dropdownMenu>
-      <li><a style="color: #333 !important;" (click)="selectLang('en')">{{ 'core.pages.language.en' | translate }}</a></li>
-      <li><a style="color: #333 !important;" (click)="selectLang('cn')">{{ 'core.pages.language.cn' | translate }}</a></li>
-      <li><a style="color: #333 !important;" (click)="selectLang('tw')">{{ 'core.pages.language.tw' | translate }}</a></li>
-    </ul>
-  </li>
+        <ul class="dropdown-menu" *dropdownMenu>
+          <li><a style="color: #333 !important;" (click)="selectLang('en')">{{ 'core.pages.language.en' | translate }}</a></li>
+          <li><a style="color: #333 !important;" (click)="selectLang('cn')">{{ 'core.pages.language.cn' | translate }}</a></li>
+          <li><a style="color: #333 !important;" (click)="selectLang('tw')">{{ 'core.pages.language.tw' | translate }}</a></li>
+        </ul>
+    </div>
+  </div>
+  <div><a class="lets-start" [routerLink]="['/enquiry']">{{ 'core.components.header.lets-start' | translate }}</a></div>
+  <div><a class="login-btn" [routerLink]="['/supplier', 'signin']">{{ 'core.components.header.login' | translate }}</a></div>
+
+</div>
+
+
+
+<ul class="links">
+  <div class="logoBox">
+    <a href="#/"><img src="./assets/logo.svg"></a>
+  </div>
+  <li><a scrollTo (click)="goToHome()" href="#whatis">{{ 'core.components.header.whatis' | translate }}</a></li>
+  <li><a scrollTo (click)="goToHome()" href="#why">{{ 'core.components.header.why' | translate }}</a></li>
+  <li><a scrollTo (click)="goToHome()" href="#benefits">{{ 'core.components.header.benefits' | translate }}</a></li>
+  <li><a scrollTo (click)="goToHome()" href="#faq">{{ 'core.components.header.faq' | translate }}</a></li>
+
+  
 </ul>
 
 <div dropdown #dd="bs-dropdown" (onShown)="menuOpen()" (onHidden)="menuClose()">
@@ -51,12 +54,8 @@
     <li><a scrollTo (click)="goToHome()" href="#benefits">{{ 'core.components.header.benefits' | translate }}</a></li>
     <li><a scrollTo (click)="goToHome()" href="#faq">{{ 'core.components.header.faq' | translate }}</a></li>
 
-    <li class="separator"></li>
-
     <li><a [routerLink]="['/supplier', 'signin']">{{ 'core.components.header.login' | translate }}</a></li>
     <li><a [routerLink]="['/enquiry']">{{ 'core.components.header.lets-start' | translate }}</a></li>
-
-    <li class="separator"></li>
     <li><a (click)="selectLang('en')">{{ 'core.pages.language.en' | translate }}</a></li>
     <li><a (click)="selectLang('cn')">Chinese</a></li>
   </ul>

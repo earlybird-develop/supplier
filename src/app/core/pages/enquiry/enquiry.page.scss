@@ -8,7 +8,7 @@
       background: linear-gradient(125deg, #312a86, #449fd8, #a0e9fa);
   display: block;
   position: relative;
-  height: 120px;
+  height: 100px;
 }
 
 .enq-home-header{
@@ -30,7 +30,7 @@
   background-image: url('/assets/2.jpg');
   background-size: 100% 100%;
   position: absolute;
-  opacity: .1;
+  opacity: .2;
   top: 0;
   right: 0;
   left: 0;
@@ -71,7 +71,6 @@
 
 .right-form {
   background-color: #fff;
-  /*box-shadow: -15px 0 65px 36px #fff;*/
   position: relative;
   padding: 20px 40px;
   z-index: 2;
@@ -107,13 +106,8 @@ label {
   margin-top: 9px;
 }
 
-textarea {
-  /*line-height: 17px;*/
-}
-
 eb-home-footer{
   position: relative;
-  /*z-index: 9999 !important;*/
 }
 
 

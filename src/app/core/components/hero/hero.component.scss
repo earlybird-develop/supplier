@@ -1,12 +1,15 @@
 :host {
   background: linear-gradient(125deg, #312a86, #449fd8, #a0e9fa);
+  background: url(../../../../assets/hero-1.jpg) no-repeat 100% 100%;
   display: block;
   position: relative;
-  height: 550px;
+  height: 650px;
+  width:100%;
+  overflow: hidden;
+  background-size:cover;
 }
 
 .graphic {
-  background-image: url(../../../../assets/graphics.svg);
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
@@ -14,24 +17,29 @@
 }
 
 .content {
-  padding-top: 26px;
-  margin-left: 110px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30px;
+
+  .sloganBox{
+    text-align: center;
+    margin-top: 35px;
+  }
 
   .slogan {
     color: #fdfdfd;
     font-size: 40px;
     font-weight: 400;
-    margin-top: 120px;
-    margin-left: 6rem;
   }
 
   .join {
-    margin-top: 40px;
-    margin-left: 6rem;
+    margin-top: 30px;
 
     .btn {
       color: #fff;
-      background-color: #62c2e5;
+      background-color: #0c7ca6;
       border-radius: 7px;
       font-size: 20px;
       font-weight: 400;
@@ -39,25 +47,7 @@
       text-transform: uppercase;
       height: 65px;
       line-height: 65px;
-      width: 344px;
-    }
-  }
-}
-
-
-@media (min-width: 1200px) {
-  .links{
-    padding-right: 12rem !important;
-  }
-
-  .content {
-    margin-left: 5rem !important;
-
-    .slogan{
-      margin-left: 11rem !important;
-    }
-    .join{
-      margin-left: 11rem !important;
+      padding: 0 55px !important;
     }
   }
 }
@@ -65,8 +55,6 @@
 
 @media (max-width: 1100px) {
   .content {
-    margin-left: 4rem !important;
-
     .logo {
       width: 70px !important;
     }
@@ -81,10 +69,6 @@
 
   .logo {
     width: 50px !important;
-  }
-
-  .slogan {
-    margin-top: 40px !important;
   }
 
   .content {

@@ -41,12 +41,12 @@
         "number2": "2",
         "number3": "3",
         "question1": "Is this EP-FO platform free ?",
-        "answer1": "It’s completely free to users, <br> no matter for buyer or supplier.",
+        "answer1": "It’s completely free to users, no matter for buyer or supplier.",
         "question2": "Is it risky for working capital on EP-FO platform?",
-        "answer2": "It’s completely risk-free. On approved invoices, <br> both sides of user don’t need to change any bank <br> information.",
-        "question3": "Does buyer or supplier <br> need to do any change on ERP/SAP ?",
+        "answer2": "It’s completely risk-free. On approved invoices, both sides of user don’t need to change any bank information.",
+        "question3": "Does buyer or supplier need to do any change on ERP/SAP ?",
         "answer3": "None",
-        "subtitle": "Power your cash flow <br> with intelligent automation",
+        "subtitle": "Power your cash flow with intelligent automation",
         "create-account": "create your free own account now"
       },
       "footer": {
@@ -70,10 +70,10 @@
         "benefits": "Benefits",
         "faq": "Faq",
         "login": "Login",
-        "lets-start": "Lets Start"
+        "lets-start": "Contact us"
       },
       "hero": {
-        "slogan": "Improve your cash flow to get more business opportunity",
+        "slogan": "Untying working capital and creating more business opportunities",
         "btn-text": "JOIN WITH EARLY PAY"
       },
       "sides": {
