@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, Injectable, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 
@@ -44,10 +45,12 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
   public isStatusInvoice: boolean = false;
   constructor(public marketsService: MarketsService,
     private _route: ActivatedRoute,
+    private _toastr: ToastrService,
     private _subheader: SubheaderService,
     private modalService: BsModalService) { }
 
   ngOnInit() {
+
     this.buyId = this._route.parent.snapshot.params.id;
 
     const subhHeader = this._subheader.show(MarketHeaderComponent);
@@ -228,6 +231,10 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
       .subscribe(
           () => {
               this.market.offerApr = apr;
+              this.participationLoading = false;
+          },
+          error => {
+              this._toastr.error('提交失败');
               this.participationLoading = false;
           }
       );

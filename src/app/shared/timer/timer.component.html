@@ -1,11 +1,13 @@
 <div tooltip="" placement="left">
   <img src="assets/icons/watches.svg" class="icon">&nbsp;
   <span >
-    <span class="timeHour">{{ hours | number: '2.0' }}</span>h 
-    <span class="timeMinute">{{ minutes | number: '2.0' }}</span>m
-    <span class="market-close" *ngIf="!isClosed" >{{ 'supplier.components.markets-header.closing' | translate }}</span>
 
-    <span class="pink" *ngIf="isClosed" >{{ 'supplier.components.markets-header.closed' | translate }}</span>
+    <span class="market-close" *ngIf="isClosed" >{{ 'supplier.components.markets-header.closed' | translate }}</span>
+    <span class="pink" *ngIf="!isClosed" >
+      <span class="timeHour">{{ hours | number: '2.0' }}</span>h
+      <span class="timeMinute">{{ minutes | number: '2.0' }}</span>m
+      {{ 'supplier.components.markets-header.closing' | translate }}
+    </span>
   </span>
 
 </div>

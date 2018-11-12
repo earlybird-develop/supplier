@@ -12,8 +12,10 @@ import { DialogOffer } from '../dialog-offer/dialog-offer.page';
 })
 export class TimerComponent implements OnInit {
   private _value = 0;
+  public _endtime = 0;
 
   public isClosed = false;
+
   public seconds = 0;
   public minutes = 0;
   public hours = 0;
@@ -30,6 +32,7 @@ export class TimerComponent implements OnInit {
       .subscribe(
         x => {
 
+
           const value = x - Math.floor(+new Date() / 1000);
 
           if (x < 0 || value < 0) {
@@ -37,7 +40,7 @@ export class TimerComponent implements OnInit {
             this.isClosed = true;
             return;
           }
-
+          this._endtime = x;
           this._value = value;
 
           this._convertTimer();
@@ -56,7 +59,11 @@ export class TimerComponent implements OnInit {
           if( this.isClosed){
               this.isClosed = false;
           }
-          this._value--;
+          this._value = this._endtime - Math.floor(+new Date() / 1000);
+          if( this._value < 0)
+          {
+              this._value = 0;
+          }
           this.hours = Math.floor(this._value / 3600);
           this.minutes = Math.floor((this._value - this.hours * 3600) / 60);
           this.seconds = this._value - this.minutes * 60 - this.hours * 3600;
