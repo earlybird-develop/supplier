@@ -6,8 +6,8 @@
 }
 
 .top-nav{
-  height: 30px;
-  line-height: 30px;
+  height: 35px;
+  line-height: 35px;
   text-align: right;
   position: relative;
   padding-right: 12%;
@@ -55,12 +55,14 @@
 .logoBox{
   display: flex;
   justify-content: flex-start;
-  width: 42%;
-  margin-top: -25px;
+  width: 24%;
+  margin-top: -3px;
+  margin-left: auto;
+  margin-right: auto;
 
   img{
-    width: 65px;
-    height: 70px;
+    //width: 65px;
+    height: 42px;
   }
 }
 

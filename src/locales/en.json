@@ -21,7 +21,8 @@
         "form-needs-title": "YOUR NEEDS",
         "form-needs": "Tell us about your needs, we're listening",
         "form-submit": "Submit",
-        "success-tip": "Your request has been submitted. Our customer service will contact you to confirm the information"
+        "success-tip": "Your request has been submitted. Our customer service will contact you to confirm the information",
+        "img": "assets/sky-lines.png"
       }
     },
     "components": {
@@ -33,7 +34,8 @@
         "collaborate": "Collaborate",
         "collaborate-desc": "With our platform, buyer and seller<br>copoeration benefit the behavior.",
         "optimize": "Optimize",
-        "optimize-desc": "This platform calculate the income<br>and connection matching."
+        "optimize-desc": "This platform calculate the income<br>and connection matching.",
+        "sky": "./assets/sky.svg"
       },
       "faq": {
         "title": "Here’s a few answers to our most common questions",
@@ -74,6 +76,7 @@
       },
       "hero": {
         "slogan": "Untying working capital and creating more business opportunities",
+        "explain": "Early bird gold platform helps customers control cash flow and improve risk-free returns",
         "btn-text": "JOIN WITH EARLY PAY"
       },
       "sides": {
@@ -276,7 +279,9 @@
           "are-you-sure-to-proceed": "Are you sure to proceed ?",
           "submit": "Submit",
           "back": "Back"
-        }
+        },
+        "set": "Set",
+        "apr": "APR"
       },
       "profile": {
         "title": "Profile",

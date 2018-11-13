@@ -21,7 +21,8 @@
         "form-needs-title": "您的需求",
         "form-needs": "告诉我们你的需求，我们正在倾听",
         "form-submit": "提交",
-        "success-tip": "您的请求已经提交，我们客服将与您联系确认信息"
+        "success-tip": "您的请求已经提交，我们客服将与您联系确认信息",
+        "img": "assets/sky-lines2.png"
       }
     },
     "components": {
@@ -33,7 +34,8 @@
         "collaborate": "合作",
         "collaborate-desc": "买卖双方基于平台规则创造共同价值",
         "optimize": "最大化",
-        "optimize-desc": "平台算法为买卖双方连接匹配最大化收益"
+        "optimize-desc": "平台算法为买卖双方连接匹配最大化收益",
+        "sky": "./assets/sky.png"
       },
       "faq": {
         "title": "以下是我们最常见的问题的一些答案",
@@ -74,6 +76,7 @@
       },
       "hero": {
         "slogan": "解绑营运资金，创造更多商机",
+        "explain": "早鸟金流平台帮助客户控制改善现金流以及提高无风险回报",
         "btn-text": "马上体验"
       },
       "sides": {
@@ -266,7 +269,9 @@
         "config-offer": "设置开价",
         "waiting-status": "市场目前为等待状态，您不能修改该字段",
         "turn-on": "打开参与开关进入市场",
-        "offer-processing": "正在处理的发票总值"
+        "offer-processing": "正在处理的发票总值",
+        "set": "设置",
+        "apr": "年利率"
       },
       "profile": {
         "title": "个人资料",

@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
 
+import { TranslateService } from '@ngx-translate/core';
+
 import { Market } from '../../models';
 import { MarketsHeaderComponent } from '../../components';
 import {
@@ -27,8 +29,7 @@ export class MarketsPage implements OnInit, OnDestroy {
   public markets: Market[];
   public hideMe = {};
   public offerTypes: ISelectOption[] = [
-    { id: 1, value: 'APR' },
-    { id: 2, value: 'DISC' },
+    { id: 1, value: this.translate.instant('supplier.pages.markets.apr') }
   ];
   public offerType = this.offerTypes[0];
   public offerPercent = 0;
@@ -41,7 +42,8 @@ export class MarketsPage implements OnInit, OnDestroy {
   constructor(private _marketsService: MarketsService,
               private _subheader: SubheaderService,
               private _toastr: ToastrService,
-              private modalService: BsModalService) {
+              private modalService: BsModalService,
+              private translate: TranslateService) {
       }
 
   ngOnInit() {

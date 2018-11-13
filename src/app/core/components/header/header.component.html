@@ -1,30 +1,31 @@
 <div class="top-nav">
-  <div class="locale-picker pointer" dropdown>
-    <div dropdownToggle>
-      <ng-container [ngSwitch]="translate.currentLang">
-        <a *ngSwitchCase="'en'">{{ 'core.pages.language.en' | translate }}</a>
-        <a *ngSwitchCase="'cn'">{{ 'core.pages.language.cn' | translate }}</a>
-        <a *ngSwitchCase="'tw'">{{ 'core.pages.language.tw' | translate }}</a>
-      </ng-container>
-      <img src="./assets/icons/languageDown.svg">
+  <div class="top-navBox">
+    <div class="locale-picker pointer" dropdown>
+      <div dropdownToggle>
+        <ng-container [ngSwitch]="translate.currentLang">
+          <a *ngSwitchCase="'en'">{{ 'core.pages.language.en' | translate }}</a>
+          <a *ngSwitchCase="'cn'">{{ 'core.pages.language.cn' | translate }}</a>
+          <a *ngSwitchCase="'tw'">{{ 'core.pages.language.tw' | translate }}</a>
+        </ng-container>
+        <img src="./assets/icons/languageDown.svg">
 
-        <ul class="dropdown-menu" *dropdownMenu>
-          <li><a style="color: #333 !important;" (click)="selectLang('en')">{{ 'core.pages.language.en' | translate }}</a></li>
-          <li><a style="color: #333 !important;" (click)="selectLang('cn')">{{ 'core.pages.language.cn' | translate }}</a></li>
-          <li><a style="color: #333 !important;" (click)="selectLang('tw')">{{ 'core.pages.language.tw' | translate }}</a></li>
-        </ul>
+          <ul class="dropdown-menu" *dropdownMenu>
+            <li><a style="color: #333 !important;" (click)="selectLang('en')">{{ 'core.pages.language.en' | translate }}</a></li>
+            <li><a style="color: #333 !important;" (click)="selectLang('cn')">{{ 'core.pages.language.cn' | translate }}</a></li>
+            <li><a style="color: #333 !important;" (click)="selectLang('tw')">{{ 'core.pages.language.tw' | translate }}</a></li>
+          </ul>
+      </div>
     </div>
+    <div><a class="lets-start" [routerLink]="['/enquiry']">{{ 'core.components.header.lets-start' | translate }}</a></div>
+    <div><a class="login-btn" [routerLink]="['/supplier', 'signin']">{{ 'core.components.header.login' | translate }}</a></div>
   </div>
-  <div><a class="lets-start" [routerLink]="['/enquiry']">{{ 'core.components.header.lets-start' | translate }}</a></div>
-  <div><a class="login-btn" [routerLink]="['/supplier', 'signin']">{{ 'core.components.header.login' | translate }}</a></div>
-
 </div>
 
 
 
 <ul class="links">
   <div class="logoBox">
-    <a href="#/"><img src="./assets/logo.svg"></a>
+    <a href="#/"><img src="./assets/logo.png"></a>
   </div>
   <li><a scrollTo (click)="goToHome()" href="#whatis">{{ 'core.components.header.whatis' | translate }}</a></li>
   <li><a scrollTo (click)="goToHome()" href="#why">{{ 'core.components.header.why' | translate }}</a></li>
