@@ -271,7 +271,7 @@
         "turn-on": "打开参与开关进入市场",
         "offer-processing": "正在处理的发票总值",
         "set": "设置",
-        "apr": "年利率"
+        "apr": "年化率"
       },
       "profile": {
         "title": "个人资料",

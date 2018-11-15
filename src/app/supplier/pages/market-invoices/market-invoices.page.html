@@ -190,7 +190,7 @@
                         #offerAprEdit>
         </eb-inline-edit>
         <ng-container *ngIf="!offerAprEdit.isOpen">
-          <span class="colored-number">{{ market?.offerApr }}%</span> {{ 'supplier.pages.invoices.apr' | translate }}
+          <span class="colored-number">{{ market?.offerApr }}%</span> {{ 'supplier.pages.markets.apr' | translate }}
           <a class="edit-btn pointer"
              (click)="offerAprEdit.open()"
              tooltip="{{ 'supplier.pages.invoices.blocked-editing' | translate }}"
@@ -251,7 +251,7 @@
       <div class="amount">{{ market?.discountMarket?.amount  | currency: market?.currencySign }}</div>
       <div class="average">
         {{ market?.discountMarket?.averageDiscount }}% {{ 'supplier.pages.invoices.disc' | translate }} |
-        {{ market?.discountMarket?.averageApr | number: '1.2' }}% {{ 'supplier.pages.invoices.apr' | translate }}
+        {{ market?.discountMarket?.averageApr | number: '1.2' }}% {{ 'supplier.pages.markets.apr' | translate }}
       </div>
     </div>
   </div>
