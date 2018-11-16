@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MinPayAmountModal } from  './pages/market-invoices/min-pay-amount-modal';
 
 import { PaginationModule } from 'ngx-bootstrap/pagination';
@@ -28,6 +28,8 @@ import {
   ChangePasswordPage,
   SigninPage,
   ForgetPasswordPage,
+  ActivationAccountComponent,
+  ResetPasswordComponent
 } from './pages';
 
 import {
@@ -50,6 +52,7 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     ChartsModule,
     RouterModule,
     SharedModule,
@@ -78,7 +81,9 @@ import { SharedModule } from '../shared/shared.module';
     HeaderComponent,
     MarketsHeaderComponent,
     MarketHeaderComponent,
-    MinPayAmountModal
+    MinPayAmountModal,
+    ActivationAccountComponent,
+    ResetPasswordComponent
   ],
   providers: [
     AccountService,

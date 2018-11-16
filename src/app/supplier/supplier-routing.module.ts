@@ -11,7 +11,9 @@ import {
   AccountPage,
   ChangePasswordPage,
   SigninPage,
-  ForgetPasswordPage
+  ForgetPasswordPage,
+  ResetPasswordComponent,
+  ActivationAccountComponent
 } from './pages';
 
 
@@ -21,7 +23,7 @@ const routes: Routes = [
     children: [
       { path: 'signin', component: SigninPage },
       {
-        path:'forget-password',
+        path: 'forget-password',
         component : ForgetPasswordPage
       },
       {
@@ -54,6 +56,14 @@ const routes: Routes = [
         ]
       }
     ]
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent
+  },
+  {
+    path: 'activation-account',
+    component: ActivationAccountComponent
   }
 ];
 

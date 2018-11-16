@@ -95,8 +95,8 @@
                             #offerAprEdit>
             </eb-inline-edit>
             <ng-container *ngIf="!offerAprEdit.isOpen">
-              {{ market?.offerApr }}% APR
-              <a class="edit-btn pointer"
+              {{ market?.offerApr }}% {{ 'supplier.pages.markets.apr' | translate }}
+                <a class="edit-btn pointer"
                  (click)="offerAprEdit.open()"
                  tooltip="{{ 'supplier.pages.markets.waiting-status' | translate }}"
                  placement="bottom"
