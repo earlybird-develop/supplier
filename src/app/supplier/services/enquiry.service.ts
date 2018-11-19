@@ -11,21 +11,24 @@ export class EnquiryService {
     }
 
     public make(httpParams: Object): Observable<boolean> {
-        const params = new HttpParams()
-            .set('firstname', httpParams['firstname'])
-            .set('lastname', httpParams['lastname'])
-            .set('company', httpParams['company'])
-            .set('workrole', httpParams['workrole'])
-            .set('email', httpParams['email'])
-            .set('phonenumber', httpParams['phonenumber'])
-            .set('region', httpParams['region'])
-            .set('interested', httpParams['interested'])
-            .set('memo', httpParams['memo']);
+
+        const data = {
+            'firstname'  : httpParams['firstname'],
+            'lastname': httpParams['lastname'],
+            'company': httpParams['company'],
+            'workrole': httpParams['workrole'],
+            'email': httpParams['email'],
+            'phonenumber': httpParams['phonenumber'],
+            'region': httpParams['region'],
+            'interested': httpParams['interested'],
+            'memo': httpParams['memo']
+        };
 
 
         return Observable.create((observer: Observer<boolean>) => {
             this._http
-                .get(MAKE_URL, { params })
+                .post(MAKE_URL, data )
+               // .get(MAKE_URL, { params })
                 .subscribe(
                 resp => {
                     observer.next(true);
