@@ -22,7 +22,10 @@
         "form-needs": "Tell us about your needs, we're listening",
         "form-submit": "Submit",
         "success-tip": "Your request has been submitted. Our customer service will contact you to confirm the information",
-        "img": "assets/sky-lines.png"
+        "img": "assets/sky-lines.png",
+        "warn": "Must fill",
+        "phone-warn": "Incorrect telephone format",
+        "email-warn": "The mailbox format is incorrect"
       }
     },
     "components": {

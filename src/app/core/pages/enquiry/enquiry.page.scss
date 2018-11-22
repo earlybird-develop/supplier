@@ -15,8 +15,16 @@
     z-index: 9999 !important;
 }
 
-.graphic {
+.errorText{
+    color: red;
+    font-size: 13.5px;
+    margin-top: 1.5px;
+    margin-left: 10px;
+}
 
+.errorImg{
+    width: 15.5px;
+    margin-right: 5px;
 }
 
 .content {

@@ -3,11 +3,30 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
+import { Alias, Model } from 'tsmodels';
+
 const MAKE_URL = "/service/make_enquiry";
+const DROPDOWN_URL = "/service/get_dropdown";
+
 @Injectable()
 export class EnquiryService {
     constructor(private _http: HttpClient) {
 
+    }
+
+    public get_dropdown(): Observable<any> {
+
+        return Observable.create((observer: Observer<any>) => {
+            this._http
+                .get(DROPDOWN_URL)
+                .subscribe(
+                    resp => {
+                        observer.next( resp['data'] ) ;
+                        observer.complete();
+                    },
+                    error => observer.error(error)
+                );
+        });
     }
 
     public make(httpParams: Object): Observable<boolean> {
@@ -38,4 +57,25 @@ export class EnquiryService {
                 ); 
         });
     }
+}
+
+export class Enquiry_Dropdown extends Model{
+    public region : Dictionary[];
+    public role: Dictionary[];
+    public interest: Dictionary[];
+
+
+    constructor(data?) {
+        super();
+
+        if (data) {
+            this._fromJSON(data);
+        }
+    }
+
+}
+
+export class Dictionary  {
+    public id: number;
+    public value: any;
 }

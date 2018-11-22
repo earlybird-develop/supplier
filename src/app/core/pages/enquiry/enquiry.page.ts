@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,  OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -8,14 +8,14 @@ import {
 } from '../../../shared/custom-select/custom-select.component';
 
 import { EnquiryService } from '../../../supplier/services';
-import { TranslateService } from '@ngx-translate/core'
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-enquiry',
   templateUrl: './enquiry.page.html',
   styleUrls: ['./enquiry.page.scss']
 })
-export class EnquiryComponent {
+export class EnquiryComponent implements OnInit  {
     constructor(private router: Router,
         private _enquiryService: EnquiryService,
         private _toastr: ToastrService,
@@ -23,49 +23,191 @@ export class EnquiryComponent {
 
     }
 
-  public roles: ISelectOption[] = [
-    { id: 1, value: 'Admin 1' },
-    { id: 2, value: 'Admin 2' },
-    { id: 3, value: 'Admin 3' },
-    { id: 4, value: 'Admin 4' },
-    { id: 5, value: 'Admin 5' },
-    { id: 6, value: 'Admin 6' },
-    { id: 7, value: 'Admin 7' }
-  ];
+    private isObject(item): boolean {
+        return Object.prototype.toString.call(item) === '[object Object]';
+    }
 
-  public regions: ISelectOption[] = [
-    { id: 1, value: 'Role 1' },
-    { id: 2, value: 'Role 2' },
-    { id: 3, value: 'Role 3' },
-    { id: 4, value: 'Role 4' },
-    { id: 5, value: 'Role 5' }
-  ];
+    ngOnInit() {
 
-  public interests: ISelectOption[] = [
-    { id: 1, value: 'Interest 1' },
-    { id: 2, value: 'Interest 2' },
-    { id: 3, value: 'Interest 3' },
-    { id: 4, value: 'Interest 4' },
-    { id: 5, value: 'Interest 5' }
-  ];
+        this._enquiryService
+        .get_dropdown()
+        .subscribe(
+            dropdown => {
 
+                let option: ISelectOption;
+                if ( dropdown.hasOwnProperty('role') ) {
+                    for (const val of dropdown['role'] ) {
+                        option = {
+                            id: val['id'],
+                            value: val['value']
+                        };
+                        this.roles.push(option);
+                    }
+                }
+
+                if ( dropdown.hasOwnProperty('region')  ) {
+                    for (const val of dropdown['region'] ) {
+                        option = {
+                            id: val['id'],
+                            value: val['value']
+                        };
+                        this.regions.push (option);
+                    }
+                }
+
+                if ( dropdown.hasOwnProperty('interest')  ) {
+                    for (const val of dropdown['interest'] ) {
+                        option = {
+                            id: val['id'],
+                            value: val['value']
+                        };
+                        this.interests.push (option);
+                    }
+                }
+            },
+            error => console.error(error)
+
+        );
+    }
+
+  // tslint:disable-next-line:member-ordering
+  public roles: ISelectOption[] = [];
+
+  // tslint:disable-next-line:member-ordering
+  public regions: ISelectOption[] = [];
+
+  // tslint:disable-next-line:member-ordering
+  public interests: ISelectOption[] = [];
+
+  // tslint:disable-next-line:member-ordering
   public roleType = this.roles[0];
+  // tslint:disable-next-line:member-ordering
   public regionType = this.regions[0];
+  // tslint:disable-next-line:member-ordering
   public interestType = this.interests[0];
 
-  public make(form: NgForm): void {
-      form.value["workrole"] = this.roleType.value;
-      form.value["region"] = this.regionType.value;
-      form.value["interested"] = this.interestType.value;
+  // 姓名有效验证
+  // tslint:disable-next-line:member-ordering
+  public lastNameValid = true;
 
+  // 名字有效验证
+  // tslint:disable-next-line:member-ordering
+  public firstNameValid = true;
+
+  // 公司有效验证
+  // tslint:disable-next-line:member-ordering
+  public companyValid = true;
+
+  // tslint:disable-next-line:member-ordering
+  public roleValid = true;
+
+  // tslint:disable-next-line:member-ordering
+  public regionValid = true;
+
+  // tslint:disable-next-line:member-ordering
+  public interestsValid = true;
+
+
+  // 邮箱有效验证
+  // tslint:disable-next-line:member-ordering
+  public emailValid = true;
+  // tslint:disable-next-line:member-ordering
+  public emailCheck = true;
+
+  onEmail(form: NgForm) {
+    if (form) {
+      this.emailCheck = form.form.get('email').valid;
+
+      // 判断为邮箱
+      // tslint:disable-next-line:max-line-length
+      const myreg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
+      const valid = myreg.test(form.value['email']);
+      valid ? this.emailCheck = true : this.emailCheck = false;
+    }
+  }
+
+  // 电话验证
+  // tslint:disable-next-line:member-ordering
+  public phoneValid = true;
+
+  onPhone(form: NgForm) {
+    if (form) {
+      this.phoneValid = form.form.get('phonenumber').valid;
+
+      // 判断为手机
+      const myreg = /(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}/;
+      const valid = myreg.test(form.value['phonenumber']);
+      valid ? this.phoneValid = true : this.phoneValid = false;
+    }
+  }
+
+  public make(form: NgForm): void {
+
+    // 选择角色验证提示
+    if (this.roleType) {
+      form.value['role'] = this.roleType.value;
+      this.roleValid = true;
+    } else {
+      this.roleValid = false;
+    }
+
+    // 联系电话验证提示
+    if (this.regionType) {
+      this.regionValid = true;
+      form.value['region'] = this.regionType.value;
+    } else {
+      this.regionValid = false;
+    }
+
+    // 兴趣验证提示
+    if (this.interestType) {
+      this.interestsValid = true;
+      form.value['interested'] = this.interestType.value;
+    } else {
+      this.interestsValid = false;
+    }
+
+    // 名字有效验证提示
+    if (form.value['lastname']) {
+      this.lastNameValid = true;
+    } else {
+      this.lastNameValid = false;
+    }
+
+    // 姓名有效验证提示
+    if (form.value['firstname']) {
+      this.firstNameValid = true;
+    } else {
+      this.firstNameValid = false;
+    }
+
+    // 公司有效验证提示
+    if (form.value['company']) {
+      this.companyValid = true;
+    } else {
+      this.companyValid = false;
+    }
+
+    // 邮箱有效验证
+    if (form.value['email']) {
+      this.emailValid = true;
+    } else {
+      this.emailValid = false;
+    }
+
+    // 判断必填项是否错误在决定传值
+    // tslint:disable-next-line:max-line-length
+    if (this.lastNameValid && this.firstNameValid && this.companyValid && this.emailValid && this.interestType && this.roleType && this.regionType && this.phoneValid && this.emailCheck) {
       this._enquiryService
-          .make(form.value)
-          .subscribe(
-          () => this.translate.get("core.pages.enquiry.success-tip")
-              .subscribe(res => {
-                  this._toastr.success(res);
-              }),
+        .make(form.value)
+        .subscribe(
+          () => this.translate.get('core.pages.enquiry.success-tip')
+            .subscribe(res => {
+              this._toastr.success(res);
+            }),
           () => this._toastr.error('Make Error')
-          );
+        );
+        // console.log(form.value);
+    }
   }
 }

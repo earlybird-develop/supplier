@@ -17,31 +17,80 @@
       <p>{{ 'core.pages.enquiry.form-subtitle' | translate }}</p>
 
       <form novalidate #makeForm="ngForm" (ngSubmit)="make(makeForm)">
-        <!--{{ 'core.pages.enquiry.form-firstname' | translate }} *-->
-        <label for="firstName"></label>
-        <input class="form-control" id="firstName" type="text" name="firstname" ngModel #firstname="ngModel" [placeholder]="('core.pages.enquiry.form-firstname' | translate) + ' *'">
-
         <!--{{ 'core.pages.enquiry.form-lastname' | translate }} *-->
         <label for="lastName"></label>
-        <input class="form-control" id="lastName" type="text" name="lastname" ngModel #lastname="ngModel"  [placeholder]="('core.pages.enquiry.form-lastname' | translate) + ' *'">
+        <input class="form-control" id="lastName" type="text" name="lastname" ngModel #lastname="ngModel"
+          [placeholder]="('core.pages.enquiry.form-lastname' | translate) + ' *'">
+        
+        <div [hidden]="lastNameValid">
+          <div class="errorText">
+            <img class="errorImg" src="../../../../assets/error.svg">
+            {{ 'core.pages.enquiry.warn' | translate }}
+          </div>
+        </div>
+        
+        <!--{{ 'core.pages.enquiry.form-firstname' | translate }} *-->
+        <label for="firstName"></label>
+        <input class="form-control"  id="firstName" type="text" name="firstname" ngModel #firstname="ngModel" [placeholder]="('core.pages.enquiry.form-firstname' | translate) + ' *'">
+
+        <div [hidden]="firstNameValid">
+          <div class="errorText">
+            <img class="errorImg" src="../../../../assets/error.svg">
+            {{ 'core.pages.enquiry.warn' | translate }}
+          </div>
+        </div>
 
         <!--{{ 'core.pages.enquiry.form-company' | translate }} *-->
         <label for="company"></label>
         <input class="form-control" id="company" type="text" name="company" ngModel #company="ngModel"  [placeholder]="('core.pages.enquiry.form-company' | translate) + ' *'">
 
+        <div [hidden]="companyValid">
+          <div class="errorText">
+            <img class="errorImg" src="../../../../assets/error.svg">
+            {{ 'core.pages.enquiry.warn' | translate }}
+          </div>
+        </div>
+
         <!--{{ 'core.pages.enquiry.form-select-role' | translate }} *-->
-        <eb-custom-select title="" [(ngModel)]="roleType"  [ngModelOptions]="{standalone: true}"
+        <eb-custom-select title=""  [(ngModel)]="roleType"  [ngModelOptions]="{standalone: true}"
                           [placeholder]="('core.pages.enquiry.form-select-role' | translate) + ' *'"
                           [options]="roles">
         </eb-custom-select>
 
+        <div [hidden]="roleValid">
+          <div class="errorText">
+            <img class="errorImg" src="../../../../assets/error.svg">
+            {{ 'core.pages.enquiry.warn' | translate }}
+          </div>
+        </div>
+
         <!--{{ 'core.pages.enquiry.form-email' | translate }} *-->
         <label for="email"></label>
-        <input class="form-control" id="email" type="text" name="email" ngModel #email="ngModel"  [placeholder]="('core.pages.enquiry.form-email' | translate) + ' *'">
+        <input class="form-control" id="email" type="text" name="email" ngModel #email="ngModel"  [placeholder]="('core.pages.enquiry.form-email' | translate) + ' *'" (input)="onEmail(makeForm)">
+
+        <div [hidden]="emailValid">
+          <div class="errorText">
+            <img class="errorImg" src="../../../../assets/error.svg">
+            {{ 'core.pages.enquiry.warn' | translate }}
+          </div>
+        </div>
+        <div [hidden]="emailCheck">
+          <div class="errorText">
+            <img class="errorImg" src="../../../../assets/error.svg">
+            {{ 'core.pages.enquiry.email-warn' | translate }}
+          </div>
+        </div>
 
         <!--{{ 'core.pages.enquiry.form-phone-optional' | translate }}-->
         <label for="phone"></label>
-        <input class="form-control" id="phone" type="text" name="phonenumber" ngModel #phonenumber="ngModel"  [placeholder]="('core.pages.enquiry.form-phone' | translate)">
+        <input class="form-control" id="phone" type="text" name="phonenumber" ngModel #phonenumber="ngModel"  [placeholder]="('core.pages.enquiry.form-phone' | translate)" (input)="onPhone(makeForm)">
+
+        <div [hidden]="phoneValid">
+          <div class="errorText">
+            <img class="errorImg" src="../../../../assets/error.svg">
+            {{ 'core.pages.enquiry.phone-warn' | translate }}
+          </div>
+        </div>
 
         <!--{{ 'core.pages.enquiry.form-region' | translate }} *-->
         <eb-custom-select title=""  [(ngModel)]="regionType"  [ngModelOptions]="{standalone: true}"
@@ -49,11 +98,25 @@
                           [options]="regions">
         </eb-custom-select>
 
+        <div [hidden]="regionValid">
+          <div class="errorText">
+            <img class="errorImg" src="../../../../assets/error.svg">
+            {{ 'core.pages.enquiry.warn' | translate }}
+          </div>
+        </div>
+
         <!--{{ 'core.pages.enquiry.form-interests' | translate }} *-->
-        <eb-custom-select title="" [(ngModel)]="interestType"  [ngModelOptions]="{standalone: true}"
+        <eb-custom-select title=""  [(ngModel)]="interestType"  [ngModelOptions]="{standalone: true}"
                           [placeholder]="('core.pages.enquiry.form-interests' | translate) + ' *'"
                           [options]="interests"> 
         </eb-custom-select>
+
+        <div [hidden]="interestsValid">
+          <div class="errorText">
+            <img class="errorImg" src="../../../../assets/error.svg">
+            {{ 'core.pages.enquiry.warn' | translate }}
+          </div>
+        </div>
 
         <!--{{ 'core.pages.enquiry.form-needs-title' | translate }}-->
         <label for="needs"></label>
