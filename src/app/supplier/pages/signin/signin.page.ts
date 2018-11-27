@@ -23,9 +23,8 @@ export class SigninPage {
 
   }
 
-  ngOnInit() {
-
-
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnInit () {
   }
 
   public login(form: NgForm): void {

@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MinPayAmountModal } from  './pages/market-invoices/min-pay-amount-modal';
+// tslint:disable-next-line:max-line-length
+import { MinPayAmountModal } from './pages/market-invoices/min-pay-amount-modal';
 
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -29,7 +30,7 @@ import {
   SigninPage,
   ForgetPasswordPage,
   ActivationAccountComponent,
-  ResetPasswordComponent
+  ResetPasswordComponent,
 } from './pages';
 
 import {
@@ -37,7 +38,9 @@ import {
     EnquiryService,
   MarketsService,
   SubheaderService,
-  MarketHistoryService
+  MarketHistoryService,
+  ResetPasswordService,
+  ActivationAccountService
 } from './services';
 
 import {
@@ -90,7 +93,9 @@ import { SharedModule } from '../shared/shared.module';
     MarketsService,
     SubheaderService,
       MarketHistoryService,
-      EnquiryService
+      EnquiryService,
+    ResetPasswordService,
+    ActivationAccountService
   ],
   entryComponents: [
     MarketsHeaderComponent,

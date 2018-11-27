@@ -5,8 +5,8 @@ import { Observer } from 'rxjs/Observer';
 
 import { Alias, Model } from 'tsmodels';
 
-const MAKE_URL = "/service/make_enquiry";
-const DROPDOWN_URL = "/service/get_dropdown";
+const MAKE_URL = '/service/make_enquiry';
+const DROPDOWN_URL = '/service/get_dropdown';
 
 @Injectable()
 export class EnquiryService {
@@ -54,13 +54,14 @@ export class EnquiryService {
                     observer.complete();
                 },
                 error => observer.error(error)
-                ); 
+                );
         });
     }
 }
 
-export class Enquiry_Dropdown extends Model{
-    public region : Dictionary[];
+// tslint:disable-next-line:class-name
+export class Enquiry_Dropdown extends Model {
+    public region: Dictionary[];
     public role: Dictionary[];
     public interest: Dictionary[];
 

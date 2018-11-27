@@ -118,7 +118,7 @@ export class MarketsService {
 
   public  setOfferApr(id: string, minPayment: number, apr: number)
   : Observable<Market> {
-    //const data = { async: true, data: { min_payment: minPayment, apr: apr }};
+    // const data = { async: true, data: { min_payment: minPayment, apr: apr }};
       const data = {
           offer_type : 'apr',
           offer_value : apr,

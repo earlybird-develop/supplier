@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 // tslint:disable-next-line:max-line-length
 import { FormGroup, ReactiveFormsModule, FormControl, FormBuilder, Validators } from '@angular/forms';
+// tslint:disable-next-line:max-line-length
+import { ResetPasswordService } from '../../services/reset-password.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -13,6 +16,11 @@ export class ResetPasswordComponent implements OnInit {
   // 显示隐藏按钮的类型
   public btnType = 'password';
 
+  // 获取url的verify_code和type值
+  // tslint:disable-next-line:member-ordering
+  private verifyCode = this.route.snapshot.queryParams['verify_code'] || '';
+  // tslint:disable-next-line:member-ordering
+  private urlType = this.route.snapshot.queryParams['type'] || '';
 
   // 自定义密码与确认密码校验
   passwordValidator(group: FormGroup): any {
@@ -60,7 +68,11 @@ export class ResetPasswordComponent implements OnInit {
   // tslint:disable-next-line:member-ordering
   formModel: FormGroup;
 
-  constructor(fb: FormBuilder) {
+  // tslint:disable-next-line:max-line-length
+  constructor(fb: FormBuilder,
+               private router: Router,
+               private route: ActivatedRoute,
+               private _restPassword: ResetPasswordService) {
     // 响应式表单构造方法
     this.formModel = fb.group({
       passwordInfo: fb.group({
@@ -73,22 +85,25 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
+
 
   // form表单接受数据验证
   onSubmit() {
     // 当点击继续时，所有值满足条件才打印值
     if (this.formModel.valid) {
-      console.log(this.formModel.value);
+      // console.log(this.formModel.value);
+      this.formModel.value.passwordInfo.verify_code = this.verifyCode;
+      this.formModel.value.passwordInfo.type = this.urlType;
+      // console.log('输入正确' + this.formModel.value);
+
+      this._restPassword
+        .make(this.formModel.value)
+        .subscribe(
+        error => ''
+        );
     }
-    // 获取password的校验结果
-    // let isValid: boolean = this.formModel.get('passwordInfo.password').valid;
-    // 打印password的值
-    // console.log('password校验结果：' + isValid);
-    // 获取password的错误信息
-    // let errors: any = this.formModel.get('passwordInfo.password').errors;
-    // 打印password的错误信息
-    // console.log('password错误结果：' + JSON.stringify(errors));
   }
 
 
