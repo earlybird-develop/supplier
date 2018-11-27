@@ -72,7 +72,7 @@ export class ResetPasswordComponent implements OnInit {
   constructor(fb: FormBuilder,
                private router: Router,
                private route: ActivatedRoute,
-               private _restPassword: ResetPasswordService) {
+               private _resetPassword: ResetPasswordService) {
     // 响应式表单构造方法
     this.formModel = fb.group({
       passwordInfo: fb.group({
@@ -98,7 +98,7 @@ export class ResetPasswordComponent implements OnInit {
       this.formModel.value.passwordInfo.type = this.urlType;
       // console.log('输入正确' + this.formModel.value);
 
-      this._restPassword
+      this._resetPassword
         .make(this.formModel.value)
         .subscribe(
         error => ''

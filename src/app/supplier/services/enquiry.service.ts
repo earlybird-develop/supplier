@@ -32,7 +32,7 @@ export class EnquiryService {
     public make(httpParams: Object): Observable<boolean> {
 
         const data = {
-            'firstname'  : httpParams['firstname'],
+            'firstname': httpParams['firstname'],
             'lastname': httpParams['lastname'],
             'company': httpParams['company'],
             'workrole': httpParams['workrole'],
