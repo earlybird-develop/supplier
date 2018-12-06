@@ -197,6 +197,8 @@
           "go": "GO"
         },
         "updating": "We will return the result after 60 seconds...",
+        "updating-start": "We will return the result after ",
+        "updating-end": " seconds...",
         "none": "None",
         "available-ar": "of your available A/R is currently available",
         "offer": "Offer",

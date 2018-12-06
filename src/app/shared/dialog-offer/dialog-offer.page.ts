@@ -1,8 +1,11 @@
 ﻿import {Component, OnInit, Input} from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TimerService } from '../timer/timer.service';
+import { MarketsService } from '../../supplier/services';
+import { Market } from '../../supplier/models';
 
 @Component({
+    // tslint:disable-next-line:component-selector
     selector: 'dialog-offer',
     templateUrl: 'dialog-offer.page.html',
     styleUrls: ['./dialog-offer.page.scss']
@@ -16,14 +19,36 @@ export class DialogOffer implements OnInit {
   public minutes = 0;
   public hours = 0;
 
+  // url的buyerId
+  public buyId: string;
 
-   constructor(public bsModalRef: BsModalRef,private _timer: TimerService) { }
+  // 下一个付款日期
+  public payDate: string;
 
+  public market: Market = new Market();
 
+  // tslint:disable-next-line:max-line-length
+  constructor(public bsModalRef: BsModalRef,
+              private _timer: TimerService,
+              public marketsService: MarketsService) {
+   }
 
-  ngOnChanges(){}
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnChanges() {}
 
   ngOnInit() {
+
+    this.marketsService
+      .getStat(this.buyId)
+      .subscribe(
+        market => {
+
+          this.market = market;
+          this.payDate = this.market.nextPaydate;
+          console.log('this.payDate:' + this.payDate);
+        },
+        errors => console.error(errors)
+      );
 
     this._timer
       .getTradingTime()
@@ -52,16 +77,16 @@ export class DialogOffer implements OnInit {
 
   private _convertTimer(): void {
 
-      if ( this._value > 0 ){
-          if( this.isClosed){
+      if ( this._value > 0 ) {
+          if ( this.isClosed) {
               this.isClosed = false;
           }
           this._value--;
           this.hours = Math.floor(this._value / 3600);
           this.minutes = Math.floor((this._value - this.hours * 3600) / 60);
           this.seconds = this._value - this.minutes * 60 - this.hours * 3600;
-      }else{
-          if(!this.isClosed ){
+      } else {
+          if (!this.isClosed ) {
               this.isClosed = true;
           }
       }

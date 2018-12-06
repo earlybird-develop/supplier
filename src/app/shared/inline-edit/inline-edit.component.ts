@@ -1,10 +1,11 @@
 import {
   Component, Input, forwardRef, Output, EventEmitter, Attribute
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { DialogOffer } from '../dialog-offer/dialog-offer.page'
+import { DialogOffer } from '../dialog-offer/dialog-offer.page';
 
 @Component({
   selector: 'eb-inline-edit',
@@ -23,21 +24,31 @@ export class InlineEditComponent implements ControlValueAccessor {
   public value: number;
   public newValue: number;
   public black = false;
+
+  // url的buyerId
+  public buyId: string;
+
   @Input()
   public disabled = false;
 
   @Input()
   public placeholder = '';
 
+  // tslint:disable-next-line:no-output-rename
   @Output('change')
   public change: EventEmitter<number> = new EventEmitter();
 
   private _propagateChange: Function = () => null;
+  // tslint:disable-next-line:member-ordering
   public bsModalRef: BsModalRef;
 
 
-  constructor( @Attribute('black') _black: string, private modalService: BsModalService) {
+  // tslint:disable-next-line:max-line-length
+  constructor(@Attribute('black') _black: string,
+              private modalService: BsModalService,
+              private _route: ActivatedRoute) {
     this.black = typeof _black === 'string';
+    this.buyId = this._route.parent.snapshot.params.id;
   }
 
   public apply(): void {
@@ -45,8 +56,10 @@ export class InlineEditComponent implements ControlValueAccessor {
     this.close();
 
     const initialState = {
-      values: this.value
+      values: this.value,
+      buyId: this.buyId
     };
+    // tslint:disable-next-line:max-line-length
     this.bsModalRef = this.modalService.show(DialogOffer, Object.assign({initialState}, { class: 'dialog-offer', initialState }));
 
   }

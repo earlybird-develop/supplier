@@ -17,8 +17,9 @@ import {
 } from './sidebarable-page/sidebarable-page.component';
 
 import { InlineEditComponent } from './inline-edit/inline-edit.component';
-import { DialogMarketOpen } from './dialog-market-open/dialog-market-open.page'; 
-import { DialogOffer } from './dialog-offer/dialog-offer.page'; 
+// tslint:disable-next-line:max-line-length
+import { DialogMarketOpen } from './dialog-market-open/dialog-market-open.page';
+import { DialogOffer } from './dialog-offer/dialog-offer.page';
 
 import {
   SearchFilterPipe,

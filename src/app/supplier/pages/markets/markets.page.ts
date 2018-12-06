@@ -16,7 +16,8 @@ import {
 } from '../../services';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { DialogMarketOpen } from '../../../shared/dialog-market-open/dialog-market-open.page'
+// tslint:disable-next-line:max-line-length
+import { DialogMarketOpen } from '../../../shared/dialog-market-open/dialog-market-open.page';
 
 
 @Component({
@@ -35,9 +36,15 @@ export class MarketsPage implements OnInit, OnDestroy {
   public offerPercent = 0;
   public processingLoading = false;
 
-  private refresh_time = 30000;
+  private refresh_time = 5000;
   private _interval: any;
   public bsModalRef: BsModalRef;
+
+  private refresh_data = false;
+
+  private current_hash = [];
+
+  private _code: string;
 
   constructor(private _marketsService: MarketsService,
               private _subheader: SubheaderService,
@@ -50,16 +57,60 @@ export class MarketsPage implements OnInit, OnDestroy {
 
     this._subheader.show(MarketsHeaderComponent);
 
+    this.load_hash();
     this.load();
 
     this._interval = setInterval(
       () => {
-        this.load();
+        this.load_hash();
+
+        if (this.refresh_data) {
+          this.load();
+        }
       }
       , this.refresh_time
     );
 
 
+  }
+
+  load_hash() {
+    this._marketsService
+      .getHashList([])
+      .subscribe(
+        resp => {
+          if (resp.code === 1) {
+
+            // tslint:disable-next-line:max-line-length
+            if (resp.data.length !== this.current_hash.length && this.current_hash.length > 0) {
+              this.current_hash = [];
+            }
+
+            for (const hash of resp.data) {
+              this._code = hash['cashpool_code'];
+              if (this.current_hash.includes(this._code)) {  // 判断当前页面是否有该市场键
+                if (this.current_hash[this._code] !== hash['stat_hash']) {
+                  this.current_hash[this._code] = hash['stat_hash'];
+                  this.refresh_data = true;
+                } else {
+                  this.refresh_data = false;
+                }
+              } else {
+                this.current_hash.push(this._code);
+                this.current_hash[this._code] = hash['stat_hash'];
+
+                if (!this.refresh_data) {
+                  this.refresh_data = true;
+                }
+              }
+            }
+          } else {
+            this._toastr.warning(resp.msg);
+          }
+        }, error => {
+          this._toastr.error('Internal server error');
+        }
+      );
   }
 
   ngOnDestroy() {
@@ -69,16 +120,18 @@ export class MarketsPage implements OnInit, OnDestroy {
 
   }
 
-  public load(): void{
+  public load(): void {
     this._marketsService
       .getList()
       .subscribe(
-        markets => this.markets = markets,
+        markets => {
+          this.markets = markets;
+        },
         error => console.error(error)
       );
   }
 
-  public showProcessing(market: Market): boolean{
+  public showProcessing(market: Market): boolean {
       return market.showProcess;
   }
 
@@ -92,7 +145,8 @@ export class MarketsPage implements OnInit, OnDestroy {
             market.isParticipation = value ? 1 : 0;
 
            const initialState = {};
-          if (market.isParticipation == 1) {
+          if (market.isParticipation === 1) {
+              // tslint:disable-next-line:max-line-length
               this.bsModalRef = this.modalService.show(DialogMarketOpen, Object.assign({}, { class: 'dialog-market-open', initialState }));
           }
 
@@ -100,10 +154,10 @@ export class MarketsPage implements OnInit, OnDestroy {
             this.load();
         },
         error => {
-            this._toastr.error('提交失败!')
+            this._toastr.error('提交失败!');
             this.load();
         }
-      )
+      );
 
   }
 
@@ -117,7 +171,7 @@ export class MarketsPage implements OnInit, OnDestroy {
 
               market.offerStatus = 1;
               this._toastr.success('提交成功!');
-              this.load()
+              this.load();
 
             },
             error => {
@@ -142,6 +196,6 @@ export class MarketsPage implements OnInit, OnDestroy {
             market.showProcess = false;
             this.load();
         }
-    )
+    );
   }
 }

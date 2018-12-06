@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'eb-sidebarable-page',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
 })
 export class SidebarablePageComponent {
 
-  constructor() { }
+  public buyId: string;
+
+  constructor(private _route: ActivatedRoute) {
+    this.buyId = this._route.parent.snapshot.params.id;
+  }
 }

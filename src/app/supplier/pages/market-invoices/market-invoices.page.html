@@ -170,7 +170,10 @@
 
   <div class="market-info">
     <div class="loading" *ngIf="participationLoading">
-      {{ 'supplier.pages.invoices.updating' | translate }}
+      <img class="loadingImg" src="../../../../assets/loading.svg">
+      {{ 'supplier.pages.invoices.updating-start' | translate }}
+      {{ loadingTime }}
+      {{ 'supplier.pages.invoices.updating-end' | translate }}
     </div>
     <div class="ar">
       <div class="text-center">

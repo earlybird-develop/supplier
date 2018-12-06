@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { TimerService } from './timer.service';
 
@@ -20,10 +20,16 @@ export class TimerComponent implements OnInit {
   public minutes = 0;
   public hours = 0;
 
+  public timeArr = { hour: 0, minute: 0, second: 0 };
+
+  // @Output() timeNum = new EventEmitter<any>();
+
   constructor(private _timer: TimerService) {
   }
 
-  ngOnChanges(){}
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnChanges () {
+  }
 
   ngOnInit() {
 
@@ -55,26 +61,26 @@ export class TimerComponent implements OnInit {
 
   private _convertTimer(): void {
 
-      if ( this._value > 0 ){
-          if( this.isClosed){
+      if ( this._value > 0 ) {
+          if ( this.isClosed) {
               this.isClosed = false;
           }
           this._value = this._endtime - Math.floor(+new Date() / 1000);
-          if( this._value < 0)
-          {
+          if ( this._value < 0) {
               this._value = 0;
           }
           this.hours = Math.floor(this._value / 3600);
           this.minutes = Math.floor((this._value - this.hours * 3600) / 60);
           this.seconds = this._value - this.minutes * 60 - this.hours * 3600;
-      }else{
-          if(!this.isClosed ){
+
+          // tslint:disable-next-line:max-line-length
+          // this.timeArr = { hour: this.hours, minute: this.minutes, second: this.seconds };
+          // this.timeNum.emit(this.timeArr);
+      } else {
+          if (!this.isClosed ) {
               this.isClosed = true;
           }
       }
-      // this.DialogOffer.emit()
-      // console.log(this.hours);
-      // console.log(this.minutes);
   }
 }
 

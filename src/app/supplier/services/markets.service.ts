@@ -17,6 +17,7 @@ const INVOICES_ADJUST_PATH = '/invoice/get_invoices_with_adjust';
 const INVOICES_AWARDED_PATH = '/invoice/get_invoices_with_awarded';
 const SET_INVOICES_INCLUDED_PATH = '/invoice/set_invoices_inlcuded';
 const SET_OFFER_APR_PATH = '/invoice/offer_apr';
+const GET_MARKET_HASH_PATH = '/hash/get_hash';
 
 export enum InvoiceType {
   Eligible = 'eligible',
@@ -39,7 +40,7 @@ export class MarketsService {
         .subscribe(
           response => {
             observer.next(response['data']['list'].map(x => new Market(x)));
-            //observer.complete();
+            // observer.complete();
           },
             error => observer.error(error)
       );
@@ -151,7 +152,7 @@ export class MarketsService {
         offer_type: offerType,
         offer_value: offerValue,
         min_payment: minPayment
-    }
+    };
 
     const params = new HttpParams().set('buyer_id', buyerId);
 
@@ -166,8 +167,8 @@ export class MarketsService {
           error => {
             console.error(error);
           }
-        )
-    })
+        );
+    });
 
   }
 
@@ -184,6 +185,26 @@ export class MarketsService {
         .subscribe(
           () => {
             observer.next(true);
+            observer.complete();
+          },
+          error => observer.error(error)
+        );
+    });
+  }
+
+  // 根据hashtime判断是否取值
+  // tslint:disable-next-line:max-line-length
+  public getHashList(cashpool_code: string[]): Observable<any> {
+
+    const data = { 'cashpool_code': cashpool_code };
+
+    return Observable.create((observer: Observer<any>) => {
+
+      this._http
+        .post(GET_MARKET_HASH_PATH, data)
+        .subscribe(
+          resp => {
+            observer.next(resp);
             observer.complete();
           },
           error => observer.error(error)

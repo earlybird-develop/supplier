@@ -3,15 +3,16 @@
   position: absolute;
   left: 0;
   right: 0;
+  background: linear-gradient(135deg, #24457c, #24457c, #3D7AB3, #3D79B2);
 }
 
 .top-nav{
-  height: 35px;
-  line-height: 35px;
+  height: 45px;
+  line-height: 45px;
   text-align: right;
   position: relative;
   padding-right: 12%;
-  background: #0d004f;
+  //background: #0d004f;
 
   div{
     display: inline-block;
@@ -46,7 +47,7 @@
   }
 
   .login-btn{
-    background-color: #0029ee;
+    background-color: #005897;
     padding: 2px 20px;
     border-radius: 2px;
   }
@@ -62,7 +63,8 @@
 
   img{
     //width: 65px;
-    height: 42px;
+    width: 165px;
+    margin-top: -47px;
   }
 }
 
@@ -71,9 +73,9 @@
     position: relative;
     justify-content: flex-end;
     padding-right: 10.5%;
-    background: #02186c;
-    height:50px;
-    line-height:50px;
+    //background: #02186c;
+    height: 42px;
+    line-height: 58px;
 
   li {
     margin: 0 28px;

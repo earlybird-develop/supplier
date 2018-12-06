@@ -3,9 +3,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 
 
-import {Observable} from "rxjs/Observable";
-import {Observer} from "rxjs/Observer";
-import {Market} from "../../supplier/models";
+import {Observable} from 'rxjs/Observable';
+import {Observer} from 'rxjs/Observer';
+import {Market} from '../../supplier/models';
 
 const TRADING_TIME_PATH = '/market/get_trading_time';
 
@@ -16,7 +16,7 @@ export class TimerService {
 
   constructor(private _http: HttpClient) { }
 
-  public getTradingTime(): Observable<any>{
+  public getTradingTime(): Observable<any> {
 
     return Observable.create((observer: Observer<any>) => {
       this._http
@@ -24,7 +24,7 @@ export class TimerService {
         .subscribe(
           resp => observer.next(resp['data']['close_time'])
         );
-    })
+    });
   }
 
 }

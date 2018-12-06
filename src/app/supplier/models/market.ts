@@ -37,7 +37,7 @@ export class Market extends Model {
   @Alias('buyer_status') public buyerStatus: number;
   @Alias('currency_sign') public currencySign: string;
   @Alias('is_participation') public isParticipation: number;
-  
+
   @Alias('offer_value') public offerApr: number;
   @Alias('avg_dpe') public DPE: number;
 
@@ -53,6 +53,7 @@ export class Market extends Model {
   // Deep relations
   @Alias('total', MarketTotal) public total: MarketTotal;
   @Alias('clearing', MarketClearing) public clearing: MarketClearing;
+  // tslint:disable-next-line:max-line-length
   @Alias('nonclearing', MarketNonClearing) public nonClearing: MarketNonClearing;
 
 

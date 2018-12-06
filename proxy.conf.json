@@ -1,6 +1,6 @@
 {
   "/": {
-    "target": "http://www.eb-cf.com:8000/",
+    "target": "http://publicapi.com:9000/",
     "secure": false
   }
 }

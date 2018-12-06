@@ -1,19 +1,15 @@
 <header>
-  <div class="container">
-    <div class="logo pointer">
-      <img src="assets/logo.svg" class="pointer" alt="Early Bird Cash Flow" [routerLink]="['/']">
-    </div>
-    <div class="controls">
-      <div class="header-menu">
-        <ul>
-          <li>
-            <a [routerLink]="['/supplier', 'markets']">
-              {{ 'supplier.components.header.menu.markets' | translate }}
-            </a>
-          </li>
-        </ul>
+  <div class="header-top">
+    <div class="container">
+      <div class="logo pointer">
+        <img src="assets/logo.svg" class="pointer" alt="Early Bird Cash Flow" [routerLink]="['/']">
+          <a class="menu-market" [routerLink]="['/supplier', 'markets']">
+            {{ 'supplier.components.header.menu.markets' | translate }}
+          </a>
       </div>
+      
       <div class="user-menu">
+        <div></div>
         <div class="lang-select" dropdown [autoClose]="true">
           <a dropdownToggle>
             <ng-container [ngSwitch]="translate.currentLang">
@@ -46,10 +42,13 @@
           <img src="assets/icons/power.svg" alt="Logout" class="logout">
         </a>
       </div>
+    </div>
+  </div>
+  <div class="header-bottom">
+    <div class="container">
       <div class="subheader">
         <div #subheader></div>
       </div>
-
     </div>
   </div>
 </header>

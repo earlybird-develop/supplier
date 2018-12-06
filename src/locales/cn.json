@@ -196,7 +196,9 @@
           "to": "到",
           "go": "查询"
         },
-        "updating": "市场将会在60秒后返回竞价结果...",
+        "updating": "市场将会在{{loadingTime}}秒后返回竞价结果...",
+        "updating-start": "市场将会在",
+        "updating-end": "秒后返回竞价结果...",
         "none": "无",
         "available-ar": "的可付应收将会被清算",
         "offer": "开价",

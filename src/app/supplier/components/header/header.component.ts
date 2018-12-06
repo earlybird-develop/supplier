@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
           this.login_name = resp['data']['name'];
         },
         errors => {
-          this.login_name = "Error";
+          this.login_name = 'Error';
         }
       );
     this._subHeader.setRootViewContainerRef(this._subheaderContainer);
@@ -46,7 +46,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('openid');
     localStorage.removeItem('refresh_token');
 
-    this._router.navigate(['/supplier','signin']);
+    this._router.navigate(['/supplier', 'signin']);
 
   }
 }
