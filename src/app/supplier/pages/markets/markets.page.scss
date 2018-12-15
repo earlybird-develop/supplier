@@ -6,6 +6,16 @@
     min-width: 750px;
   }
 
+  table > thead > tr > th {
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    color: #3d3d3d;
+  }
+  table > tbody > tr > td {
+    text-align: center;
+  }
+
 }
 
   .row-gray {
@@ -19,9 +29,6 @@
   color: #8e3f3f;
 }
 
-.participation-block {
-  padding-left: 20px;
-}
 
 .market-container {
   font-size: 13px;
@@ -47,6 +54,7 @@
   border-left: 3px solid #ff6565;
   border-right: 1px solid rgba(149, 152, 154, .36);
   padding: 12px 40px 19px;
+  text-align: left !important;
 
   h1 {
     display: block;
@@ -156,6 +164,12 @@
       }
     }
   }
+}
+.company-name {
+  text-align: left;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 170px;
 }
 
 @media(max-width: 1000px) {

@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { HttpClient } from '@angular/common/http';
 import { Market } from '../../models';
 import { MarketsHeaderComponent } from '../../components';
 import {
@@ -17,8 +18,9 @@ import {
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 // tslint:disable-next-line:max-line-length
-import { DialogMarketOpen } from '../../../shared/dialog-market-open/dialog-market-open.page';
+import { DialogMarketOpen } from '../dialog-market-open/dialog-market-open.page';
 
+const GET_PROFILE_PATH = '/account/get_profile';
 
 @Component({
   selector: 'eb-markets',
@@ -46,156 +48,204 @@ export class MarketsPage implements OnInit, OnDestroy {
 
   private _code: string;
 
-  constructor(private _marketsService: MarketsService,
-              private _subheader: SubheaderService,
-              private _toastr: ToastrService,
-              private modalService: BsModalService,
-              private translate: TranslateService) {
-      }
+  // 用户信息
+  public user_profile: string;
+
+  constructor(
+    private _marketsService: MarketsService,
+    private _subheader: SubheaderService,
+    private _toastr: ToastrService,
+    private modalService: BsModalService,
+    private translate: TranslateService,
+    private _http: HttpClient
+  ) {}
 
   ngOnInit() {
+    // 获取用户名
+    this._http.get(GET_PROFILE_PATH).subscribe(
+      resp => {
+        this.user_profile = resp['data']['profile'];
+      },
+      errors => {
+        this.user_profile = 'Error';
+      }
+    );
 
     this._subheader.show(MarketsHeaderComponent);
 
     this.load_hash();
     this.load();
 
-    this._interval = setInterval(
-      () => {
-        this.load_hash();
+    this._interval = setInterval(() => {
+      this.load_hash();
 
-        if (this.refresh_data) {
-          this.load();
-        }
+      if (this.refresh_data) {
+        this.load();
       }
-      , this.refresh_time
-    );
-
-
+    }, this.refresh_time);
   }
 
   load_hash() {
-    this._marketsService
-      .getHashList([])
-      .subscribe(
-        resp => {
-          if (resp.code === 1) {
+    this._marketsService.getHashList([]).subscribe(
+      resp => {
+        if (resp.code === 1) {
+          // tslint:disable-next-line:max-line-length
+          if (
+            resp.data.length !== this.current_hash.length &&
+            this.current_hash.length > 0
+          ) {
+            this.current_hash = [];
+          }
 
-            // tslint:disable-next-line:max-line-length
-            if (resp.data.length !== this.current_hash.length && this.current_hash.length > 0) {
-              this.current_hash = [];
-            }
-
-            for (const hash of resp.data) {
-              this._code = hash['cashpool_code'];
-              if (this.current_hash.includes(this._code)) {  // 判断当前页面是否有该市场键
-                if (this.current_hash[this._code] !== hash['stat_hash']) {
-                  this.current_hash[this._code] = hash['stat_hash'];
-                  this.refresh_data = true;
-                } else {
-                  this.refresh_data = false;
-                }
-              } else {
-                this.current_hash.push(this._code);
+          for (const hash of resp.data) {
+            this._code = hash['cashpool_code'];
+            if (this.current_hash.includes(this._code)) {
+              // 判断当前页面是否有该市场键
+              if (this.current_hash[this._code] !== hash['stat_hash']) {
                 this.current_hash[this._code] = hash['stat_hash'];
+                this.refresh_data = true;
+              } else {
+                this.refresh_data = false;
+              }
+            } else {
+              this.current_hash.push(this._code);
+              this.current_hash[this._code] = hash['stat_hash'];
 
-                if (!this.refresh_data) {
-                  this.refresh_data = true;
-                }
+              if (!this.refresh_data) {
+                this.refresh_data = true;
               }
             }
-          } else {
-            this._toastr.warning(resp.msg);
           }
-        }, error => {
-          this._toastr.error('Internal server error');
+        } else {
+          this._toastr.warning(resp.msg);
         }
-      );
+      },
+      error => {
+        this._toastr.error('Internal server error');
+      }
+    );
   }
 
   ngOnDestroy() {
     this._subheader.dispose();
 
     clearInterval(this._interval);
-
   }
 
   public load(): void {
-    this._marketsService
-      .getList()
-      .subscribe(
-        markets => {
-          this.markets = markets;
-        },
-        error => console.error(error)
-      );
+    this._marketsService.getList().subscribe(
+      markets => {
+        this.markets = markets;
+      },
+      error => console.error(error)
+    );
   }
 
   public showProcessing(market: Market): boolean {
-      return market.showProcess;
+    return market.showProcess;
   }
 
   public setParticipation(market: Market, value: boolean): void {
+    // 判断按钮为参与还是取消
+    if (value) {
+      // 获取当前localStorage值
+      const dialogMarketOpen = localStorage.getItem('dialogMarketOpen');
+      const user_profile = localStorage.getItem('user_profile');
+      // 显示弹窗对话
+      if (dialogMarketOpen !== '0' && user_profile !== this.user_profile) {
 
-    this._marketsService
-      .setParticipation(market.id, value)
-      .subscribe(
-        sucess => {
+          const initialState = {};
+          this.bsModalRef = this.modalService.show(
+            // tslint:disable-next-line:max-line-length
+            DialogMarketOpen, Object.assign({}, { class: 'dialog-market-open', initialState })
+          );
 
-            market.isParticipation = value ? 1 : 0;
+          this.bsModalRef.content.onClose.subscribe(
 
-           const initialState = {};
-          if (market.isParticipation === 1) {
-              // tslint:disable-next-line:max-line-length
-              this.bsModalRef = this.modalService.show(DialogMarketOpen, Object.assign({}, { class: 'dialog-market-open', initialState }));
-          }
+            result => {
+              if (result) {
+                // 当前选中不再显示按钮
+                if (result.val === '0') {
+                  localStorage.setItem('dialogMarketOpen', '0');
+                  localStorage.setItem('user_profile', this.user_profile);
+                }
 
+                // 判断当前选择是参与还是取消
+                if (result.name !== 'dialogJoin') {
+                  value = false;
+                }
+              }
+              this._marketsService
+                  .setParticipation(market.id, value)
+                  .subscribe(
+                    sucess => {
+                      this._toastr.success('提交成功!');
+                      this.load();
+                    },
+                    error => {
+                      this._toastr.error('提交失败!');
+                      this.load();
+                    }
+                  );
+            }
+          );
+      } else {
+        this._marketsService
+          .setParticipation(market.id, value)
+          .subscribe(
+            sucess => {
+              this._toastr.success('提交成功!');
+              this.load();
+            },
+            error => {
+              this._toastr.error('提交失败!');
+              this.load();
+            }
+          );
+      }
+    } else {
+      this._marketsService
+        .setParticipation(market.id, value)
+        .subscribe(
+          sucess => {
             this._toastr.success('提交成功!');
             this.load();
-        },
-        error => {
+          },
+          error => {
             this._toastr.error('提交失败!');
             this.load();
-        }
-      );
+          }
+        );
+    }
+
 
   }
 
   public setOfferApr(market, val: number): void {
-
-     market.offerApr = val;
+    market.offerApr = val;
     this._marketsService
       .setOfferApr(market.id, market.minPayment, val)
-        .subscribe(
-            success => {
-
-              market.offerStatus = 1;
-              this._toastr.success('提交成功!');
-              this.load();
-
-            },
-            error => {
-                this._toastr.error('提交失败');
-                this.load();
-            }
-        );
-
+      .subscribe(
+        success => {
+          market.offerStatus = 1;
+          this._toastr.success('提交成功!');
+          this.load();
+        },
+        error => {
+          this._toastr.error('提交失败');
+          this.load();
+        }
+      );
   }
 
   public configureOffer(market: Market): void {
     market.showProcess = true;
 
-    this._marketsService.configureOffer(
-      this.offerType.value,
-      this.offerPercent,
-      0,
-      market.id
-    )
-    .subscribe(
-        () => {
-            market.showProcess = false;
-            this.load();
-        }
-    );
+    this._marketsService
+      .configureOffer(this.offerType.value, this.offerPercent, 0, market.id)
+      .subscribe(() => {
+        market.showProcess = false;
+        this.load();
+      });
   }
 }

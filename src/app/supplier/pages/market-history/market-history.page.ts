@@ -19,13 +19,14 @@ import { Angular2Csv } from 'angular2-csv';
 export class MarketHistoryPage implements OnInit {
   public buyId: string;
   public fromDays = 7;
-  public filter: { startdate: string, enddate: string };
+  public filter: { startdate: string; enddate: string };
   public isCustomRange = false;
   public awards: Award[] = [];
   public market: HistoryMarket;
   // public graphData: Object[] = [];
   public customFrom: string;
   public customTo: string;
+  public checkbox = false;
 
   // @ViewChild(BaseChartDirective)
   // private _chart: BaseChartDirective;
@@ -46,9 +47,11 @@ export class MarketHistoryPage implements OnInit {
   //   }
   // };
 
-  constructor(private _marketHistory: MarketHistoryService,
-              private _subheader: SubheaderService,
-              private _route: ActivatedRoute) { }
+  constructor(
+    private _marketHistory: MarketHistoryService,
+    private _subheader: SubheaderService,
+    private _route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.buyId = this._route.parent.snapshot.params.id;
@@ -62,11 +65,11 @@ export class MarketHistoryPage implements OnInit {
   public load(): void {
     this._marketHistory
       .get(this.buyId, this.filter)
-      .subscribe(x => this.market = x);
+      .subscribe(x => (this.market = x));
 
     this._marketHistory
       .getAwardedList(this.buyId, this.filter)
-      .subscribe(x => this.awards = x);
+      .subscribe(x => (this.awards = x));
 
     // this._marketHistory
     //   .getMarketGraph(this.buyId, this.filter)
@@ -74,38 +77,27 @@ export class MarketHistoryPage implements OnInit {
   }
 
   public downloadAwardedDetailsCsv(id: string): void {
-    this._marketHistory
-      .downloadAwardedDetailsCsv(id)
-      .subscribe(
-        awards => {
-          const params = { useBom: false };
-          const csv = new Angular2Csv(awards, 'Invoices', params);
-        }
-      );
+    this._marketHistory.downloadAwardedDetailsCsv(id).subscribe(awards => {
+      const params = { useBom: false };
+      const csv = new Angular2Csv(awards, 'Invoices', params);
+    });
   }
 
   public downloadAwardedDetailsExcel(id: string): void {
-    this._marketHistory
-      .downloadAwardedDetailsExcel(id)
-      .subscribe(
-        binData => {
-          const a = document.createElement('a');
-          document.body.appendChild(a);
-          // a.style = "display: none";
+    this._marketHistory.downloadAwardedDetailsExcel(id).subscribe(binData => {
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      // a.style = 'display: none';
 
-          const blob = new Blob(
-            [binData],
-            { type: 'application/vnd.ms-excel' }
-          );
+      const blob = new Blob([binData], { type: 'application/vnd.ms-excel' });
 
-          const url = window.URL.createObjectURL(blob);
+      const url = window.URL.createObjectURL(blob);
 
-          a.href = url;
-          a.download = 'history.xls';
-          a.click();
-          window.URL.revokeObjectURL(url);
-        }
-      );
+      a.href = url;
+      a.download = 'history.xls';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
   }
 
   // public chartHandler(data: Object[]): void {
@@ -166,5 +158,12 @@ export class MarketHistoryPage implements OnInit {
   private _dateFormat(date: Date | number): string {
     const pipe = new DatePipe('EN');
     return pipe.transform(date, 'yyyy-MM-dd');
+  }
+
+  // 全选按钮
+  public setCheckedHistory(e: Event): void {
+    console.log(this.awards);
+    // this.awards.map(x => (x = e.target['checked']));
+    // console.log(this.awards);
   }
 }

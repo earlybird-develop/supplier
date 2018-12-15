@@ -15,22 +15,22 @@ export class HeaderComponent implements OnInit {
   @ViewChild('subheader', { read: ViewContainerRef })
   private _subheaderContainer: ViewContainerRef;
   public login_name: string;
-  constructor(private _subHeader: SubheaderService,
-              private _router: Router,
-              private _http: HttpClient,
-              public translate: TranslateService) { }
+  constructor(
+    private _subHeader: SubheaderService,
+    private _router: Router,
+    private _http: HttpClient,
+    public translate: TranslateService
+  ) {}
 
   ngOnInit() {
-    this._http
-      .get(GET_PROFILE_PATH)
-      .subscribe(
-        resp => {
-          this.login_name = resp['data']['name'];
-        },
-        errors => {
-          this.login_name = 'Error';
-        }
-      );
+    this._http.get(GET_PROFILE_PATH).subscribe(
+      resp => {
+        this.login_name = resp['data']['name'];
+      },
+      errors => {
+        this.login_name = 'Error';
+      }
+    );
     this._subHeader.setRootViewContainerRef(this._subheaderContainer);
   }
 
@@ -40,13 +40,12 @@ export class HeaderComponent implements OnInit {
   }
 
   public logout() {
-
     localStorage.removeItem('access_token');
     localStorage.removeItem('expire_time');
     localStorage.removeItem('openid');
     localStorage.removeItem('refresh_token');
 
     this._router.navigate(['/supplier', 'signin']);
-
   }
+
 }

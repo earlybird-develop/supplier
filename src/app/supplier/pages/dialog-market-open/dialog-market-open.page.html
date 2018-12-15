@@ -13,11 +13,15 @@
             <span>{{ 'supplier.pages.markets.dialog-participation.info3' | translate }}</span>
         </div>
         <div class="m15">
-            <span class="btn1">{{ 'supplier.pages.markets.dialog-participation.participate' | translate }}</span>
-            <span class="btn2" (click)="bsModalRef.hide()">{{ 'supplier.pages.markets.dialog-participation.cancel' | translate }}</span>
+            <span class="btn1" (click)="dialogJoin()">{{ 'supplier.pages.markets.dialog-participation.participate' | translate }}</span>
+            <span class="btn2" (click)="dialogCancel()">{{ 'supplier.pages.markets.dialog-participation.cancel' | translate }}</span>
         </div>
         <div>
             {{ 'supplier.pages.markets.dialog-participation.tip' | translate }}
+        </div>
+        <div>
+            <input type="checkbox" (click)="checkedclick()">
+            <span class="">{{ 'supplier.pages.markets.dialog-offer.btn1' | translate }}</span>
         </div>
     </div>
 </ng-container> 

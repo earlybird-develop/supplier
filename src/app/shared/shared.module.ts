@@ -17,9 +17,6 @@ import {
 } from './sidebarable-page/sidebarable-page.component';
 
 import { InlineEditComponent } from './inline-edit/inline-edit.component';
-// tslint:disable-next-line:max-line-length
-import { DialogMarketOpen } from './dialog-market-open/dialog-market-open.page';
-import { DialogOffer } from './dialog-offer/dialog-offer.page';
 
 import {
   SearchFilterPipe,
@@ -48,8 +45,6 @@ import { CustomSelectComponent } from './custom-select/custom-select.component';
     InlineEditComponent,
     FooterComponent,
       DialogComponent,
-      DialogMarketOpen,
-      DialogOffer,
 
     SearchFilterPipe,
     CapitalizePipe,
@@ -73,9 +68,7 @@ import { CustomSelectComponent } from './custom-select/custom-select.component';
     KeysPipe
   ],
   entryComponents: [
-      DialogComponent,
-      DialogMarketOpen,
-      DialogOffer
+      DialogComponent
   ]
 })
 export class SharedModule { }

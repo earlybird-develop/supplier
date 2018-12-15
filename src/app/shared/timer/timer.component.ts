@@ -2,7 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { TimerService } from './timer.service';
 
-import { DialogOffer } from '../dialog-offer/dialog-offer.page';
+// tslint:disable-next-line:max-line-length
+import { DialogOffer } from '../../supplier/pages/dialog-offer/dialog-offer.page';
 
 
 @Component({

@@ -5,7 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { DialogOffer } from '../dialog-offer/dialog-offer.page';
+// tslint:disable-next-line:max-line-length
+import { DialogOffer } from '../../supplier/pages/dialog-offer/dialog-offer.page';
 
 @Component({
   selector: 'eb-inline-edit',
@@ -59,9 +60,11 @@ export class InlineEditComponent implements ControlValueAccessor {
       values: this.value,
       buyId: this.buyId
     };
-    // tslint:disable-next-line:max-line-length
-    this.bsModalRef = this.modalService.show(DialogOffer, Object.assign({initialState}, { class: 'dialog-offer', initialState }));
 
+    if (localStorage.getItem('notOffer') !== 'true') {
+      // tslint:disable-next-line:max-line-length
+      this.bsModalRef = this.modalService.show(DialogOffer, Object.assign({ initialState }, { class: 'dialog-offer', initialState }));
+    }
   }
 
   public cancel(): void {

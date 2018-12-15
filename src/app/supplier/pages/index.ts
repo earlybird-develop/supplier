@@ -10,3 +10,5 @@ export * from './signin/signin.page';
 export * from './forget-password/forget-password.page';
 export * from './reset-password/reset-password.component';
 export * from './activation-account/activation-account.component';
+export * from './dialog-market-open/dialog-market-open.page';
+export * from './dialog-offer/dialog-offer.page';

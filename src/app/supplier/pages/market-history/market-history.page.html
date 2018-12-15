@@ -106,6 +106,10 @@
     <table class="table">
       <thead>
         <tr>
+          <th><input type="checkbox" 
+                          (click)="setCheckedHistory($event)"
+                          [(ngModel)]="checkbox">
+          </th>
           <th>{{ 'supplier.pages.history.table.date' | translate }}</th>
           <th>{{ 'supplier.pages.history.table.total-paid' | translate }}</th>
           <th class="text-center">{{ 'supplier.pages.history.table.total-discount' | translate }}</th>
@@ -117,6 +121,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let award of awards">
+          <td><input type="checkbox" [(ngModel)]="award.awards"></td>
           <td>{{ award.award_date }}</td>
           <td>{{ award.total_paid | currency: market?.currencySign }}</td>
           <td class="text-center">{{ award.total_discount | currency: market?.currencySign }}</td>

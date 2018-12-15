@@ -2,7 +2,7 @@
   "core": {
     "pages": {
       "language": {
-        "en" : "英文",
+        "en" : "English",
         "cn" : "简体中文",
         "tw" : "繁体中文"
       },
@@ -237,11 +237,11 @@
       "markets": {
         "table": {
           "participation": "参加",
-          "division": "分部",
+          "division": "市场",
           "ar": "应收机会",
           "offer": "开价",
-          "clearing": "清理金额",
-          "non-clearing": "未清理金额",
+          "clearing": "清算应收",
+          "non-clearing": "未清算应收",
           "discount": "折扣金额",
           "dpe": "提早天数",
           "pay-date": "付款时间"

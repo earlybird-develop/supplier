@@ -16,6 +16,8 @@ import { AccessTokenInterceptor } from './access-token.interceptor';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
+import { CookieService } from 'angular2-cookie/services/cookies.service';
+
 declare function require(name: string);
 
 const enLocale = require('../locales/en.json');
@@ -28,13 +30,16 @@ export class CustomTranslateLoader extends TranslateLoader {
 
     const locale = enLocale;
 
-    if( lang === 'cn' ){
+    if ( lang === 'cn' ) {
+      // tslint:disable-next-line:no-shadowed-variable
       const locale = cnLocale;
       return Observable.of(locale);
-    } else if(lang === 'tw'){
+    } else if (lang === 'tw') {
+      // tslint:disable-next-line:no-shadowed-variable
       const locale = twLocale;
       return Observable.of(locale);
-    } else if(lang === 'en'){
+    } else if (lang === 'en') {
+      // tslint:disable-next-line:no-shadowed-variable
       const locale = enLocale;
       return Observable.of(locale);
     }
@@ -46,9 +51,7 @@ export function HttpLoaderFactory() {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     CommonModule,
@@ -70,9 +73,10 @@ export function HttpLoaderFactory() {
       provide: HTTP_INTERCEPTORS,
       useClass: AccessTokenInterceptor,
       multi: true
-    }
+    },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
 

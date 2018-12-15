@@ -70,7 +70,7 @@
           </td>
         </tr>
         <tr *ngSwitchCase="false" [ngClass]="{'row-gray':market.buyerStatus == 0}">
-          <td class="participation-block" >
+          <td >
             <eb-checkbox (ngModelChange)="setParticipation(market, $event)"
                          [ngModel]="market.isParticipation === 1"
                        >
@@ -78,13 +78,15 @@
             </eb-checkbox>
           </td>
           <td>
-            <div>
-              <a [routerLink]="['/supplier', 'markets', market.id, 'invoices']">
-                {{ market.buyer }} ({{ market.currency }})
-              </a>
+            <div class="company-name">
+              <div>
+                <a [routerLink]="['/supplier', 'markets', market.id, 'invoices']">
+                  {{ market.buyer }} ({{ market.currency }})
+                </a>
+              </div>
+              <div>{{ market.supplier }}</div>
+              <div>{{ market.vendorcode }}</div>
             </div>
-            <div>{{ market.supplier }}</div>
-            <div>{{ market.vendorcode }}</div>
           </td>
           <td>{{ market.availableAmount | currency: market.currencySign }}</td>
           <td>

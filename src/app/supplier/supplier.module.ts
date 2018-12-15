@@ -16,7 +16,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { SupplierRoutingModule } from './supplier-routing.module';
-
+// tslint:disable-next-line:max-line-length
+import { DialogMarketOpen } from './pages/dialog-market-open/dialog-market-open.page';
+import { DialogOffer } from './pages/dialog-offer/dialog-offer.page';
 
 import {
   WrapperPage,
@@ -80,6 +82,8 @@ import { SharedModule } from '../shared/shared.module';
     ChangePasswordPage,
     SigninPage,
     ForgetPasswordPage,
+    DialogMarketOpen,
+    DialogOffer,
 
     HeaderComponent,
     MarketsHeaderComponent,
@@ -92,15 +96,17 @@ import { SharedModule } from '../shared/shared.module';
     AccountService,
     MarketsService,
     SubheaderService,
-      MarketHistoryService,
-      EnquiryService,
+    MarketHistoryService,
+    EnquiryService,
     ResetPasswordService,
     ActivationAccountService
   ],
   entryComponents: [
     MarketsHeaderComponent,
     MarketHeaderComponent,
-    MinPayAmountModal
+    MinPayAmountModal,
+    DialogMarketOpen,
+    DialogOffer
   ]
 })
-export class SupplierModule { }
+export class SupplierModule {}

@@ -27,8 +27,10 @@ export class CheckboxComponent implements ControlValueAccessor {
   private _propagateChange: Function = () => null;
 
   // @Attribute('onOffMode') onOffMode,
-  constructor(@Attribute('static') fixed,
-              @Attribute('confirmable') confirmable) {
+  constructor(
+    @Attribute('static') fixed,
+    @Attribute('confirmable') confirmable
+  ) {
     this.onOffMode = true; // typeof onOffMode === 'string';
     this.fixed = typeof fixed === 'string';
     this.confirmable = typeof confirmable === 'string';
@@ -55,7 +57,8 @@ export class CheckboxComponent implements ControlValueAccessor {
     this._propagateChange = fn;
   }
 
-  registerOnTouched(fn) { }
+  registerOnTouched(fn) {}
 
-  setDisabledState(fn) { }
+  setDisabledState(fn) {}
+
 }
