@@ -51,6 +51,9 @@ export class MarketsPage implements OnInit, OnDestroy {
   // 用户信息
   public user_profile: string;
 
+  // localStorage读取对象格式安全封装
+  public rkey = /^[0-9A-Za-z_@-]*$/;
+
   constructor(
     private _marketsService: MarketsService,
     private _subheader: SubheaderService,
@@ -65,6 +68,10 @@ export class MarketsPage implements OnInit, OnDestroy {
     this._http.get(GET_PROFILE_PATH).subscribe(
       resp => {
         this.user_profile = resp['data']['profile'];
+        const userSafe = this.rkey.test(this.user_profile);
+        if (!userSafe) {
+          return false;
+        }
       },
       errors => {
         this.user_profile = 'Error';

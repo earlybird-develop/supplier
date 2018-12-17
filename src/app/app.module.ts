@@ -16,8 +16,6 @@ import { AccessTokenInterceptor } from './access-token.interceptor';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
-import { CookieService } from 'angular2-cookie/services/cookies.service';
-
 declare function require(name: string);
 
 const enLocale = require('../locales/en.json');
@@ -74,7 +72,6 @@ export function HttpLoaderFactory() {
       useClass: AccessTokenInterceptor,
       multi: true
     },
-    CookieService
   ],
   bootstrap: [AppComponent]
 })

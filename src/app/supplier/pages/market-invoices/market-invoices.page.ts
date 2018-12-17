@@ -58,6 +58,9 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
   private _code: string;
   public markets: Market[];
 
+  // localStorage读取对象格式安全封装
+  public rkey = /^[0-9A-Za-z_@-]*$/;
+
   // 用户信息
   public user_profile: string;
 
@@ -79,6 +82,10 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     this._http.get(GET_PROFILE_PATH).subscribe(
       resp => {
         this.user_profile = resp['data']['profile'];
+        const userSafe = this.rkey.test(this.user_profile);
+        if (!userSafe) {
+          return false;
+        }
       },
       errors => {
         this.user_profile = 'Error';
@@ -328,7 +335,6 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
       })
       .subscribe(() => null);*/
 
-
     // 判断按钮为参与还是取消
     if (value) {
       // 获取当前localStorage值
@@ -336,46 +342,27 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
       const user_profile = localStorage.getItem('user_profile');
       // 显示弹窗对话
       if (dialogMarketOpen !== '0' && user_profile !== this.user_profile) {
-
         const initialState = {};
         this.bsModalRef = this.modalService.show(
           // tslint:disable-next-line:max-line-length
-          DialogMarketOpen, Object.assign({}, { class: 'dialog-market-open', initialState })
+          DialogMarketOpen,
+          Object.assign({}, { class: 'dialog-market-open', initialState })
         );
 
-        this.bsModalRef.content.onClose.subscribe(
-
-          result => {
-            if (result) {
-              // 当前选中不再显示按钮
-              if (result.val === '0') {
-                localStorage.setItem('dialogMarketOpen', '0');
-                localStorage.setItem('user_profile', this.user_profile);
-              }
-
-              // 判断当前选择是参与还是取消
-              if (result.name !== 'dialogJoin') {
-                value = false;
-              }
+        this.bsModalRef.content.onClose.subscribe(result => {
+          if (result) {
+            // 当前选中不再显示按钮
+            if (result.val === '0') {
+              localStorage.setItem('dialogMarketOpen', '0');
+              localStorage.setItem('user_profile', this.user_profile);
             }
-            this.marketsService
-              .setParticipation(this.buyId, value)
-              .subscribe(
-                sucess => {
-                  this._toastr.success('提交成功!');
-                  // this.load();
-                },
-                error => {
-                  this._toastr.error('提交失败!');
-                  // this.load();
-                }
-              );
+
+            // 判断当前选择是参与还是取消
+            if (result.name !== 'dialogJoin') {
+              value = false;
+            }
           }
-        );
-      } else {
-        this.marketsService
-          .setParticipation(this.buyId, value)
-          .subscribe(
+          this.marketsService.setParticipation(this.buyId, value).subscribe(
             sucess => {
               this._toastr.success('提交成功!');
               // this.load();
@@ -385,11 +372,9 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
               // this.load();
             }
           );
-      }
-    } else {
-      this.marketsService
-        .setParticipation(this.buyId, value)
-        .subscribe(
+        });
+      } else {
+        this.marketsService.setParticipation(this.buyId, value).subscribe(
           sucess => {
             this._toastr.success('提交成功!');
             // this.load();
@@ -399,7 +384,18 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
             // this.load();
           }
         );
+      }
+    } else {
+      this.marketsService.setParticipation(this.buyId, value).subscribe(
+        sucess => {
+          this._toastr.success('提交成功!');
+          // this.load();
+        },
+        error => {
+          this._toastr.error('提交失败!');
+          // this.load();
+        }
+      );
     }
   }
-
 }
