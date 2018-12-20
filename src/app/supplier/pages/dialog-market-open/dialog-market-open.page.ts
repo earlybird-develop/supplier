@@ -1,5 +1,5 @@
 ﻿// tslint:disable-next-line:max-line-length
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Subject } from 'rxjs/Subject';
 
@@ -9,14 +9,15 @@ import { Subject } from 'rxjs/Subject';
   templateUrl: 'dialog-market-open.page.html',
   styleUrls: ['./dialog-market-open.page.scss']
 })
-export class DialogMarketOpen implements OnInit {
+export class DialogMarketOpen implements OnInit,OnDestroy {
 
-  // 判断不在显示信息单选框是否被选择
-  public checkedClick = false;
+  // 返回是否继续显示本弹框
+  private isShow = true;
+  // 返回是否为“确定”
+  private isConfirm = false;
 
   constructor(public bsModalRef: BsModalRef) {}
 
-  public active = false;
   public onClose: Subject<any>;
 
   ngOnInit() {
@@ -25,34 +26,30 @@ export class DialogMarketOpen implements OnInit {
     this.onClose = new Subject();
   }
 
+  ngOnDestroy(){
+      this.onClose.next({ IsConfirm: this.isConfirm, IsShow: this.isShow });
+  }
+
   // 参与市场
-  public dialogJoin() {
-    if (this.checkedClick === true) {
-      this.onClose.next({ name: 'dialogJoin', val: '0' });
-      this.bsModalRef.hide();
-    } else {
-      this.onClose.next({ name: 'dialogJoin', val: '1' });
-      this.bsModalRef.hide();
-    }
+  public doConfirm() {
+
+    this.isConfirm = true;
+    this.bsModalRef.hide();
+
   }
 
   // 取消参与市场
-  public dialogCancel() {
-    if (this.checkedClick === true) {
-      this.onClose.next({ name: 'dialogCancel', val: '0' });
-      this.bsModalRef.hide();
-    } else {
-      this.onClose.next({ name: 'dialogCancel', val: '1' });
-      this.bsModalRef.hide();
-    }
+  public doCancel() {
+    this.bsModalRef.hide();
   }
 
   // 判断不在显示信息单选框是否被选择
-  public checkedclick() {
-    if (this.checkedClick === false) {
-      this.checkedClick = true;
+  public setCheckbox() {
+    
+    if (this.isShow === false) {
+      this.isShow = true;
     } else {
-      this.checkedClick = false;
+      this.isShow = false;
     }
   }
 

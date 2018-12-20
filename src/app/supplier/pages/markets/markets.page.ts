@@ -152,81 +152,61 @@ export class MarketsPage implements OnInit, OnDestroy {
     return market.showProcess;
   }
 
-  public setParticipation(market: Market, value: boolean): void {
-    // 判断按钮为参与还是取消
-    if (value) {
-      // 获取当前localStorage值
-      const dialogMarketOpen = localStorage.getItem('dialogMarketOpen');
-      const user_profile = localStorage.getItem('user_profile');
-      // 显示弹窗对话
-      if (dialogMarketOpen !== '0' && user_profile !== this.user_profile) {
-
-          const initialState = {};
-          this.bsModalRef = this.modalService.show(
-            // tslint:disable-next-line:max-line-length
-            DialogMarketOpen, Object.assign({}, { class: 'dialog-market-open', initialState })
-          );
-
-          this.bsModalRef.content.onClose.subscribe(
-
-            result => {
-              if (result) {
-                // 当前选中不再显示按钮
-                if (result.val === '0') {
-                  localStorage.setItem('dialogMarketOpen', '0');
-                  localStorage.setItem('user_profile', this.user_profile);
-                }
-
-                // 判断当前选择是参与还是取消
-                if (result.name !== 'dialogJoin') {
-                  value = false;
-                }
-              }
-              this._marketsService
-                  .setParticipation(market.id, value)
-                  .subscribe(
-                    sucess => {
-                      this._toastr.success('提交成功!');
-                      this.load();
-                    },
-                    error => {
-                      this._toastr.error('提交失败!');
-                      this.load();
-                    }
-                  );
-            }
-          );
-      } else {
-        this._marketsService
+  private _setParticipation(market: Market, value: boolean): void {
+      this._marketsService
           .setParticipation(market.id, value)
           .subscribe(
-            sucess => {
-              this._toastr.success('提交成功!');
-              this.load();
-            },
-            error => {
-              this._toastr.error('提交失败!');
-              this.load();
-            }
+              sucess => {
+                  this._toastr.success('提交成功!');
+                  this.load();
+              },
+              error => {
+                  this._toastr.error('提交失败!');
+                  market.isParticipation = 0;
+                  this.load();
+              }
           );
-      }
-    } else {
-      this._marketsService
-        .setParticipation(market.id, value)
-        .subscribe(
-          sucess => {
-            this._toastr.success('提交成功!');
-            this.load();
-          },
-          error => {
-            this._toastr.error('提交失败!');
-            this.load();
-          }
+  }
+
+  public setParticipation(market: Market, value: boolean): void {
+
+      // 获取当前localStorage值
+      let dialogShow = localStorage.getItem('dialogMarketOpen_' + localStorage.getItem('user_profile'));
+
+     //判断如果是“参与”市场则判断是否要进行弹框提示
+    if (value && !dialogShow) {
+
+        const initialState = {};
+        this.bsModalRef = this.modalService.show(
+            // tslint:disable-next-line:max-line-length
+            DialogMarketOpen, Object.assign({}, {class: 'dialog-market-open', initialState})
         );
+
+        this.bsModalRef.content.onClose.subscribe(
+            result => {
+                if (result) {
+                    // 当前选中不再显示按钮
+                    if (!result.IsShow) {
+                        localStorage.setItem('dialogMarketOpen_' + localStorage.getItem('user_profile'), "noshow");
+                    }
+
+                    // 判断当前选择是参与还是取消
+                    if (!result.IsConfirm) {
+                        market.isParticipation = 0;
+                    }else{
+                        this._setParticipation( market, value);
+                    }
+                }
+            })
+
+    }else{
+
+          this._setParticipation( market, value);
+    }
+
     }
 
 
-  }
 
   public setOfferApr(market, val: number): void {
     market.offerApr = val;
