@@ -28,13 +28,13 @@ export class Market extends Model {
   public showProcess;
 
   @Alias() public currency: string;
-  @Alias() public buyer: string;
+  @Alias('buyer') public marketCode: string;
   @Alias() public vendorcode: string;
   @Alias() public supplier: string;
   @Alias() public paydate: string;
   @Alias('buyer_id') public id: string;
-  @Alias('buyer_name') public buyerName: string;
-  @Alias('buyer_status') public buyerStatus: number;
+  @Alias('buyer_name') public marketName: string;
+  @Alias('buyer_status') public marketStatus: number;
   @Alias('currency_sign') public currencySign: string;
   @Alias('is_participation') public isParticipation: number;
 

@@ -26,6 +26,8 @@ export class HeaderComponent implements OnInit {
     this._http.get(GET_PROFILE_PATH).subscribe(
       resp => {
         this.login_name = resp['data']['name'];
+        localStorage.setItem('user_name', resp['data']['name']);
+        localStorage.setItem('user_profile', resp['data']['profile']);
       },
       errors => {
         this.login_name = 'Error';
@@ -40,10 +42,15 @@ export class HeaderComponent implements OnInit {
   }
 
   public logout() {
+
+    //清空页面缓存
     localStorage.removeItem('access_token');
     localStorage.removeItem('expire_time');
     localStorage.removeItem('openid');
     localStorage.removeItem('refresh_token');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('user_name');
+    localStorage.removeItem('user_profile');
 
     this._router.navigate(['/supplier', 'signin']);
   }

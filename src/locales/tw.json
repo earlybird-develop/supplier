@@ -255,7 +255,7 @@
           "btn2": "我已知悉"
         },
         "view": "查看发票",
-        "subtext": "您有 {{value}} 的可用发票来自于买家 {{buyer}} ({{currency}})。您可以开价争取一个平均{{dpe}}天的提早回款机会。",
+        "subtext": "您有 {{value}} 的可用发票来自于买家 {{market}} ({{currency}})。您可以开价争取一个平均{{dpe}}天的提早回款机会。",
         "config-offer": "设置开价",
         "waiting-status": "市场目前为等待状态，您不能修改该字段",
         "turn-on": "打开参与开关进入市场",

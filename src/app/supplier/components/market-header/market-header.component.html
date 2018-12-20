@@ -1,20 +1,20 @@
-<!--<div class="left-bar">{{ buyerName }}</div>-->
+<!--<div class="left-bar">{{ marketName }}</div>-->
 
 <ul class="menu" >
   <li routerLinkActive="active">
-    <a [routerLink]="['/supplier', 'markets', buyId, 'invoices']">
+    <a [routerLink]="['/supplier', 'markets', marketCode, 'invoices']">
       {{ 'supplier.components.market-header.menu.invoices' | translate }}
     </a>
   </li>
   <li routerLinkActive="active">
-    <a [routerLink]="['/supplier', 'markets', buyId, 'history']">
+    <a [routerLink]="['/supplier', 'markets', marketCode, 'history']">
       {{ 'supplier.components.market-header.menu.history' | translate }}
     </a>
   </li>
 </ul>
 
 <div class="info">
-  <span class="buyer-name">{{buyerName}}</span>
+  <span class="buyer-name">{{marketName}}</span>
   <div class="pay-date"
        tooltip="{{ 'supplier.components.market-header.pay-date' | translate }}: {{ payDate }}"
        placement="left">

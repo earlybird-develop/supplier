@@ -189,7 +189,7 @@
       <div class="apr">
         <eb-inline-edit [ngModel]="market.offerApr"
                         (ngModelChange)="setOfferApr($event)"
-                        [disabled]="market.isLocked() || market.buyerStatus == 0"
+                        [disabled]="market.isLocked() || market.marketStatus == 0"
                         #offerAprEdit>
         </eb-inline-edit>
         <ng-container *ngIf="!offerAprEdit.isOpen">
@@ -226,7 +226,7 @@
     <div class="market-status text-center">
       <div class="title">{{ 'supplier.pages.invoices.participation' | translate }}</div>
       <eb-checkbox onOffMode
-                   [ngModel]="market.isParticipation"
+                   [(ngModel)]="market.isParticipation"
                    [disabled]="market.isLocked()"
                    (ngModelChange)="setParticipation($event)">
       </eb-checkbox>

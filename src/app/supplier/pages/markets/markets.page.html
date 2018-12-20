@@ -26,7 +26,7 @@
                   </a>
                 </div>
                 <div class="subtext">
-                  {{ 'supplier.pages.markets.subtext' | translate: { value: (market.availableAmount | currency: market.currencySign), buyer: market.buyer, currency: market.currency, dpe: market.DPE } }}
+                  {{ 'supplier.pages.markets.subtext' | translate: { value: (market.availableAmount | currency: market.currencySign), market: market.marketName, currency: market.currency, dpe: market.DPE } }}
                 </div>
               </div>
               <div class="configure-offer">
@@ -69,10 +69,10 @@
             </div>
           </td>
         </tr>
-        <tr *ngSwitchCase="false" [ngClass]="{'row-gray':market.buyerStatus == 0}">
+        <tr *ngSwitchCase="false" [ngClass]="{'row-gray':market.marketStatus == 0}">
           <td >
             <eb-checkbox (ngModelChange)="setParticipation(market, $event)"
-                         [ngModel]="market.isParticipation === 1"
+                         [(ngModel)]="market.isParticipation"
                        >
 
             </eb-checkbox>
@@ -81,7 +81,7 @@
             <div class="company-name">
               <div>
                 <a [routerLink]="['/supplier', 'markets', market.id, 'invoices']">
-                  {{ market.buyer }} ({{ market.currency }})
+                  {{ market.marketName }} ({{ market.currency }})
                 </a>
               </div>
               <div>{{ market.supplier }}</div>
@@ -92,7 +92,7 @@
           <td>
             <eb-inline-edit [ngModel]="market.offerApr"
                             (ngModelChange)="setOfferApr(market, $event)"
-                            [disabled]="market.isLocked() || market.buyerStatus == 0"
+                            [disabled]="market.isLocked() || market.marketStatus == 0"
                             black
                             #offerAprEdit>
             </eb-inline-edit>

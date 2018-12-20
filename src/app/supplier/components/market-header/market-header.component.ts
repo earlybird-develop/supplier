@@ -8,13 +8,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./market-header.component.scss']
 })
 export class MarketHeaderComponent {
-  public buyId: string;
+  public marketCode: string;
   public payDate: string;
-  public buyerName: string;
+  public marketName: string;
   public timeArr: any;
 
   constructor(private _route: ActivatedRoute) {
-    this.buyId = this._route.parent.snapshot.params.id;
+    this.marketCode = this._route.parent.snapshot.params.id;
   }
 
 }

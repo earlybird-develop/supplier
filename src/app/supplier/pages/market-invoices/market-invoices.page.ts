@@ -10,8 +10,9 @@ import 'rxjs/add/operator/finally';
 import { MarketsService, InvoiceType, SubheaderService } from '../../services';
 import { Market, Invoice, InvoicesFilter } from '../../models';
 import { MarketHeaderComponent } from '../../components';
+
 // tslint:disable-next-line:max-line-length
-import { MinPayAmountModal } from '../../pages/market-invoices/min-pay-amount-modal';
+import { MinPayAmountModal } from './min-pay-amount-modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { DatePipe } from '@angular/common';
@@ -28,7 +29,7 @@ const GET_PROFILE_PATH = '/account/get_profile';
   styleUrls: ['./market-invoices.page.scss']
 })
 export class MarketInvoicesPage implements OnInit, OnDestroy {
-  public buyId: string;
+  public marketId: string;
   public search = '';
   public checkbox = false;
   public market: Market = new Market();
@@ -58,8 +59,6 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
   private _code: string;
   public markets: Market[];
 
-  // localStorage读取对象格式安全封装
-  public rkey = /^[0-9A-Za-z_@-]*$/;
 
   // 用户信息
   public user_profile: string;
@@ -74,33 +73,20 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     private modalService: BsModalService,
     private _http: HttpClient
   ) {
-    this.buyId = this._route.parent.snapshot.params.id;
+    this.marketId = this._route.parent.snapshot.params.id;
   }
 
   ngOnInit() {
-    // 获取用户名
-    this._http.get(GET_PROFILE_PATH).subscribe(
-      resp => {
-        this.user_profile = resp['data']['profile'];
-        const userSafe = this.rkey.test(this.user_profile);
-        if (!userSafe) {
-          return false;
-        }
-      },
-      errors => {
-        this.user_profile = 'Error';
-      }
-    );
 
     this.load_hash();
     const subhHeader = this._subheader.show(MarketHeaderComponent);
-    subhHeader.buyId = this.buyId;
+    subhHeader.marketId = this.marketId;
 
-    this.marketsService.getStat(this.buyId).subscribe(
+    this.marketsService.getStat(this.marketId).subscribe(
       market => {
         this.market = market;
         subhHeader.payDate = this.market.nextPaydate;
-        subhHeader.buyerName = this.market.buyerName;
+        subhHeader.marketName = this.market.marketName;
         this.isParticipation = this.market.isParticipation;
       },
       errors => console.error(errors)
@@ -119,7 +105,7 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
   }
 
   load_hash() {
-    this.marketsService.getHashList([this.buyId]).subscribe(
+    this.marketsService.getHashList([this.marketId]).subscribe(
       resp => {
         if (resp.code === 1) {
           // tslint:disable-next-line:max-line-length
@@ -128,7 +114,9 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
             }*/
 
           for (const hash of resp.data) {
+
             this._code = hash['cashpool_code'];
+
             if (this.current_hash.includes(this._code)) {
               // 判断当前页面是否有该市场键
               if (this.current_hash[this._code] !== hash['stat_hash']) {
@@ -157,7 +145,7 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
   }
 
   getStat() {
-    this.marketsService.getStat(this.buyId).subscribe(
+    this.marketsService.getStat(this.marketId).subscribe(
       market => {
         this.market = market;
       },
@@ -170,7 +158,7 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
   }
 
   openMinAmountModal() {
-    if (this.market.buyerStatus === 0) {
+    if (this.market.marketStatus === 0) {
       return;
     }
 
@@ -189,13 +177,16 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     );
   }
 
-  public onSubmit(val) {
+  public onSubmit(offer) {
+
     this.marketsService
-      .setOfferApr(this.buyId, val.min_payment, val.offer_value)
+      .setOfferApr(this.marketId, offer.min_payment, offer.offer_value)
       .finally(() => (this.participationLoading = false))
       .subscribe(() => null);
+    
     this.bsModalRef.hide();
     this.getStat();
+
   }
 
   public setInvoiceType(type): void {
@@ -220,7 +211,7 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
   public loadInvoices(): void {
     this.checkbox = false;
     this.marketsService
-      .getInvoices(this.buyId, this.filter, this.invoiceType)
+      .getInvoices(this.marketId, this.filter, this.invoiceType)
       .subscribe(
         invoices => {
           if (this.isStatusInvoice === true) {
@@ -244,7 +235,7 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     }
 
     this.marketsService
-      .setInvoicesInclude(incIds, this.buyId, isIncluded)
+      .setInvoicesInclude(incIds, this.marketId, isIncluded)
       .subscribe(() => this.loadInvoices());
   }
 
@@ -309,93 +300,68 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
       );
   }
 
-  public setParticipation(value: boolean): void {
-    if (this.market.buyerStatus === 1) {
+  private _setParticipation(value: boolean): void {
+
+    if (this.market.marketStatus === 1) {
       this.participationLoading = true;
     }
-
-    // todo : This hack needs to be removed when api will work
-    this.isParticipation = value ? 1 : 0;
 
     // 这里打开关闭参与的市场时，都要将 开价禁用
     this.market.offerStatus = 1;
 
-    /*this.marketsService
-      .setParticipation(this.buyId, value)
-      .finally(() => {
-        this.participationLoading = false;
-        const initialState = {};
-        if (this.isParticipation) {
-          // tslint:disable-next-line:max-line-length
-          this.bsModalRef = this.modalService.show(
-            DialogMarketOpen,
-            Object.assign({}, { class: 'dialog-market-open', initialState })
-          );
-        }
-      })
-      .subscribe(() => null);*/
-
-    // 判断按钮为参与还是取消
-    if (value) {
-      // 获取当前localStorage值
-      const dialogMarketOpen = localStorage.getItem('dialogMarketOpen');
-      const user_profile = localStorage.getItem('user_profile');
-      // 显示弹窗对话
-      if (dialogMarketOpen !== '0' && user_profile !== this.user_profile) {
-        const initialState = {};
-        this.bsModalRef = this.modalService.show(
-          // tslint:disable-next-line:max-line-length
-          DialogMarketOpen,
-          Object.assign({}, { class: 'dialog-market-open', initialState })
-        );
-
-        this.bsModalRef.content.onClose.subscribe(result => {
-          if (result) {
-            // 当前选中不再显示按钮
-            if (result.val === '0') {
-              localStorage.setItem('dialogMarketOpen', '0');
-              localStorage.setItem('user_profile', this.user_profile);
-            }
-
-            // 判断当前选择是参与还是取消
-            if (result.name !== 'dialogJoin') {
-              value = false;
-            }
-          }
-          this.marketsService.setParticipation(this.buyId, value).subscribe(
+    this.marketsService
+        .setParticipation(this.market.id, value)
+        .subscribe(
             sucess => {
+              this.isParticipation = value ? 1 : 0;
+              this.participationLoading = false;
               this._toastr.success('提交成功!');
-              // this.load();
+              this.getStat();
             },
             error => {
+              this.isParticipation = value ? 0 : 1;   //若执行失败则返回原来的值
+              this.participationLoading = false;
               this._toastr.error('提交失败!');
-              // this.load();
+              this.getStat();
             }
-          );
-        });
-      } else {
-        this.marketsService.setParticipation(this.buyId, value).subscribe(
-          sucess => {
-            this._toastr.success('提交成功!');
-            // this.load();
-          },
-          error => {
-            this._toastr.error('提交失败!');
-            // this.load();
-          }
-        );
-      }
-    } else {
-      this.marketsService.setParticipation(this.buyId, value).subscribe(
-        sucess => {
-          this._toastr.success('提交成功!');
-          // this.load();
-        },
-        error => {
-          this._toastr.error('提交失败!');
-          // this.load();
-        }
+        )
+  }
+
+  public setParticipation(value: boolean): void {
+
+    // 获取当前localStorage值
+    let dialogShow = localStorage.getItem('dialogMarketOpen_' + localStorage.getItem('user_profile'));
+
+    //判断如果是“参与”市场则判断是否要进行弹框提示
+    if (value && !dialogShow) {
+
+      const initialState = {};
+      this.bsModalRef = this.modalService.show(
+          // tslint:disable-next-line:max-line-length
+          DialogMarketOpen, Object.assign({}, {class: 'dialog-market-open', initialState})
       );
+
+      this.bsModalRef.content.onClose.subscribe(
+          result => {
+            if (result) {
+              // 当前选中不再显示按钮
+              if (!result.IsShow) {
+                localStorage.setItem('dialogMarketOpen_' + localStorage.getItem('user_profile'), "noshow");
+              }
+
+              // 判断当前选择是参与还是取消
+              if (!result.IsConfirm) {
+                this.market.isParticipation = value ? 0 : 1;
+              }else{
+                this._setParticipation(value);
+              }
+            }
+          })
+
+    }else{
+
+      this._setParticipation( value);
     }
+
   }
 }

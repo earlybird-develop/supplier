@@ -47,8 +47,6 @@ export class AccountService {
     });
   }
 
-
-
   public refreshAccessToken(httpParams: Object): Observable<boolean> {
         const params = new HttpParams()
             .set('refresh_token', localStorage.getItem( 'refresh_token'))
@@ -79,7 +77,6 @@ export class AccountService {
         .get(GET_PROFILE_PATH)
         .subscribe(
           resp => {
-            localStorage.setItem('user_name', resp['data']['name']);
             observer.next(UserProfile.new(UserProfile, resp['data']));
             observer.complete();
           },

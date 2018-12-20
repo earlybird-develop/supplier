@@ -64,19 +64,6 @@ export class MarketsPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // 获取用户名
-    this._http.get(GET_PROFILE_PATH).subscribe(
-      resp => {
-        this.user_profile = resp['data']['profile'];
-        const userSafe = this.rkey.test(this.user_profile);
-        if (!userSafe) {
-          return false;
-        }
-      },
-      errors => {
-        this.user_profile = 'Error';
-      }
-    );
 
     this._subheader.show(MarketsHeaderComponent);
 
@@ -157,52 +144,51 @@ export class MarketsPage implements OnInit, OnDestroy {
           .setParticipation(market.id, value)
           .subscribe(
               sucess => {
+                  market.isParticipation = value ? 1 : 0;
                   this._toastr.success('提交成功!');
-                  this.load();
               },
               error => {
+                  market.isParticipation = value ? 0 : 1;
                   this._toastr.error('提交失败!');
-                  market.isParticipation = 0;
-                  this.load();
               }
           );
   }
 
   public setParticipation(market: Market, value: boolean): void {
 
-      // 获取当前localStorage值
-      let dialogShow = localStorage.getItem('dialogMarketOpen_' + localStorage.getItem('user_profile'));
+         // 获取当前localStorage值
+         let dialogShow = localStorage.getItem('dialogMarketOpen_' + localStorage.getItem('user_profile'));
 
-     //判断如果是“参与”市场则判断是否要进行弹框提示
-    if (value && !dialogShow) {
+         //判断如果是“参与”市场则判断是否要进行弹框提示
+        if (value && !dialogShow) {
 
-        const initialState = {};
-        this.bsModalRef = this.modalService.show(
-            // tslint:disable-next-line:max-line-length
-            DialogMarketOpen, Object.assign({}, {class: 'dialog-market-open', initialState})
-        );
+            const initialState = {};
+            this.bsModalRef = this.modalService.show(
+                // tslint:disable-next-line:max-line-length
+                DialogMarketOpen, Object.assign({}, {class: 'dialog-market-open', initialState})
+            );
 
-        this.bsModalRef.content.onClose.subscribe(
-            result => {
-                if (result) {
-                    // 当前选中不再显示按钮
-                    if (!result.IsShow) {
-                        localStorage.setItem('dialogMarketOpen_' + localStorage.getItem('user_profile'), "noshow");
+            this.bsModalRef.content.onClose.subscribe(
+                result => {
+                    if (result) {
+                        // 当前选中不再显示按钮
+                        if (!result.IsShow) {
+                            localStorage.setItem('dialogMarketOpen_' + localStorage.getItem('user_profile'), "noshow");
+                        }
+
+                        // 判断当前选择是参与还是取消
+                        if (!result.IsConfirm) {
+                            market.isParticipation = value ? 0 : 1;
+                        }else{
+                            this._setParticipation( market, value);
+                        }
                     }
+                })
 
-                    // 判断当前选择是参与还是取消
-                    if (!result.IsConfirm) {
-                        market.isParticipation = 0;
-                    }else{
-                        this._setParticipation( market, value);
-                    }
-                }
-            })
+        }else{
 
-    }else{
-
-          this._setParticipation( market, value);
-    }
+              this._setParticipation( market, value);
+        }
 
     }
 
