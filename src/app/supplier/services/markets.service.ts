@@ -18,6 +18,7 @@ const INVOICES_AWARDED_PATH = '/invoice/get_invoices_with_awarded';
 const SET_INVOICES_INCLUDED_PATH = '/invoice/set_invoices_inlcuded';
 const SET_OFFER_APR_PATH = '/invoice/offer_apr';
 const GET_MARKET_HASH_PATH = '/hash/get_hash';
+const INVOICES_ALL = '/invoice/list';
 
 export enum InvoiceType {
   Eligible = 'eligible',
@@ -42,14 +43,13 @@ export class MarketsService {
             observer.next(response['data']['list'].map(x => new Market(x)));
             // observer.complete();
           },
-            error => observer.error(error)
-      );
+          error => observer.error(error)
+        );
     });
   }
 
   public getStat(id: string): Observable<Market> {
     const params = new HttpParams().set('buyer_id', id);
-
     return Observable.create((observer: Observer<Market>) => {
       this._http
         .get(MARKET_STAT_PATH, { params: params })
@@ -59,23 +59,37 @@ export class MarketsService {
             observer.next(new Market(response['data']));
             observer.complete();
           },
-            error => observer.error(error)
+          error => observer.error(error)
         );
     });
   }
-
+  public getAllInvoices(id: string, filter: InvoicesFilter): Observable<Invoice[]> {
+    let params = new HttpParams().set('buyer_id', id);
+    return Observable.create((observer: Observer<Invoice[]>) => {
+      this._http
+        .get(INVOICES_ALL, { params })
+        .subscribe(
+          response => {
+            console.log(response);
+            this.totalAmount = response['data']['total_amount'];
+            observer.next(response['data']['list'].map(x => new Invoice(x)));
+            observer.complete();
+          },
+          error => observer.error(error)
+        );
+    });
+  }
   public getInvoices(id: string, filter: InvoicesFilter, type: InvoiceType)
-  : Observable<Invoice[]> {
-
+    : Observable<Invoice[]> {
     const sFilter = filter._toJSON();
     let url = '';
     let params = new HttpParams().set('buyer_id', id);
-
+      sFilter['is_included']=sFilter['is_clearing']= 0;
     switch (type) {
-      case(InvoiceType.Eligible): url = INVOICES_ELIGIBLE_PATH; break;
-      case(InvoiceType.Ineligible): url = INVOICES_INELIGIBLE_PATH; break;
-      case(InvoiceType.Adjustments): url = INVOICES_ADJUST_PATH; break;
-      case(InvoiceType.Awarded): url = INVOICES_AWARDED_PATH;
+      case (InvoiceType.Eligible): url = INVOICES_ELIGIBLE_PATH; break;
+      case (InvoiceType.Ineligible): url = INVOICES_INELIGIBLE_PATH; break;
+      case (InvoiceType.Adjustments): url = INVOICES_ADJUST_PATH; break;
+      case (InvoiceType.Awarded): url = INVOICES_AWARDED_PATH;
     }
 
     if (type === InvoiceType.Eligible) {
@@ -92,13 +106,13 @@ export class MarketsService {
             observer.next(response['data']['list'].map(x => new Invoice(x)));
             observer.complete();
           },
-            error => observer.error(error)
+          error => observer.error(error)
         );
     });
   }
 
   public setInvoicesInclude(invoicesIds: string[], id: string, isInc = true)
-  : Observable<any> {
+    : Observable<any> {
 
     const params = new HttpParams().set('buyer_id', id);
 
@@ -112,20 +126,20 @@ export class MarketsService {
             observer.next(true);
             observer.complete();
           },
-           error => observer.error(error)
+          error => observer.error(error)
         );
     });
   }
 
-  public  setOfferApr(id: string, minPayment: number, apr: number)
-  : Observable<Market> {
+  public setOfferApr(id: string, minPayment: number, apr: number)
+    : Observable<Market> {
     // const data = { async: true, data: { min_payment: minPayment, apr: apr }};
-      const data = {
-          offer_type : 'apr',
-          offer_value : apr,
-          min_payment: minPayment
-      };
-      const params = new HttpParams().set('buyer_id', id);
+    const data = {
+      offer_type: 'apr',
+      offer_value: apr,
+      min_payment: minPayment
+    };
+    const params = new HttpParams().set('buyer_id', id);
 
     return Observable.create((observer: Observer<any>) => {
       this._http
@@ -146,12 +160,12 @@ export class MarketsService {
     minPayment: number,
     buyerId: string
   )
-  : Observable<Market> {
+    : Observable<Market> {
 
     const data = {
-        offer_type: offerType,
-        offer_value: offerValue,
-        min_payment: minPayment
+      offer_type: offerType,
+      offer_value: offerValue,
+      min_payment: minPayment
     };
 
     const params = new HttpParams().set('buyer_id', buyerId);
@@ -173,10 +187,10 @@ export class MarketsService {
   }
 
   public setParticipation(marketId: string, isParticipation: boolean)
-  : Observable<boolean> {
+    : Observable<boolean> {
     const data = {
-        buyers: [marketId],
-        is_participation: isParticipation ? 1 : 0
+      buyers: [marketId],
+      is_participation: isParticipation ? 1 : 0
     };
 
     return Observable.create((observer: Observer<boolean>) => {

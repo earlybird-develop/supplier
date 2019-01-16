@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
-
-
 import { HttpClient, HttpParams } from '@angular/common/http';
-
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-
 import { UserProfile, ForegtPasswordEmail } from '../models/index';
-
+import { AESService } from './aes.service';
 
 const GET_ACCESS_TOKEN_PATH = '/oauth2/get_access_token';
 const REFRESH_ACCESS_TOKEN_PATH = '/oauth2/refresh_access_token';
@@ -19,20 +15,17 @@ const FORGET_PASSWORD_EMAIL_SEND = '/service/reset_password';
 @Injectable()
 export class AccountService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private aesService: AESService) { }
 
   public getAccessToken(httpParams: Object): Observable<boolean> {
     const params = new HttpParams()
-      .set('username', httpParams['email'])
-      .set('password', httpParams['password'])
       .set('appid', 'platform')
       .set('secret', '123456')
       .set('grant_type', 'password');
-
-
+    var encryptPassword = this.aesService.encrypt(httpParams['password']);
     return Observable.create((observer: Observer<boolean>) => {
       this._http
-        .get(GET_ACCESS_TOKEN_PATH, { params })
+        .post(GET_ACCESS_TOKEN_PATH, { username: httpParams['email'], password: encryptPassword }, { params })
         .subscribe(
           resp => {
             localStorage.setItem('access_token', resp['access_token']);
@@ -48,28 +41,28 @@ export class AccountService {
   }
 
   public refreshAccessToken(httpParams: Object): Observable<boolean> {
-        const params = new HttpParams()
-            .set('refresh_token', localStorage.getItem( 'refresh_token'))
-            .set('appid', 'xxx-1-xxx')
-            .set('secret', '123456')
-            .set('grant_type', 'refresh_token');
+    const params = new HttpParams()
+      .set('refresh_token', localStorage.getItem('refresh_token'))
+      .set('appid', 'xxx-1-xxx')
+      .set('secret', '123456')
+      .set('grant_type', 'refresh_token');
 
-        return Observable.create((observer: Observer<boolean>) => {
-            this._http
-                .get(REFRESH_ACCESS_TOKEN_PATH, { params })
-                .subscribe(
-                    resp => {
-                        localStorage.setItem('access_token', resp['access_token']);
-                        localStorage.setItem('expire_time', resp['expire_time']);
-                        localStorage.setItem('refresh_token', resp['refresh_token']);
+    return Observable.create((observer: Observer<boolean>) => {
+      this._http
+        .get(REFRESH_ACCESS_TOKEN_PATH, { params })
+        .subscribe(
+          resp => {
+            localStorage.setItem('access_token', resp['access_token']);
+            localStorage.setItem('expire_time', resp['expire_time']);
+            localStorage.setItem('refresh_token', resp['refresh_token']);
 
-                        observer.next(true);
-                        observer.complete();
-                    },
-                    error => observer.error(error)
-                );
-        });
-    }
+            observer.next(true);
+            observer.complete();
+          },
+          error => observer.error(error)
+        );
+    });
+  }
 
   public getProfile(): Observable<UserProfile> {
     return Observable.create((observer: Observer<UserProfile>) => {
@@ -114,8 +107,8 @@ export class AccountService {
     })
   }
 
-  public postForgetPasswordMail(email): Observable<ForegtPasswordEmail>{
-    return Observable.create((observer : Observer<ForegtPasswordEmail>) => {
+  public postForgetPasswordMail(email): Observable<ForegtPasswordEmail> {
+    return Observable.create((observer: Observer<ForegtPasswordEmail>) => {
       this._http
         .post(FORGET_PASSWORD_EMAIL_SEND, email)
         .subscribe(

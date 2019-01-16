@@ -21,7 +21,8 @@ import { InlineEditComponent } from './inline-edit/inline-edit.component';
 import {
   SearchFilterPipe,
   CapitalizePipe,
-  KeysPipe
+  KeysPipe,
+  InvoiceFilterPipe
 } from './pipes';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -35,8 +36,8 @@ import { CustomSelectComponent } from './custom-select/custom-select.component';
     PopoverModule.forRoot(),
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
-      PerfectScrollbarModule,
-      TranslateModule
+    PerfectScrollbarModule,
+    TranslateModule
   ],
   declarations: [
     CheckboxComponent,
@@ -44,8 +45,8 @@ import { CustomSelectComponent } from './custom-select/custom-select.component';
     SidebarablePageComponent,
     InlineEditComponent,
     FooterComponent,
-      DialogComponent,
-
+    DialogComponent,
+    InvoiceFilterPipe,
     SearchFilterPipe,
     CapitalizePipe,
     KeysPipe,
@@ -62,13 +63,13 @@ import { CustomSelectComponent } from './custom-select/custom-select.component';
     InlineEditComponent,
     FooterComponent,
     CustomSelectComponent,
-
+    InvoiceFilterPipe,
     SearchFilterPipe,
     CapitalizePipe,
     KeysPipe
   ],
   entryComponents: [
-      DialogComponent
+    DialogComponent
   ]
 })
 export class SharedModule { }

@@ -65,6 +65,11 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
 
   public allInvoices = [];
   public isStatusInvoice = false;
+  public filterDate = [];
+  public filterAmount = [];
+  public filterInclude = 0;
+  public filterAward = 0;
+
   constructor(
     public marketsService: MarketsService,
     private _route: ActivatedRoute,
@@ -183,7 +188,7 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
       .setOfferApr(this.marketId, offer.min_payment, offer.offer_value)
       .finally(() => (this.participationLoading = false))
       .subscribe(() => null);
-    
+
     this.bsModalRef.hide();
     this.getStat();
 
@@ -197,10 +202,7 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
 
     if (type === 'all') {
       this.isStatusInvoice = true;
-      allInvoices.forEach(element => {
-        this.invoiceType = element;
-        this.loadInvoices();
-      });
+      this.loadAllInvoices();
       this.invoiceType = 'all';
     } else {
       this.invoiceType = type;
@@ -208,6 +210,19 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     }
   }
 
+  public loadAllInvoices(): void {
+    this.checkbox = false;
+    this.marketsService
+      .getAllInvoices(this.marketId, this.filter)
+      .subscribe(
+        x => {
+          console.log(x);
+          this.invoices = x;
+        },
+        errors => console.error(errors)
+      );
+
+  }
   public loadInvoices(): void {
     this.checkbox = false;
     this.marketsService
@@ -239,14 +254,39 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
       .subscribe(() => this.loadInvoices());
   }
 
-  public toggleDpe(value: number, e: Event): void {
+  public toggleDpe(value: number, e: Event, check: boolean): void {
     this.filter.toggleDpe(value, e);
-    this.loadInvoices();
+    if (check) {
+      this.filterDate.push(value);
+    } else {
+      var index = this.filterDate.indexOf(value);
+      this.filterDate.splice(index,1);
+    }
+    // this.loadInvoices();
+  }
+  public toggleInclude(num:number,checked:boolean){
+    if(checked){
+      this.filterInclude=this.filterInclude+num;
+    }else{
+      this.filterInclude=this.filterInclude-num;
+    }
+  }
+  public toggleClearing(num:number,checked:boolean){
+    if(checked){
+      this.filterAward=this.filterAward+num;
+    }else{
+      this.filterAward=this.filterAward-num;
+    }
   }
 
-  public toggleAmount(value: number, e: Event): void {
+  public toggleAmount(value: number, e: Event,checked:boolean): void {
     this.filter.toggleAmount(value, e);
-    this.loadInvoices();
+    if (checked) {
+      this.filterAmount.push(value);
+    } else {
+      var index = this.filterAmount.indexOf(value);   
+      this.filterAmount.splice(index,1);
+    }
   }
 
   public goCustomRange(): void {
@@ -310,21 +350,21 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     this.market.offerStatus = 1;
 
     this.marketsService
-        .setParticipation(this.market.id, value)
-        .subscribe(
-            sucess => {
-              this.isParticipation = value ? 1 : 0;
-              this.participationLoading = false;
-              this._toastr.success('提交成功!');
-              this.getStat();
-            },
-            error => {
-              this.isParticipation = value ? 0 : 1;   //若执行失败则返回原来的值
-              this.participationLoading = false;
-              this._toastr.error('提交失败!');
-              this.getStat();
-            }
-        )
+      .setParticipation(this.market.id, value)
+      .subscribe(
+        sucess => {
+          this.isParticipation = value ? 1 : 0;
+          this.participationLoading = false;
+          this._toastr.success('提交成功!');
+          this.getStat();
+        },
+        error => {
+          this.isParticipation = value ? 0 : 1;   //若执行失败则返回原来的值
+          this.participationLoading = false;
+          this._toastr.error('提交失败!');
+          this.getStat();
+        }
+      )
   }
 
   public setParticipation(value: boolean): void {
@@ -337,30 +377,30 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
 
       const initialState = {};
       this.bsModalRef = this.modalService.show(
-          // tslint:disable-next-line:max-line-length
-          DialogMarketOpen, Object.assign({}, {class: 'dialog-market-open', initialState})
+        // tslint:disable-next-line:max-line-length
+        DialogMarketOpen, Object.assign({}, { class: 'dialog-market-open', initialState })
       );
 
       this.bsModalRef.content.onClose.subscribe(
-          result => {
-            if (result) {
-              // 当前选中不再显示按钮
-              if (!result.IsShow) {
-                localStorage.setItem('dialogMarketOpen_' + localStorage.getItem('user_profile'), "noshow");
-              }
-
-              // 判断当前选择是参与还是取消
-              if (!result.IsConfirm) {
-                this.market.isParticipation = value ? 0 : 1;
-              }else{
-                this._setParticipation(value);
-              }
+        result => {
+          if (result) {
+            // 当前选中不再显示按钮
+            if (!result.IsShow) {
+              localStorage.setItem('dialogMarketOpen_' + localStorage.getItem('user_profile'), "noshow");
             }
-          })
 
-    }else{
+            // 判断当前选择是参与还是取消
+            if (!result.IsConfirm) {
+              this.market.isParticipation = value ? 0 : 1;
+            } else {
+              this._setParticipation(value);
+            }
+          }
+        })
 
-      this._setParticipation( value);
+    } else {
+
+      this._setParticipation(value);
     }
 
   }

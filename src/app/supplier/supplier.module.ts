@@ -42,7 +42,8 @@ import {
   SubheaderService,
   MarketHistoryService,
   ResetPasswordService,
-  ActivationAccountService
+  ActivationAccountService,
+  AESService
 } from './services';
 
 import {
@@ -99,7 +100,8 @@ import { SharedModule } from '../shared/shared.module';
     MarketHistoryService,
     EnquiryService,
     ResetPasswordService,
-    ActivationAccountService
+    ActivationAccountService,
+    AESService
   ],
   entryComponents: [
     MarketsHeaderComponent,

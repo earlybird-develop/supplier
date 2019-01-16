@@ -27,16 +27,15 @@
           <li>
             <label>
               <input type="checkbox"
-                     [(ngModel)]="filter.included"
-                     (change)="loadInvoices()">
+                     (change)="toggleInclude(1,$event.target.checked)">
               {{ 'supplier.pages.invoices.filter.included-opt' | translate }}
+              
             </label>
           </li>
           <li>
             <label>
               <input type="checkbox"
-                     [(ngModel)]="filter.excluded"
-                     (change)="loadInvoices()">
+                     (change)="toggleInclude(-1,$event.target.checked)">
               {{ 'supplier.pages.invoices.filter.excluded' | translate }}
             </label>
           </li>
@@ -49,8 +48,7 @@
           <li>
             <label>
               <input type="checkbox"
-                     [(ngModel)]="filter.clearingYes"
-                     (change)="loadInvoices()">
+                     (change)="toggleClearing(1,$event.target.checked)">
               {{ 'supplier.pages.invoices.filter.yes' | translate }}
             </label>
           </li>
@@ -58,7 +56,7 @@
             <label>
               <input type="checkbox"
                      [(ngModel)]="filter.clearingNo"
-                     (change)="loadInvoices()">
+                     (change)="toggleClearing(-1,$event.target.checked)">
               {{ 'supplier.pages.invoices.filter.no' | translate }}
             </label>
           </li>
@@ -71,7 +69,7 @@
           <li>
             <label>
               <input type="checkbox"
-                     (change)="toggleDpe(1, $event)"
+                     (change)="toggleDpe(1, $event,$event.target.checked)"
                      [ngModel]="filter.dpe.indexOf(1) >= 0">
               {{ 'supplier.pages.invoices.filter.less15' | translate }}
             </label>
@@ -79,7 +77,7 @@
           <li>
             <label>
               <input type="checkbox"
-                     (change)="toggleDpe(2, $event)"
+                     (change)="toggleDpe(2, $event,$event.target.checked)"
                      [ngModel]="filter.dpe.indexOf(2) >= 0">
               {{ 'supplier.pages.invoices.filter.more15' | translate }}
             </label>
@@ -87,7 +85,7 @@
           <li>
             <label>
               <input type="checkbox"
-                     (change)="toggleDpe(3, $event)"
+                     (change)="toggleDpe(3, $event,$event.target.checked)"
                      [ngModel]="filter.dpe.indexOf(3) >= 0">
               {{ 'supplier.pages.invoices.filter.more30' | translate }}
             </label>
@@ -95,7 +93,7 @@
           <li>
             <label>
               <input type="checkbox"
-                     (change)="toggleDpe(4, $event)"
+                     (change)="toggleDpe(4, $event,$event.target.checked)"
                      [ngModel]="filter.dpe.indexOf(4) >= 0">
               {{ 'supplier.pages.invoices.filter.more45' | translate }}
             </label>
@@ -132,7 +130,7 @@
           <li>
             <label>
               <input type="checkbox"
-                     (change)="toggleAmount(1, $event)"
+                     (change)="toggleAmount(1, $event,$event.target.checked)"
                      [ngModel]="filter.amount.indexOf(1) >= 0">
               {{ 'supplier.pages.invoices.filter.less25k' | translate }}
             </label>
@@ -140,7 +138,7 @@
           <li>
             <label>
               <input type="checkbox"
-                     (change)="toggleAmount(2, $event)"
+                     (change)="toggleAmount(2, $event,$event.target.checked)"
                      [ngModel]="filter.amount.indexOf(2) >= 0">
               {{ 'supplier.pages.invoices.filter.more25k' | translate }}
             </label>
@@ -148,7 +146,7 @@
           <li>
             <label>
               <input type="checkbox"
-                     (change)="toggleAmount(3, $event)"
+                     (change)="toggleAmount(3, $event,$event.target.checked)"
                      [ngModel]="filter.amount.indexOf(3) >= 0">
               {{ 'supplier.pages.invoices.filter.more50k' | translate }}
             </label>
@@ -156,7 +154,7 @@
           <li>
             <label>
               <input type="checkbox"
-                     (change)="toggleAmount(4, $event)"
+                     (change)="toggleAmount(4, $event,$event.target.checked)"
                      [ngModel]="filter.amount.indexOf(4) >= 0">
               {{ 'supplier.pages.invoices.filter.more75k' | translate }}
             </label>
@@ -302,7 +300,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let invoice of invoices | searchFilter: 'invoiceId' : search" [class.clearno]="invoice?.isClearing()==false">
+          <tr *ngFor="let invoice of invoices | invoiceFilter:filterDate:filterInclude:filterAward:filterAmount | searchFilter: 'invoiceId' : search" [class.clearno]="invoice?.isClearing()==false">
             <td><input type="checkbox" [(ngModel)]="invoice._checked"></td>
             <td class="text-center">
 
