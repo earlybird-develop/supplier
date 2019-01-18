@@ -1,26 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-
 import { ToastrService } from 'ngx-toastr';
-
 import { TranslateService } from '@ngx-translate/core';
-
 import { HttpClient } from '@angular/common/http';
 import { Market } from '../../models';
 import { MarketsHeaderComponent } from '../../components';
-import {
-  ISelectOption
-} from '../../../shared/custom-select/custom-select.component';
-
-import {
-  MarketsService,
-  SubheaderService
-} from '../../services';
+import { ISelectOption } from '../../../shared/custom-select/custom-select.component';
+import { MarketsService, SubheaderService } from '../../services';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
-// tslint:disable-next-line:max-line-length
 import { DialogMarketOpen } from '../dialog-market-open/dialog-market-open.page';
-
-const GET_PROFILE_PATH = '/account/get_profile';
 
 @Component({
   selector: 'eb-markets',
@@ -37,22 +25,14 @@ export class MarketsPage implements OnInit, OnDestroy {
   public offerType = this.offerTypes[0];
   public offerPercent = 0;
   public processingLoading = false;
-
   private refresh_time = 5000;
   private _interval: any;
   public bsModalRef: BsModalRef;
-
   private refresh_data = false;
-
   private current_hash = [];
-
   private _code: string;
-
-  // 用户信息
-  public user_profile: string;
-
-  // localStorage读取对象格式安全封装
-  public rkey = /^[0-9A-Za-z_@-]*$/;
+  public user_profile: string;  // 用户信息
+  public rkey = /^[0-9A-Za-z_@-]*$/;  // localStorage读取对象格式安全封装
 
   constructor(
     private _marketsService: MarketsService,
@@ -61,18 +41,15 @@ export class MarketsPage implements OnInit, OnDestroy {
     private modalService: BsModalService,
     private translate: TranslateService,
     private _http: HttpClient
-  ) {}
+  ) { }
 
   ngOnInit() {
 
     this._subheader.show(MarketsHeaderComponent);
-
     this.load_hash();
     this.load();
-
     this._interval = setInterval(() => {
       this.load_hash();
-
       if (this.refresh_data) {
         this.load();
       }
@@ -83,7 +60,6 @@ export class MarketsPage implements OnInit, OnDestroy {
     this._marketsService.getHashList([]).subscribe(
       resp => {
         if (resp.code === 1) {
-          // tslint:disable-next-line:max-line-length
           if (
             resp.data.length !== this.current_hash.length &&
             this.current_hash.length > 0
@@ -104,7 +80,6 @@ export class MarketsPage implements OnInit, OnDestroy {
             } else {
               this.current_hash.push(this._code);
               this.current_hash[this._code] = hash['stat_hash'];
-
               if (!this.refresh_data) {
                 this.refresh_data = true;
               }
@@ -122,7 +97,6 @@ export class MarketsPage implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._subheader.dispose();
-
     clearInterval(this._interval);
   }
 
@@ -140,57 +114,51 @@ export class MarketsPage implements OnInit, OnDestroy {
   }
 
   private _setParticipation(market: Market, value: boolean): void {
-      this._marketsService
-          .setParticipation(market.id, value)
-          .subscribe(
-              sucess => {
-                  market.isParticipation = value ? 1 : 0;
-                  this._toastr.success('提交成功!');
-              },
-              error => {
-                  market.isParticipation = value ? 0 : 1;
-                  this._toastr.error('提交失败!');
-              }
-          );
+    this._marketsService
+      .setParticipation(market.id, value)
+      .subscribe(
+        sucess => {
+          market.isParticipation = value ? 1 : 0;
+          this._toastr.success('提交成功!');
+        },
+        error => {
+          market.isParticipation = value ? 0 : 1;
+          this._toastr.error('提交失败!');
+        }
+      );
   }
 
   public setParticipation(market: Market, value: boolean): void {
+    // 获取当前localStorage值
+    let dialogShow = localStorage.getItem('dialogMarketOpen_' + localStorage.getItem('user_profile'));
+    //判断如果是“参与”市场则判断是否要进行弹框提示
+    if (value && !dialogShow) {
+      const initialState = {};
+      this.bsModalRef = this.modalService.show(
+        DialogMarketOpen, Object.assign({}, { class: 'dialog-market-open', initialState })
+      );
 
-         // 获取当前localStorage值
-         let dialogShow = localStorage.getItem('dialogMarketOpen_' + localStorage.getItem('user_profile'));
+      this.bsModalRef.content.onClose.subscribe(
+        result => {
+          if (result) {
+            // 当前选中不再显示按钮
+            if (!result.IsShow) {
+              localStorage.setItem('dialogMarketOpen_' + localStorage.getItem('user_profile'), "noshow");
+            }
+            // 判断当前选择是参与还是取消
+            if (!result.IsConfirm) {
+              market.isParticipation = value ? 0 : 1;
+            } else {
+              this._setParticipation(market, value);
+            }
+          }
+        })
 
-         //判断如果是“参与”市场则判断是否要进行弹框提示
-        if (value && !dialogShow) {
-
-            const initialState = {};
-            this.bsModalRef = this.modalService.show(
-                // tslint:disable-next-line:max-line-length
-                DialogMarketOpen, Object.assign({}, {class: 'dialog-market-open', initialState})
-            );
-
-            this.bsModalRef.content.onClose.subscribe(
-                result => {
-                    if (result) {
-                        // 当前选中不再显示按钮
-                        if (!result.IsShow) {
-                            localStorage.setItem('dialogMarketOpen_' + localStorage.getItem('user_profile'), "noshow");
-                        }
-
-                        // 判断当前选择是参与还是取消
-                        if (!result.IsConfirm) {
-                            market.isParticipation = value ? 0 : 1;
-                        }else{
-                            this._setParticipation( market, value);
-                        }
-                    }
-                })
-
-        }else{
-
-              this._setParticipation( market, value);
-        }
-
+    } else {
+      this._setParticipation(market, value);
     }
+
+  }
 
 
 
@@ -213,7 +181,6 @@ export class MarketsPage implements OnInit, OnDestroy {
 
   public configureOffer(market: Market): void {
     market.showProcess = true;
-
     this._marketsService
       .configureOffer(this.offerType.value, this.offerPercent, 0, market.id)
       .subscribe(() => {

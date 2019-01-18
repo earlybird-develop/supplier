@@ -1,10 +1,4 @@
-import {
-  ComponentFactoryResolver,
-  ComponentRef,
-  ReflectiveInjector,
-  Type,
-  ViewContainerRef
-} from '@angular/core';
+import { ComponentFactoryResolver, ComponentRef, ReflectiveInjector, Type, ViewContainerRef } from '@angular/core';
 import { ResolvedReflectiveProvider } from '@angular/core/src/di/reflective_provider';
 
 export class ComponentBase {
@@ -16,8 +10,7 @@ export class ComponentBase {
   public _show<T>(
     component: Type<T>,
     providers: ResolvedReflectiveProvider[] = [])
-  : void {
-
+    : void {
     if (!this.container) {
       const childComponent =
         this.componentFactoryResolver.resolveComponentFactory(component);

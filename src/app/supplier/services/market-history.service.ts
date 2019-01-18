@@ -3,8 +3,6 @@ import { Observer } from 'rxjs/Observer';
 import { HistoryMarket, Award } from '../models/index';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpParams } from '@angular/common/http';
-
-
 const MARKET_HISTORY_STAT_PATH = '/history/get_market_stat';
 const HISTORY_AWARDED_LIST = '/history/get_awarded_list';
 const DOWNLOAD_AWARDED_DETAILS = '/history/download_awarded_detail';

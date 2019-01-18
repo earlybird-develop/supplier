@@ -3,7 +3,6 @@ import {
   ViewContainerRef
 } from '@angular/core';
 
-
 @Injectable()
 export class SubheaderService {
   private _rootViewContainerRef: ViewContainerRef;

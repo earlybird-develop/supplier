@@ -1,7 +1,5 @@
 import { ComponentFactoryResolver, Injectable } from '@angular/core';
-
 import { ComponentBase } from './component-base';
-
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { DialogComponent } from './dialog.component';
@@ -15,12 +13,9 @@ export class DialogService extends ComponentBase {
 
   public show(type: string, text: string): Observable<boolean> {
     super._show(DialogComponent, []);
-
     return Observable.create((observer: Observer<boolean>) => {
-
       this.container.instance.text = text;
       this.container.instance.type = type;
-
       this.container
         .instance
         .onExit()

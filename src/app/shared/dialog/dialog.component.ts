@@ -1,12 +1,7 @@
-import {
-  Component, OnDestroy, OnInit, Renderer2, HostListener, Inject
-} from '@angular/core';
-
+import {Component, OnDestroy, OnInit, Renderer2, HostListener, Inject} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-
 
 @Component({
   templateUrl: './dialog.component.html',

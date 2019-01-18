@@ -1,27 +1,16 @@
-// tslint:disable-next-line:max-line-length
 import { Component, OnInit, OnDestroy, Injectable, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
-
 import 'rxjs/add/operator/finally';
-
 import { MarketsService, InvoiceType, SubheaderService } from '../../services';
 import { Market, Invoice, InvoicesFilter } from '../../models';
 import { MarketHeaderComponent } from '../../components';
-
-// tslint:disable-next-line:max-line-length
 import { MinPayAmountModal } from './min-pay-amount-modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { DatePipe } from '@angular/common';
-// tslint:disable-next-line:max-line-length
 import { DialogMarketOpen } from '../dialog-market-open/dialog-market-open.page';
-import { DialogOffer } from '../dialog-offer/dialog-offer.page';
-import { HttpClient } from '@angular/common/http';
-
-const GET_PROFILE_PATH = '/account/get_profile';
 
 @Component({
   selector: 'eb-market-invoices',
@@ -37,32 +26,18 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
   public filter = new InvoicesFilter();
   public invoiceType: any;
   public isParticipation: number;
-  // 遮罩层判断
-  public participationLoading = false;
+  public participationLoading = false;  // 遮罩层判断
   public bsModalRef: BsModalRef;
-
   private refresh_time = 5000;
-
   private _interval: any;
-
   public startDate: string;
   public endDate: string;
-
-  // 倒计时时间
-  public loadingTime = 60;
-
-  // 判断是否刷新页面
-  private refresh_data = false;
-
+  public loadingTime = 60;// 倒计时时间
+  private refresh_data = false; // 判断是否刷新页面
   private current_hash = [];
-
   private _code: string;
   public markets: Market[];
-
-
-  // 用户信息
-  public user_profile: string;
-
+  public user_profile: string; // 用户信息
   public allInvoices = [];
   public isStatusInvoice = false;
   public filterDate = [];
@@ -75,8 +50,7 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _toastr: ToastrService,
     private _subheader: SubheaderService,
-    private modalService: BsModalService,
-    private _http: HttpClient
+    private modalService: BsModalService
   ) {
     this.marketId = this._route.parent.snapshot.params.id;
   }
@@ -117,11 +91,8 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
           /*if (resp.data.length !== this.current_hash.length && this.current_hash.length > 0) {
               this.current_hash = [];
             }*/
-
           for (const hash of resp.data) {
-
             this._code = hash['cashpool_code'];
-
             if (this.current_hash.includes(this._code)) {
               // 判断当前页面是否有该市场键
               if (this.current_hash[this._code] !== hash['stat_hash']) {
@@ -166,7 +137,6 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     if (this.market.marketStatus === 0) {
       return;
     }
-
     const ref = this;
     const initialState = {
       market: this.market,
@@ -174,8 +144,6 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
         ref.onSubmit(val);
       }
     };
-
-    // tslint:disable-next-line:max-line-length
     this.bsModalRef = this.modalService.show(
       MinPayAmountModal,
       Object.assign({}, { class: 'modal-initial-pay', initialState })
@@ -183,15 +151,12 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
   }
 
   public onSubmit(offer) {
-
     this.marketsService
       .setOfferApr(this.marketId, offer.min_payment, offer.offer_value)
       .finally(() => (this.participationLoading = false))
       .subscribe(() => null);
-
     this.bsModalRef.hide();
     this.getStat();
-
   }
 
   public setInvoiceType(type): void {
@@ -199,7 +164,6 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     this.allInvoices = [];
     this.isStatusInvoice = false;
     allInvoices = ['eligible', 'ineligible', 'adjustments', 'awarded'];
-
     if (type === 'all') {
       this.isStatusInvoice = true;
       this.loadAllInvoices();
@@ -221,8 +185,8 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
         },
         errors => console.error(errors)
       );
-
   }
+
   public loadInvoices(): void {
     this.checkbox = false;
     this.marketsService
@@ -244,7 +208,6 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     const incIds: string[] = this.invoices
       .filter(x => x._checked)
       .map(x => x.invId.toString());
-
     if (incIds.length === 0) {
       return;
     }
@@ -260,32 +223,33 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
       this.filterDate.push(value);
     } else {
       var index = this.filterDate.indexOf(value);
-      this.filterDate.splice(index,1);
-    }
-    // this.loadInvoices();
-  }
-  public toggleInclude(num:number,checked:boolean){
-    if(checked){
-      this.filterInclude=this.filterInclude+num;
-    }else{
-      this.filterInclude=this.filterInclude-num;
-    }
-  }
-  public toggleClearing(num:number,checked:boolean){
-    if(checked){
-      this.filterAward=this.filterAward+num;
-    }else{
-      this.filterAward=this.filterAward-num;
+      this.filterDate.splice(index, 1);
     }
   }
 
-  public toggleAmount(value: number, e: Event,checked:boolean): void {
+  public toggleInclude(num: number, checked: boolean) {
+    if (checked) {
+      this.filterInclude = this.filterInclude + num;
+    } else {
+      this.filterInclude = this.filterInclude - num;
+    }
+  }
+
+  public toggleClearing(num: number, checked: boolean) {
+    if (checked) {
+      this.filterAward = this.filterAward + num;
+    } else {
+      this.filterAward = this.filterAward - num;
+    }
+  }
+
+  public toggleAmount(value: number, e: Event, checked: boolean): void {
     this.filter.toggleAmount(value, e);
     if (checked) {
       this.filterAmount.push(value);
     } else {
-      var index = this.filterAmount.indexOf(value);   
-      this.filterAmount.splice(index,1);
+      var index = this.filterAmount.indexOf(value);
+      this.filterAmount.splice(index, 1);
     }
   }
 
@@ -293,7 +257,6 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     const pipe = new DatePipe('EN');
     this.filter.startDate = pipe.transform(this.startDate, 'yyyy-MM-dd');
     this.filter.endDate = pipe.transform(this.endDate, 'yyyy-MM-dd');
-
     this.loadInvoices();
   }
 
@@ -305,7 +268,6 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     const invoices = this.invoices
       .filter(x => x._checked)
       .map(x => x._toJSON());
-
     const params = { useBom: false };
     const csv = new Angular2Csv(invoices, 'Invoices', params);
   }
@@ -325,7 +287,6 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     // todo : This hack needs to be removed when api will work
     this.market.offerApr = apr;
     this.market.offerStatus = 1;
-
     this.marketsService
       .setOfferApr(this.market.id, this.market.minPayment, apr)
       .subscribe(
@@ -341,14 +302,11 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
   }
 
   private _setParticipation(value: boolean): void {
-
     if (this.market.marketStatus === 1) {
       this.participationLoading = true;
     }
-
     // 这里打开关闭参与的市场时，都要将 开价禁用
     this.market.offerStatus = 1;
-
     this.marketsService
       .setParticipation(this.market.id, value)
       .subscribe(
@@ -368,7 +326,6 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
   }
 
   public setParticipation(value: boolean): void {
-
     // 获取当前localStorage值
     let dialogShow = localStorage.getItem('dialogMarketOpen_' + localStorage.getItem('user_profile'));
 
@@ -377,7 +334,6 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
 
       const initialState = {};
       this.bsModalRef = this.modalService.show(
-        // tslint:disable-next-line:max-line-length
         DialogMarketOpen, Object.assign({}, { class: 'dialog-market-open', initialState })
       );
 
@@ -388,7 +344,6 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
             if (!result.IsShow) {
               localStorage.setItem('dialogMarketOpen_' + localStorage.getItem('user_profile'), "noshow");
             }
-
             // 判断当前选择是参与还是取消
             if (!result.IsConfirm) {
               this.market.isParticipation = value ? 0 : 1;
@@ -399,9 +354,7 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
         })
 
     } else {
-
       this._setParticipation(value);
     }
-
   }
 }

@@ -8,14 +8,11 @@ import { UserProfile } from '../../models';
   templateUrl: './change-password.page.html',
   styleUrls: ['./change-password.page.scss']
 })
-export class ChangePasswordPage implements OnInit{
+export class ChangePasswordPage implements OnInit {
 
   public user: UserProfile;
 
-  constructor(private _toastr: ToastrService,
-              private _accountService: AccountService) {
-
-  }
+  constructor(private _toastr: ToastrService, private _accountService: AccountService) { }
 
   ngOnInit() {
     this._accountService

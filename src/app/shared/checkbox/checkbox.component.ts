@@ -1,6 +1,4 @@
-import {
-  Attribute, Component, EventEmitter, forwardRef, Output
-} from '@angular/core';
+import {Attribute, Component, EventEmitter, forwardRef, Output} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -20,10 +18,8 @@ export class CheckboxComponent implements ControlValueAccessor {
   private onOffMode = false;
   private fixed = false;
   private confirmable = false;
-
   @Output()
   public change: EventEmitter<boolean> = new EventEmitter();
-
   private _propagateChange: Function = () => null;
 
   // @Attribute('onOffMode') onOffMode,
@@ -40,12 +36,10 @@ export class CheckboxComponent implements ControlValueAccessor {
     if (this.fixed) {
       return;
     }
-
     if (!this.confirmable) {
       this.model = !this.model;
       this._propagateChange(this.model);
     }
-
     this.change.emit(!this.model);
   }
 

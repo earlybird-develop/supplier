@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// tslint:disable-next-line:max-line-length
 import { FormGroup, ReactiveFormsModule, FormControl, FormBuilder, Validators } from '@angular/forms';
-// tslint:disable-next-line:max-line-length
 import { ActivationAccountService } from '../../services/activation-account.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -12,11 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ActivationAccountComponent implements OnInit {
 
-  // 显示隐藏按钮的值
-  public btnValue = 'show';
-  // 显示隐藏按钮的类型
-  public btnType = 'password';
-
+  public btnValue = 'show'; // 显示隐藏按钮的值
+  public btnType = 'password';  // 显示隐藏按钮的类型
   // 获取url的verify_code和type值
   // tslint:disable-next-line:member-ordering
   private verifyCode = this.route.snapshot.queryParams['verify_code'] || '';
@@ -25,9 +20,7 @@ export class ActivationAccountComponent implements OnInit {
 
   // 自定义密码与确认密码校验
   passwordValidator(group: FormGroup): any {
-    // tslint:disable-next-line:max-line-length
     const password: FormControl = group.get('password') as FormControl;
-    // tslint:disable-next-line:max-line-length
     const checkPassword: FormControl = group.get('checkPassword') as FormControl;
     const valid: boolean = (password.value === checkPassword.value);
     return valid ? null : { equal: { errorInfo: 'true' } };
@@ -105,7 +98,6 @@ export class ActivationAccountComponent implements OnInit {
     }
   }
 
-
   // 密码框显示隐藏按钮方法
   public check() {
     // 判断按钮是否为显示或隐藏进行密码显示隐藏
@@ -117,7 +109,4 @@ export class ActivationAccountComponent implements OnInit {
       this.btnType = 'password';
     }
   }
-
-
-
 }

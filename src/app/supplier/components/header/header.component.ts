@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
-
 import { SubheaderService } from '../../services';
 
 const GET_PROFILE_PATH = '/account/get_profile';
@@ -11,6 +10,7 @@ const GET_PROFILE_PATH = '/account/get_profile';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent implements OnInit {
   @ViewChild('subheader', { read: ViewContainerRef })
   private _subheaderContainer: ViewContainerRef;
@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
     private _router: Router,
     private _http: HttpClient,
     public translate: TranslateService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this._http.get(GET_PROFILE_PATH).subscribe(
@@ -42,7 +42,6 @@ export class HeaderComponent implements OnInit {
   }
 
   public logout() {
-
     //清空页面缓存
     localStorage.removeItem('access_token');
     localStorage.removeItem('expire_time');
@@ -51,8 +50,6 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('user_name');
     localStorage.removeItem('user_profile');
-
     this._router.navigate(['/supplier', 'signin']);
   }
-
 }

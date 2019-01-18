@@ -1,7 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { SubheaderService } from '../../services';
 
-
 @Component({
   selector: 'eb-market',
   templateUrl: './market.page.html',
@@ -9,7 +8,7 @@ import { SubheaderService } from '../../services';
 })
 export class MarketPage implements OnDestroy {
 
-  constructor(private _subheader: SubheaderService) {}
+  constructor(private _subheader: SubheaderService) { }
 
   ngOnDestroy() {
     this._subheader.dispose();

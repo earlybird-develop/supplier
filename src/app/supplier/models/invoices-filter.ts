@@ -3,7 +3,6 @@ import { Alias, Model } from 'tsmodels';
 export class InvoicesFilter extends Model {
   public included = false;
   public excluded = false;
-
   public clearingYes = false;
   public clearingNo = false;
 

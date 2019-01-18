@@ -71,24 +71,23 @@ export class InvoiceFilterPipe implements PipeTransform {
             break;
           case 2:
             temReturnValue = temReturnValue.concat(returnValue.filter(function (e) {
-              return   Number(e['invoiceAmount']) <= 50000 && Number(e['invoiceAmount']) >25000;
+              return Number(e['invoiceAmount']) <= 50000 && Number(e['invoiceAmount']) > 25000;
             }));
             break;
           case 3:
             temReturnValue = temReturnValue.concat(returnValue.filter(function (e) {
-              return  Number(e['invoiceAmount']) <= 75000 && Number(e['invoiceAmount']) >50000;
+              return Number(e['invoiceAmount']) <= 75000 && Number(e['invoiceAmount']) > 50000;
             }));
             break;
           case 4:
             temReturnValue = temReturnValue.concat(returnValue.filter(function (e) {
-              return  Number(e['invoiceAmount']) > 75000 ;
+              return Number(e['invoiceAmount']) > 75000;
             }));
             break;
         }
       }
-      returnValue=temReturnValue;
+      returnValue = temReturnValue;
     }
-    // console.log(items.length + " " + returnValue.length);
     return returnValue;
   }
 

@@ -16,12 +16,10 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class AccessTokenInterceptor implements HttpInterceptor {
 
-  constructor(private _router: Router) {}
+  constructor(private _router: Router) { }
 
   public intercept(request: HttpRequest<any>, next: HttpHandler)
-  : Observable<HttpEvent<any>> {
-
-
+    : Observable<HttpEvent<any>> {
     request = request.clone({
       url: '/rest' + request.url,
       setParams: {
@@ -29,9 +27,6 @@ export class AccessTokenInterceptor implements HttpInterceptor {
         'openid': localStorage.getItem('openid')
       }
     });
-
-
-
     return next.handle(request)
       .do(null, (err: any) => {
         if (err instanceof HttpErrorResponse) {

@@ -1,16 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-
 import { Market, Invoice, InvoicesFilter } from '../models';
-
-
+import { AESService } from './aes.service'
 const MARKETS_PATH = '/market/get_market_list';
 const MARKET_STAT_PATH = '/invoice/get_market_stat';
 const MARKET_PARTICIPATION_PATH = '/market/set_participation';
-
 const INVOICES_ELIGIBLE_PATH = '/invoice/get_invoices_with_eligible';
 const INVOICES_INELIGIBLE_PATH = '/invoice/get_invoices_with_ineligible';
 const INVOICES_ADJUST_PATH = '/invoice/get_invoices_with_adjust';
@@ -31,17 +27,15 @@ export enum InvoiceType {
 export class MarketsService {
   public totalAmount = 0;
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private aesService: AESService) { }
 
   public getList(): Observable<Market[]> {
     return Observable.create((observer: Observer<Market[]>) => {
-
       this._http
         .get(MARKETS_PATH)
         .subscribe(
           response => {
             observer.next(response['data']['list'].map(x => new Market(x)));
-            // observer.complete();
           },
           error => observer.error(error)
         );
@@ -55,7 +49,6 @@ export class MarketsService {
         .get(MARKET_STAT_PATH, { params: params })
         .subscribe(
           response => {
-
             observer.next(new Market(response['data']));
             observer.complete();
           },
@@ -63,6 +56,7 @@ export class MarketsService {
         );
     });
   }
+
   public getAllInvoices(id: string, filter: InvoicesFilter): Observable<Invoice[]> {
     let params = new HttpParams().set('buyer_id', id);
     return Observable.create((observer: Observer<Invoice[]>) => {
@@ -79,12 +73,13 @@ export class MarketsService {
         );
     });
   }
+
   public getInvoices(id: string, filter: InvoicesFilter, type: InvoiceType)
     : Observable<Invoice[]> {
     const sFilter = filter._toJSON();
     let url = '';
     let params = new HttpParams().set('buyer_id', id);
-      sFilter['is_included']=sFilter['is_clearing']= 0;
+    sFilter['is_included'] = sFilter['is_clearing'] = 0;
     switch (type) {
       case (InvoiceType.Eligible): url = INVOICES_ELIGIBLE_PATH; break;
       case (InvoiceType.Ineligible): url = INVOICES_INELIGIBLE_PATH; break;
@@ -113,14 +108,12 @@ export class MarketsService {
 
   public setInvoicesInclude(invoicesIds: string[], id: string, isInc = true)
     : Observable<any> {
-
     const params = new HttpParams().set('buyer_id', id);
-
     const data = { data: invoicesIds, is_included: isInc ? 1 : -1 };
-
+    var encryptData = this.aesService.encrypt(data);
     return Observable.create((observer: Observer<any>) => {
       this._http
-        .post(SET_INVOICES_INCLUDED_PATH, data, { params })
+        .post(SET_INVOICES_INCLUDED_PATH, encryptData, { params })
         .subscribe(
           resp => {
             observer.next(true);
@@ -133,17 +126,16 @@ export class MarketsService {
 
   public setOfferApr(id: string, minPayment: number, apr: number)
     : Observable<Market> {
-    // const data = { async: true, data: { min_payment: minPayment, apr: apr }};
     const data = {
       offer_type: 'apr',
       offer_value: apr,
       min_payment: minPayment
     };
     const params = new HttpParams().set('buyer_id', id);
-
+    var encryptData = this.aesService.encrypt(data);
     return Observable.create((observer: Observer<any>) => {
       this._http
-        .post(SET_OFFER_APR_PATH, data, { params: params })
+        .post(SET_OFFER_APR_PATH, encryptData, { params: params })
         .subscribe(
           resp => {
             observer.next(resp);
@@ -161,18 +153,16 @@ export class MarketsService {
     buyerId: string
   )
     : Observable<Market> {
-
     const data = {
       offer_type: offerType,
       offer_value: offerValue,
       min_payment: minPayment
     };
-
     const params = new HttpParams().set('buyer_id', buyerId);
-
+    var encryptData = this.aesService.encrypt(data);
     return Observable.create((observer: Observer<any>) => {
       this._http
-        .post(SET_OFFER_APR_PATH, data, { params })
+        .post(SET_OFFER_APR_PATH, encryptData, { params })
         .subscribe(
           response => {
             observer.next(response);
@@ -183,7 +173,6 @@ export class MarketsService {
           }
         );
     });
-
   }
 
   public setParticipation(marketId: string, isParticipation: boolean)
@@ -192,10 +181,10 @@ export class MarketsService {
       buyers: [marketId],
       is_participation: isParticipation ? 1 : 0
     };
-
+    var encryptData = this.aesService.encrypt(data);
     return Observable.create((observer: Observer<boolean>) => {
       this._http
-        .post(MARKET_PARTICIPATION_PATH, data)
+        .post(MARKET_PARTICIPATION_PATH, encryptData)
         .subscribe(
           () => {
             observer.next(true);
@@ -207,15 +196,12 @@ export class MarketsService {
   }
 
   // 根据hashtime判断是否取值
-  // tslint:disable-next-line:max-line-length
   public getHashList(cashpool_code: string[]): Observable<any> {
-
     const data = { 'cashpool_code': cashpool_code };
-
+    var encryptData = this.aesService.encrypt(data);
     return Observable.create((observer: Observer<any>) => {
-
       this._http
-        .post(GET_MARKET_HASH_PATH, data)
+        .post(GET_MARKET_HASH_PATH, encryptData)
         .subscribe(
           resp => {
             observer.next(resp);

@@ -37,29 +37,21 @@ export class Market extends Model {
   @Alias('buyer_status') public marketStatus: number;
   @Alias('currency_sign') public currencySign: string;
   @Alias('is_participation') public isParticipation: number;
-
   @Alias('offer_value') public offerApr: number;
   @Alias('avg_dpe') public DPE: number;
-
   @Alias('next_paydate') public nextPaydate: string;
   @Alias('min_payment') public minPayment: number;
   @Alias('offer_status') public offerStatus: number;
-
   @Alias('total_amount') public totalAmount: number;
   @Alias('avaibale_amount') public availableAmount: number;
   @Alias('clearing_amount') public clearingAmount: number;
   @Alias('noclearing_amount') public noclearingAmount: number;
-
-  // Deep relations
   @Alias('total', MarketTotal) public total: MarketTotal;
   @Alias('clearing', MarketClearing) public clearing: MarketClearing;
-  // tslint:disable-next-line:max-line-length
   @Alias('nonclearing', MarketNonClearing) public nonClearing: MarketNonClearing;
-
 
   constructor(data?) {
     super();
-
     if (data) {
       this._convertDiscount(data['discount']);
       this._fromJSON(data);
@@ -74,14 +66,11 @@ export class Market extends Model {
 
   public _fromJSON(data) {
     super._fromJSON(data);
-
     if (!this.isObject(data.total)) {
       return;
     }
-
     this.clearingPercentage =
       (this.clearing.availableAmount / this.total.availableAmount) * 100;
-
     this.clearingPercentage = +this.clearingPercentage.toFixed(2);
   }
 

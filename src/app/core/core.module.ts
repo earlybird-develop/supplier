@@ -1,20 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { TranslateModule } from '@ngx-translate/core';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { ScrollToModule } from 'ng2-scroll-to';
-
 import { SharedModule } from '../shared/shared.module';
 import { CoreRoutingModule } from './core-routing.module';
 import { HomePage, SidesPage } from './pages';
-
-import {
-  HeroComponent,
-  HeaderComponent,
-  EbcfComponent
-} from './components';
+import {HeroComponent,HeaderComponent,EbcfComponent} from './components';
 import { FreeAccountComponent } from './components/free-account/free-account.component';
 import { WhyComponent } from './components/why/why.component';
 import { SidesComponent } from './components/sides/sides.component';

@@ -1,13 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-
-
-import {
-  AccountService
-} from '../../services';
-
+import { AccountService } from '../../services';
 
 @Component({
   selector: 'eb-signin',
@@ -15,16 +10,9 @@ import {
   styleUrls: ['./signin.page.scss']
 })
 export class SigninPage {
+  constructor(private router: Router, private _accountService: AccountService, private _toastr: ToastrService) { }
 
-  constructor(private router: Router,
-              private _accountService: AccountService,
-              private _toastr: ToastrService) {
-
-  }
-
-  // tslint:disable-next-line:use-life-cycle-interface
-  ngOnInit () {
-  }
+  ngOnInit() { }
 
   public login(form: NgForm): void {
     this._accountService

@@ -15,7 +15,6 @@ export class Invoice extends Model {
 
   constructor(data?) {
     super();
-
     if (data) {
       this._fromJSON(data);
     }
@@ -26,9 +25,9 @@ export class Invoice extends Model {
   }
 
   public isIncludedClass(): string {
-    if( this.included == 1){
+    if (this.included == 1) {
       return 'included';
-    }else{
+    } else {
       return 'noincluded';
     }
   }

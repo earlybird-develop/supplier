@@ -1,12 +1,8 @@
-import { Component,  OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-
-import {
-  ISelectOption
-} from '../../../shared/custom-select/custom-select.component';
-
+import { ISelectOption } from '../../../shared/custom-select/custom-select.component';
 import { EnquiryService } from '../../../supplier/services';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -15,61 +11,56 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './enquiry.page.html',
   styleUrls: ['./enquiry.page.scss']
 })
-export class EnquiryComponent implements OnInit  {
-    constructor(private router: Router,
-        private _enquiryService: EnquiryService,
-        private _toastr: ToastrService,
-        private translate: TranslateService) {
+export class EnquiryComponent implements OnInit {
+  constructor(private router: Router,
+    private _enquiryService: EnquiryService,
+    private _toastr: ToastrService,
+    private translate: TranslateService) {
+  }
 
-    }
+  private isObject(item): boolean {
+    return Object.prototype.toString.call(item) === '[object Object]';
+  }
 
-    private isObject(item): boolean {
-        return Object.prototype.toString.call(item) === '[object Object]';
-    }
+  ngOnInit() {
+    this._enquiryService
+      .get_dropdown()
+      .subscribe(
+        dropdown => {
+          let option: ISelectOption;
+          if (dropdown.hasOwnProperty('role')) {
+            for (const val of dropdown['role']) {
+              option = {
+                id: val['id'],
+                value: val['value']
+              };
+              this.roles.push(option);
+            }
+          }
 
-    ngOnInit() {
+          if (dropdown.hasOwnProperty('region')) {
+            for (const val of dropdown['region']) {
+              option = {
+                id: val['id'],
+                value: val['value']
+              };
+              this.regions.push(option);
+            }
+          }
 
-        this._enquiryService
-        .get_dropdown()
-        .subscribe(
-            dropdown => {
-
-                let option: ISelectOption;
-                if ( dropdown.hasOwnProperty('role') ) {
-                    for (const val of dropdown['role'] ) {
-                        option = {
-                            id: val['id'],
-                            value: val['value']
-                        };
-                        this.roles.push(option);
-                    }
-                }
-
-                if ( dropdown.hasOwnProperty('region')  ) {
-                    for (const val of dropdown['region'] ) {
-                        option = {
-                            id: val['id'],
-                            value: val['value']
-                        };
-                        this.regions.push (option);
-                    }
-                }
-
-                if ( dropdown.hasOwnProperty('interest')  ) {
-                    for (const val of dropdown['interest'] ) {
-                        option = {
-                            id: val['id'],
-                            value: val['value']
-                        };
-                        this.interests.push (option);
-                    }
-                }
-            },
-            error => console.error(error)
-
-        );
-    }
-
+          if (dropdown.hasOwnProperty('interest')) {
+            for (const val of dropdown['interest']) {
+              option = {
+                id: val['id'],
+                value: val['value']
+              };
+              this.interests.push(option);
+            }
+          }
+        },
+        error => console.error(error)
+      );
+  }
   // tslint:disable-next-line:member-ordering
   public roles: ISelectOption[] = [];
 
@@ -107,7 +98,6 @@ export class EnquiryComponent implements OnInit  {
   // tslint:disable-next-line:member-ordering
   public interestsValid = true;
 
-
   // 邮箱有效验证
   // tslint:disable-next-line:member-ordering
   public emailValid = true;
@@ -117,7 +107,6 @@ export class EnquiryComponent implements OnInit  {
   onEmail(form: NgForm) {
     if (form) {
       this.emailCheck = form.form.get('email').valid;
-
       // 判断为邮箱
       // tslint:disable-next-line:max-line-length
       const myreg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
@@ -125,15 +114,12 @@ export class EnquiryComponent implements OnInit  {
       valid ? this.emailCheck = true : this.emailCheck = false;
     }
   }
-
   // 电话验证
   // tslint:disable-next-line:member-ordering
   public phoneValid = true;
-
   onPhone(form: NgForm) {
     if (form) {
       this.phoneValid = form.form.get('phonenumber').valid;
-
       // 判断为手机
       const myreg = /(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}/;
       const valid = myreg.test(form.value['phonenumber']);
@@ -142,7 +128,6 @@ export class EnquiryComponent implements OnInit  {
   }
 
   public make(form: NgForm): void {
-
     // 选择角色验证提示
     if (this.roleType) {
       form.value['role'] = this.roleType.value;
@@ -150,7 +135,6 @@ export class EnquiryComponent implements OnInit  {
     } else {
       this.roleValid = false;
     }
-
     // 联系电话验证提示
     if (this.regionType) {
       this.regionValid = true;
@@ -158,7 +142,6 @@ export class EnquiryComponent implements OnInit  {
     } else {
       this.regionValid = false;
     }
-
     // 兴趣验证提示
     if (this.interestType) {
       this.interestsValid = true;
@@ -166,35 +149,30 @@ export class EnquiryComponent implements OnInit  {
     } else {
       this.interestsValid = false;
     }
-
     // 名字有效验证提示
     if (form.value['lastname']) {
       this.lastNameValid = true;
     } else {
       this.lastNameValid = false;
     }
-
     // 姓名有效验证提示
     if (form.value['firstname']) {
       this.firstNameValid = true;
     } else {
       this.firstNameValid = false;
     }
-
     // 公司有效验证提示
     if (form.value['company']) {
       this.companyValid = true;
     } else {
       this.companyValid = false;
     }
-
     // 邮箱有效验证
     if (form.value['email']) {
       this.emailValid = true;
     } else {
       this.emailValid = false;
     }
-
     // 判断必填项是否错误在决定传值
     // tslint:disable-next-line:max-line-length
     if (this.lastNameValid && this.firstNameValid && this.companyValid && this.emailValid && this.interestType && this.roleType && this.regionType && this.phoneValid && this.emailCheck) {
@@ -207,7 +185,7 @@ export class EnquiryComponent implements OnInit  {
             }),
           () => this._toastr.error('Make Error')
         );
-        // console.log(form.value);
+      // console.log(form.value);
     }
   }
 }

@@ -1,7 +1,4 @@
-import {
-  Component, OnInit, OnDestroy, Inject, Renderer2
-} from '@angular/core';
-
+import { Component, OnInit, OnDestroy, Inject, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -12,7 +9,7 @@ import { DOCUMENT } from '@angular/common';
 export class AccountPage implements OnInit, OnDestroy {
 
   constructor(@Inject(DOCUMENT) private _document: Document,
-              private _renderer: Renderer2) { }
+    private _renderer: Renderer2) { }
 
   ngOnInit() {
     this._renderer.addClass(this._document.body, 'grey');
