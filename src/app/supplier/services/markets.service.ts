@@ -3,7 +3,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { Market, Invoice, InvoicesFilter } from '../models';
-import { AESService } from './aes.service'
 const MARKETS_PATH = '/market/get_market_list';
 const MARKET_STAT_PATH = '/invoice/get_market_stat';
 const MARKET_PARTICIPATION_PATH = '/market/set_participation';
@@ -27,7 +26,7 @@ export enum InvoiceType {
 export class MarketsService {
   public totalAmount = 0;
 
-  constructor(private _http: HttpClient, private aesService: AESService) { }
+  constructor(private _http: HttpClient) { }
 
   public getList(): Observable<Market[]> {
     return Observable.create((observer: Observer<Market[]>) => {
@@ -110,10 +109,9 @@ export class MarketsService {
     : Observable<any> {
     const params = new HttpParams().set('buyer_id', id);
     const data = { data: invoicesIds, is_included: isInc ? 1 : -1 };
-    var encryptData = this.aesService.encrypt(data);
     return Observable.create((observer: Observer<any>) => {
       this._http
-        .post(SET_INVOICES_INCLUDED_PATH, encryptData, { params })
+        .post(SET_INVOICES_INCLUDED_PATH, data, { params })
         .subscribe(
           resp => {
             observer.next(true);
@@ -132,10 +130,9 @@ export class MarketsService {
       min_payment: minPayment
     };
     const params = new HttpParams().set('buyer_id', id);
-    var encryptData = this.aesService.encrypt(data);
     return Observable.create((observer: Observer<any>) => {
       this._http
-        .post(SET_OFFER_APR_PATH, encryptData, { params: params })
+        .post(SET_OFFER_APR_PATH, data, { params: params })
         .subscribe(
           resp => {
             observer.next(resp);
@@ -159,10 +156,9 @@ export class MarketsService {
       min_payment: minPayment
     };
     const params = new HttpParams().set('buyer_id', buyerId);
-    var encryptData = this.aesService.encrypt(data);
     return Observable.create((observer: Observer<any>) => {
       this._http
-        .post(SET_OFFER_APR_PATH, encryptData, { params })
+        .post(SET_OFFER_APR_PATH, data, { params })
         .subscribe(
           response => {
             observer.next(response);
@@ -181,10 +177,9 @@ export class MarketsService {
       buyers: [marketId],
       is_participation: isParticipation ? 1 : 0
     };
-    var encryptData = this.aesService.encrypt(data);
     return Observable.create((observer: Observer<boolean>) => {
       this._http
-        .post(MARKET_PARTICIPATION_PATH, encryptData)
+        .post(MARKET_PARTICIPATION_PATH, data)
         .subscribe(
           () => {
             observer.next(true);
@@ -198,10 +193,9 @@ export class MarketsService {
   // 根据hashtime判断是否取值
   public getHashList(cashpool_code: string[]): Observable<any> {
     const data = { 'cashpool_code': cashpool_code };
-    var encryptData = this.aesService.encrypt(data);
     return Observable.create((observer: Observer<any>) => {
       this._http
-        .post(GET_MARKET_HASH_PATH, encryptData)
+        .post(GET_MARKET_HASH_PATH, data)
         .subscribe(
           resp => {
             observer.next(resp);

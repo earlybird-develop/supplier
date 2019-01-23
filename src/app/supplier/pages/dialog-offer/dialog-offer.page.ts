@@ -19,12 +19,13 @@ export class DialogOffer implements OnInit {
   public payDate: string;// 下一个付款日期
   public checkedClick = false;// 判断不在显示信息单选框是否被选择
   public market: Market = new Market();
+  public call: any;
+  public cancel: any;
   constructor(
     public bsModalRef: BsModalRef,
     private _timer: TimerService,
     public marketsService: MarketsService
   ) { }
-
   ngOnChanges() { }
 
   ngOnInit() {
@@ -78,6 +79,13 @@ export class DialogOffer implements OnInit {
     if (this.checkedClick === true) {
       localStorage.setItem('notOfferBox', 'true');
     }
+    this.call();
     this.bsModalRef.hide();
   }
+
+  public doCancel() {
+    this.cancel();
+    this.bsModalRef.hide();
+  }
+
 }

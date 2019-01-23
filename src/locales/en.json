@@ -31,23 +31,26 @@
     "components": {
       "ebcf": {
         "title": "\"Early Bird\" is such a platform that makes the buyers and sellers better cooperation",
-        "text1": "Through the platform will be early payment program into both sides can benefit<br>the behavior.",
-        "subtitle": "EBCF makes it easier for You",
-        "text2": "The buyer only needs to simply present the original payment plan<br>on the platform and the amount and time of the early payment, and the seller provides the<br>acceptable rate for the corresponding invoice for cash.<br>By the platform for everyone to calculate the income<br>and connection matching. It is so simple.",
-        "collaborate": "Collaborate",
+        "text1": "Looking for a better rate of return for your short-term cash with no incremental risk?",
+        "subtitle": "EBCF makes it easy for you.",
+        "text2": "EBCF is true dynamic discounting and truly unique. <br>Our unique marketplace approach empowers suppliers to offer their customers a discount they choose,<br> in exchange for early payment, on demand.<br>Suppliers take control of cash flow while their customers earn a no-risk return on short-term cash,<br> and improve their bottom line and supply chain health.",
+        "collaborate": "BUYER",
         "collaborate-desc": "With our platform, buyer and seller<br>copoeration benefit the behavior.",
-        "optimize": "Optimize",
+        "optimize": "SUPPLIERS",
         "optimize-desc": "This platform calculate the income<br>and connection matching.",
-        "sky": "./assets/sky.svg"
+        "sky": "./assets/sky.svg",
+        "arrows-left":"Set their unqiue expect return",
+        "arrows-right":"Set their unique target early payment rate",
+        "text3":"DYNAMIC WORKING CAPITAL MARKETPLACE"
       },
       "faq": {
         "title": "Here’s a few answers to our most common questions",
         "number1": "1",
         "number2": "2",
         "number3": "3",
-        "question1": "Is this EP-FO platform free ?",
+        "question1": "Is this EBCF platform free ?",
         "answer1": "It’s completely free to users, no matter for buyer or supplier.",
-        "question2": "Is it risky for working capital on EP-FO platform?",
+        "question2": "Is it risky for working capital on EBCF platform?",
         "answer2": "It’s completely risk-free. On approved invoices, both sides of user don’t need to change any bank information.",
         "question3": "Does buyer or supplier need to do any change on ERP/SAP ?",
         "answer3": "None",
@@ -62,11 +65,12 @@
           "terms": "Terms of service",
           "contact": "Contact Us"
         },
+        "privacy": "Privacy",
         "copy": "Copyright",
         "copy_website": "Early Bird Invoice Manage Ltd. All rights reserved."
       },
       "free-account": {
-        "content": "If you’re ready to improve your cash flow <br> and spend more time developing your business opportunity",
+        "content": "If you’re ready to improve your cash return whilst strength your supply chain.",
         "btn": "CREATE MY FREE ACCOUNT"
       },
       "header": {
@@ -78,8 +82,8 @@
         "lets-start": "Contact us"
       },
       "hero": {
-        "slogan": "Untying working capital and creating more business opportunities",
-        "explain": "Early bird gold platform helps customers control cash flow and improve risk-free returns",
+        "slogan": "Liberate working capital and creating more business opportunities",
+        "explain": "Early Bird Cash Flow platform helps customers control cash flow and improve risk-free returns",
         "btn-text": "JOIN WITH EARLY PAY"
       },
       "sides": {
@@ -95,7 +99,7 @@
           "opt1": "Improve cash flow",
           "opt2": "Access cash on demand",
           "opt3": "No financial risk or bank credit approval",
-          "opt4": "Simply click"
+          "opt4": "Simply use"
         },
         "lean-more": "learn more"
       },
@@ -104,7 +108,7 @@
         "buyer-title": "BUYERS",
         "buyer-desc": "Generate higher returns on cash<br> &nbsp;",
         "supplier-title": "SUPPLIERS",
-        "supplier-desc": "No financial risk <br> or bank credit approval"
+        "supplier-desc": "Cash flow on demand"
       }
     }
   },
@@ -283,7 +287,9 @@
           "fixed-inline": "You are setting a fixed line amount at {{paymentValue}}, you can set the line according to your need. But be awared a higher fixed line may decrease your chance to win more early payment amount.",
           "are-you-sure-to-proceed": "Are you sure to proceed ?",
           "submit": "Submit",
-          "back": "Back"
+          "back": "Back",
+          "selection1":"Fixed Line",
+          "selection2":"Minimum Invoice Amount"
         },
         "set": "Set",
         "apr": "APR"

@@ -4,8 +4,8 @@
         <div class="form-group row main-min-pay">
             <div class="col-md-7">
                 <select class="form-control" (click)="onSelectValue($event)">
-                    <option value="1" [selected]="marketValue.showFixedLine == true">Fixed Line</option>
-                    <option value="2" [selected]="marketValue.showFixedLine == false">Minimum Invoice Amount</option>
+                    <option value="1" [selected]="marketValue.showFixedLine == true">{{'supplier.pages.markets.minimum-pay-amount-popup.selection1' | translate}}</option>
+                    <option value="2" [selected]="marketValue.showFixedLine == false">{{'supplier.pages.markets.minimum-pay-amount-popup.selection2' | translate}}</option>
                 </select>
             </div>
             <div class="edit col-md-4" *ngIf="marketValue.showFixedLine">

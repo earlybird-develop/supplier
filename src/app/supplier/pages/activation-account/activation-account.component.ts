@@ -13,9 +13,7 @@ export class ActivationAccountComponent implements OnInit {
   public btnValue = 'show'; // 显示隐藏按钮的值
   public btnType = 'password';  // 显示隐藏按钮的类型
   // 获取url的verify_code和type值
-  // tslint:disable-next-line:member-ordering
   private verifyCode = this.route.snapshot.queryParams['verify_code'] || '';
-  // tslint:disable-next-line:member-ordering
   private urlType = this.route.snapshot.queryParams['type'] || '';
 
   // 自定义密码与确认密码校验
@@ -57,12 +55,9 @@ export class ActivationAccountComponent implements OnInit {
     const valid = onlySpecial.test(control.value);
     return valid ? { onlySpecial: { special: 'true' } } : null;
   }
-
   // 定义表单属性名称
-  // tslint:disable-next-line:member-ordering
   formModel: FormGroup;
 
-  // tslint:disable-next-line:max-line-length
   constructor(fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -71,7 +66,6 @@ export class ActivationAccountComponent implements OnInit {
     this.formModel = fb.group({
       passwordInfo: fb.group({
         // 设置密码和确认密码值为空，校验条件为必填和最少长度为8
-        // tslint:disable-next-line:max-line-length
         password: ['', [Validators.required, Validators.minLength(8), this.leastOneNum, this.leastOneLeter, this.leastOneCapital, this.SpecialCharacter]],
         checkPassword: ['', [Validators.required, Validators.minLength(8)]]
       }, { validator: this.passwordValidator })

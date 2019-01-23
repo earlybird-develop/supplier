@@ -34,11 +34,14 @@
         "text1": "一个将提早支付账款的行为变成买卖双方都能获益的平台",
         "subtitle": "早鸟金流让您的操作简单高效",
         "text2": "买家只需要在平台上提出可提早支付的金额时间和期望，<br>供应商为对应的发票提供可接受的利率，<br>由平台为大家计算收益并进行连接匹配，<br>就是如此的简单。",
-        "collaborate": "合作",
-        "collaborate-desc": "买卖双方基于平台规则创造共同价值",
-        "optimize": "最大化",
-        "optimize-desc": "平台算法为买卖双方连接匹配最大化收益",
-        "sky": "./assets/sky.png"
+        "collaborate": "买家",
+        "collaborate-desc": "您的生意可提供现金",
+        "text3":"算法优化撮合",
+        "optimize": "供应商",
+        "optimize-desc": "您的生意需要现金",
+        "sky": "./assets/sky.png",
+        "arrows-left":"設置专属的期望成本",
+        "arrows-right":"設置专属的期望回報"
       },
       "faq": {
         "title": "以下是我们最常见的问题的一些答案",
@@ -62,6 +65,7 @@
           "terms": "服务协议",
           "contact": "联系我们"
         },
+        "privacy":"隐私条例",
         "copy": "版权所有",
         "copy_website": "早鸟企业发票管理系统."
       },
@@ -275,6 +279,18 @@
         "waiting-status": "市场目前为等待状态，您不能修改该字段",
         "turn-on": "打开参与开关进入市场",
         "offer-processing": "正在处理的发票总值",
+        "minimum-pay-amount-popup": {
+          "minimum-pay-amount": "最小起付钱金额设置",
+          "set": "设置",
+          "cancel": "取消",
+          "minimum-invoice": "You are choosing minimum invoice amount, it means you agree to clear every eligible invoice.",
+          "fixed-inline": "You are setting a fixed line amount at {{paymentValue}}, you can set the line according to your need. But be awared a higher fixed line may decrease your chance to win more early payment amount.",
+          "are-you-sure-to-proceed": "确定执行?",
+          "submit": "提交",
+          "back": "返回",
+          "selection1":"Fixed Line 中文",
+          "selection2":"Minimum Invoice Amount 中文"
+        },
         "set": "开价",
         "apr": "年化率"
       },

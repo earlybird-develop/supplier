@@ -61,61 +61,32 @@ export class EnquiryComponent implements OnInit {
         error => console.error(error)
       );
   }
-  // tslint:disable-next-line:member-ordering
+
   public roles: ISelectOption[] = [];
-
-  // tslint:disable-next-line:member-ordering
   public regions: ISelectOption[] = [];
-
-  // tslint:disable-next-line:member-ordering
   public interests: ISelectOption[] = [];
-
-  // tslint:disable-next-line:member-ordering
   public roleType = this.roles[0];
-  // tslint:disable-next-line:member-ordering
   public regionType = this.regions[0];
-  // tslint:disable-next-line:member-ordering
   public interestType = this.interests[0];
-
-  // 姓名有效验证
-  // tslint:disable-next-line:member-ordering
-  public lastNameValid = true;
-
-  // 名字有效验证
-  // tslint:disable-next-line:member-ordering
-  public firstNameValid = true;
-
-  // 公司有效验证
-  // tslint:disable-next-line:member-ordering
-  public companyValid = true;
-
-  // tslint:disable-next-line:member-ordering
+  public lastNameValid = true; // 姓名有效验证
+  public firstNameValid = true;  // 名字有效验证
+  public companyValid = true;// 公司有效验证
   public roleValid = true;
-
-  // tslint:disable-next-line:member-ordering
   public regionValid = true;
-
-  // tslint:disable-next-line:member-ordering
   public interestsValid = true;
-
-  // 邮箱有效验证
-  // tslint:disable-next-line:member-ordering
-  public emailValid = true;
-  // tslint:disable-next-line:member-ordering
+  public emailValid = true;  // 邮箱有效验证
   public emailCheck = true;
 
   onEmail(form: NgForm) {
     if (form) {
       this.emailCheck = form.form.get('email').valid;
       // 判断为邮箱
-      // tslint:disable-next-line:max-line-length
       const myreg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
       const valid = myreg.test(form.value['email']);
       valid ? this.emailCheck = true : this.emailCheck = false;
     }
   }
   // 电话验证
-  // tslint:disable-next-line:member-ordering
   public phoneValid = true;
   onPhone(form: NgForm) {
     if (form) {
@@ -174,7 +145,6 @@ export class EnquiryComponent implements OnInit {
       this.emailValid = false;
     }
     // 判断必填项是否错误在决定传值
-    // tslint:disable-next-line:max-line-length
     if (this.lastNameValid && this.firstNameValid && this.companyValid && this.emailValid && this.interestType && this.roleType && this.regionType && this.phoneValid && this.emailCheck) {
       this._enquiryService
         .make(form.value)
@@ -185,7 +155,6 @@ export class EnquiryComponent implements OnInit {
             }),
           () => this._toastr.error('Make Error')
         );
-      // console.log(form.value);
     }
   }
 }

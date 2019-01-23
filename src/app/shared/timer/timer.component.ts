@@ -19,7 +19,7 @@ export class TimerComponent implements OnInit {
   constructor(private _timer: TimerService) {
   }
 
-  // tslint:disable-next-line:use-life-cycle-interface
+  // :disable-next-line:use-life-cycle-interface
   ngOnChanges() {
   }
 
@@ -55,9 +55,6 @@ export class TimerComponent implements OnInit {
       this.hours = Math.floor(this._value / 3600);
       this.minutes = Math.floor((this._value - this.hours * 3600) / 60);
       this.seconds = this._value - this.minutes * 60 - this.hours * 3600;
-      // tslint:disable-next-line:max-line-length
-      // this.timeArr = { hour: this.hours, minute: this.minutes, second: this.seconds };
-      // this.timeNum.emit(this.timeArr);
     } else {
       if (!this.isClosed) {
         this.isClosed = true;

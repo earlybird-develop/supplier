@@ -15,6 +15,7 @@ import { DialogOffer } from '../../supplier/pages/dialog-offer/dialog-offer.page
       useExisting: forwardRef(() => InlineEditComponent),
       multi: true
     }
+
   ]
 })
 export class InlineEditComponent implements ControlValueAccessor {
@@ -23,25 +24,24 @@ export class InlineEditComponent implements ControlValueAccessor {
   public newValue: number;
   public black = false;
   public buyId: string;  // url的buyerId
-
+  public submitToService = false;
   @Input()
   public disabled = false;
 
   @Input()
   public placeholder = '';
 
-  // tslint:disable-next-line:no-output-rename
   @Output('change')
   public change: EventEmitter<number> = new EventEmitter();
 
   private _propagateChange: Function = () => null;
-  // tslint:disable-next-line:member-ordering
+
   public bsModalRef: BsModalRef;
 
-  // tslint:disable-next-line:max-line-length
   constructor(@Attribute('black') _black: string,
     private modalService: BsModalService,
-    private _route: ActivatedRoute) {
+    private _route: ActivatedRoute
+  ) {
     this.black = typeof _black === 'string';
     this.buyId = this._route.parent.snapshot.params.id;
   }
@@ -50,17 +50,16 @@ export class InlineEditComponent implements ControlValueAccessor {
     this._propagateChange(this.value);
     this.close();
 
-    const initialState = {
-      values: this.value,
-      buyId: this.buyId
-    };
-
     if (localStorage.getItem('notOffer') !== 'true') {
-      // tslint:disable-next-line:max-line-length
-      this.bsModalRef = this.modalService.show(DialogOffer, Object.assign({ initialState }, { class: 'dialog-offer', initialState }));
+      //  this.bsModalRef = this.modalService.show(DialogOffer, Object.assign({ initialState }, { class: 'dialog-offer', initialState }));
+      this.submitToService = false;
+    } else {
+      this.submitToService = true;
     }
   }
-
+  public checkLocalStorage(): boolean {
+    return  this.submitToService;
+  }
   public cancel(): void {
     this.value = this.newValue;
     this.close();

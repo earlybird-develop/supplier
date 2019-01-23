@@ -11,11 +11,14 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { DatePipe } from '@angular/common';
 import { DialogMarketOpen } from '../dialog-market-open/dialog-market-open.page';
+import { InlineEditComponent } from '../../../shared/inline-edit/inline-edit.component';
+import { DialogOffer } from '../dialog-offer/dialog-offer.page';
 
 @Component({
   selector: 'eb-market-invoices',
   templateUrl: './market-invoices.page.html',
-  styleUrls: ['./market-invoices.page.scss']
+  styleUrls: ['./market-invoices.page.scss'],
+  providers: [InlineEditComponent]
 })
 export class MarketInvoicesPage implements OnInit, OnDestroy {
   public marketId: string;
@@ -50,7 +53,8 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _toastr: ToastrService,
     private _subheader: SubheaderService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private inlineEdit: InlineEditComponent
   ) {
     this.marketId = this._route.parent.snapshot.params.id;
   }
@@ -87,7 +91,6 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
     this.marketsService.getHashList([this.marketId]).subscribe(
       resp => {
         if (resp.code === 1) {
-          // tslint:disable-next-line:max-line-length
           /*if (resp.data.length !== this.current_hash.length && this.current_hash.length > 0) {
               this.current_hash = [];
             }*/
@@ -283,15 +286,33 @@ export class MarketInvoicesPage implements OnInit, OnDestroy {
       this.loadingTime--;
     }, 1000);
     // 遮罩层打开
-    this.participationLoading = true;
-    // todo : This hack needs to be removed when api will work
+
+    if (this.inlineEdit.checkLocalStorage()) {
+      this.setOfferAprToService();
+    } else {
+      var ref = this;
+      const initialState = {
+        values: apr,
+        buyId: this.marketId,
+        call: function call() {
+          ref.setOfferAprToService();
+        },
+        cancel: function cancel() {
+          ref.ngOnInit();
+        }
+      };
+      this.bsModalRef = this.modalService.show(DialogOffer, Object.assign({ initialState }, { class: 'dialog-offer', initialState }));
+    }
     this.market.offerApr = apr;
+  }
+  public setOfferAprToService() {
+    this.participationLoading = true;
     this.market.offerStatus = 1;
     this.marketsService
-      .setOfferApr(this.market.id, this.market.minPayment, apr)
+      .setOfferApr(this.market.id, this.market.minPayment, this.market.offerApr)
       .subscribe(
-        () => {
-          this.market.offerApr = apr;
+        (response) => {
+          console.log(response);
           this.participationLoading = false;
         },
         error => {
