@@ -11,7 +11,6 @@ export class ActivationAccountService {
   constructor(private _http: HttpClient) { }
 
   public make(httpParams: Object): Observable<any> {
-
     const data = {
       newpassword: httpParams['passwordInfo'].password,
       confirmpassword: httpParams['passwordInfo'].checkPassword

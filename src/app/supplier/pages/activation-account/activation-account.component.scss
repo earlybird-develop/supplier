@@ -17,7 +17,7 @@
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     display: flex;
-    height: 394px;
+    height: 420px;
     margin: 0 auto;
     position: relative;
     width: 612px;
@@ -138,7 +138,16 @@
     margin-bottom: 20px;
     margin-top: 52px;
     display: flow-root;
-    
+    p{
+        font-size: 10px;
+    }
+     .privacy{
+         color: #24457C;
+     }
+     .checkbox{
+        vertical-align:bottom;
+        margin-top: 2px;
+     }
     .continue-btn{
         background-color: #589b3c;
         color: #fff !important;
@@ -148,6 +157,7 @@
         float: right;
         border: 0px;
         margin-top: 6px;
+        position:relative;
     }
     .back-to-login{
         background: white;
@@ -157,6 +167,7 @@
         font-size: 14px;
         float: right;
         margin-top: 5px;
+        position: relative;;
     }
     .back-to-login:hover{
         box-shadow: none;

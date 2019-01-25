@@ -14,7 +14,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { SupplierRoutingModule } from './supplier-routing.module';
 import { DialogMarketOpen } from './pages/dialog-market-open/dialog-market-open.page';
-import {DialogOffer} from './pages/dialog-offer/dialog-offer.page'
+import {DialogOffer} from './pages/dialog-offer/dialog-offer.page';
+import {PrivacyModal} from './pages/activation-account/privacy';
 import {
   WrapperPage,
   MarketsPage,
@@ -84,6 +85,7 @@ import { SharedModule } from '../shared/shared.module';
     MarketsHeaderComponent,
     MarketHeaderComponent,
     MinPayAmountModal,
+    PrivacyModal,
     ActivationAccountComponent,
     ResetPasswordComponent
   ],
@@ -101,6 +103,7 @@ import { SharedModule } from '../shared/shared.module';
     MarketsHeaderComponent,
     MarketHeaderComponent,
     MinPayAmountModal,
+    PrivacyModal,
     DialogMarketOpen,
     DialogOffer
   ]

@@ -17,7 +17,6 @@ export class EnquiryService {
                 .get(DROPDOWN_URL)
                 .subscribe(
                     resp => {
-                        console.log(resp);
                         observer.next(resp['data']);
                         observer.complete();
                     },

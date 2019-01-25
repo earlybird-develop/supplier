@@ -1,58 +1,62 @@
-<div class="container">
+<div class="container" id="container">
   <div class="right-side">
     <img src="./assets/logo.png" alt="Early Bird">
   </div>
   <div class="content">
     <div class="title">{{ 'supplier.pages.activation.title' | translate }}</div>
-    <form class="forgetpassword-form" [formGroup]="formModel" (ngSubmit)="onSubmit()">
-      <div class="form-group" formGroupName="passwordInfo">
+    <form class="forgetpassword-form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
         <label class="password" for="password">{{ 'supplier.pages.reset.password' | translate }}</label>
         <span class="red-color">*</span>
         <!-->img class="passwordImg" src="../../../../assets/password.svg"-->
-        <input id="password" type="{{ btnType }}" class="form-control" maxlength="15" formControlName="password">
+        <input id="password" (input)="passwordChecking($event.target.value)" type="{{ btnType }}" class="form-control" maxlength="15">
         <div class="showHidenBtn">
           <input type="button" class="showHidenBox" (click)="check()" value="{{ 'supplier.pages.reset.'+btnValue | translate }}">
         </div>
-        <div [hidden]="formModel.get('passwordInfo.password').valid || formModel.get('passwordInfo.password').untouched">
-          <div class="errorText" [hidden]="!formModel.hasError('onlySpecial','passwordInfo.password')">
+        <div [hidden]="passwordChecked">
+          <div class="errorText" [hidden]="passwordCheckedSymbol">
             <img class="errorImg" src="../../../../assets/error.svg">
             {{ 'supplier.pages.reset.check5' | translate }}
           </div>
-          <div class="errorText" [hidden]="!formModel.hasError('required','passwordInfo.password')">
+          <div class="errorText"  [hidden]="passwordCheckedLength">
             <img class="errorImg" src="../../../../assets/error.svg">
             {{ 'supplier.pages.reset.check1' | translate }}
           </div>
-          <div class="errorText" [hidden]="!formModel.hasError('onlyCapital','passwordInfo.password')">
+          <div class="errorText"  [hidden]="passwordCheckedUpperCase">
             <img class="errorImg" src="../../../../assets/error.svg">
             {{ 'supplier.pages.reset.check3' | translate }}
           </div>
-          <div class="errorText" [hidden]="!formModel.hasError('onlyLetter','passwordInfo.password')">
+          <div class="errorText"  [hidden]="passwordCheckedLowerCase">
             <img class="errorImg" src="../../../../assets/error.svg">
             {{ 'supplier.pages.reset.check4' | translate }}
           </div>
-          <div class="errorText" [hidden]="!formModel.hasError('onlyNum','passwordInfo.password')">
+          <div class="errorText"  [hidden]="passwordCheckedNumber">
             <img class="errorImg" src="../../../../assets/error.svg">
             {{ 'supplier.pages.reset.check2' | translate }}
-          </div>
-          <div class="errorText" [hidden]="!formModel.hasError('minlength','passwordInfo.password')">
-            <img class="errorImg" src="../../../../assets/error.svg">
-            {{ 'supplier.pages.reset.check1' | translate }}
           </div>
         </div>
         <label class="password" for="check">{{ 'supplier.pages.reset.check' | translate }}</label>
         <span class="red-color">*</span>
-        <input id="check-password" type="{{ btnType }}" class="form-control" maxlength="15" formControlName="checkPassword">
-        <div class="" [hidden]="formModel.get('passwordInfo.checkPassword').valid">
-          <div class="errorText" [hidden]="!formModel.hasError('equal','passwordInfo')">
-            <img class="errorImg" src="../../../../assets/error.svg">
+        <input id="check-password"  (input)="passwordMatching($event.target.value)" type="{{ btnType }}"  class="form-control" maxlength="15">
+        <div class="" [hidden]="passwordCheckedMatch">
+          <div class="errorText">
+            <img class="errorImg"  src="../../../../assets/error.svg">
             {{ 'supplier.pages.reset.check6' | translate }}
           </div>
         </div>
       </div>
       <div class="forgot">
-        <button type="submit" class="btn-primary continue-btn">{{ 'supplier.pages.forget.continue' | translate }}</button>
-        <button class="btn back-to-login" [routerLink]="['/supplier','signin']" href="javascript:void(0);">{{
-          'supplier.pages.forget.back-to-login' | translate }}</button>
+        <div class="col">
+          <div class="row">
+            <input type="checkbox" class="checkbox" mat-raised-button matTooltip="Info about the action"
+              matTooltipClass="example-tooltip-red" TooltipPosition='below' (change)="agreePrivacy($event.target.checked)">
+            <p>我已阅读并同意 <a class="privacy">EB-CF 隐私条款</a> &nbsp; </p>
+            <p><a class="privacy">EB-CF 用户条款</a></p>
+          </div>
+            <button type="submit" class="btn-primary continue-btn">{{ 'supplier.pages.forget.continue' | translate }}</button>
+            <button class="btn back-to-login" [routerLink]="['/supplier','signin']" >{{
+              'supplier.pages.forget.back-to-login' | translate }}</button>
+        </div>
       </div>
     </form>
   </div>

@@ -32,19 +32,26 @@ export class AccessTokenInterceptor implements HttpInterceptor {
     //     body: encryptValue
     //   });
     // } else {
-      request = request.clone({
-        url: '/rest' + request.url,
-        setParams: {
-          'access_token': localStorage.getItem('access_token'),
-          'openid': localStorage.getItem('openid')
-        }
-      });
+      if(request.url.slice(1,7) == 'assets'){
+        request = request.clone({
+          url: request.url,
+          setParams:null
+        });
+      }else{
+        request = request.clone({
+          url: '/rest' + request.url,
+          setParams: {
+            'access_token': localStorage.getItem('access_token'),
+            'openid': localStorage.getItem('openid')
+          }
+        });
+      }  
     // }
 
+ 
     return next.handle(request)
       .do((response) => {
         if (typeof response['body'] =='string') {
-          console.log("do we need to decoding?");
         }
       
       }, (err: any) => {
