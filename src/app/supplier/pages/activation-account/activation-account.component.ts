@@ -80,6 +80,7 @@ export class ActivationAccountComponent implements OnInit {
         error => {this._toastr.error(error);}
       );
   }
+  
   public passwordChecking(value) {
     var regexTotal = new RegExp('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,15}');
     var atLeastNumberPattern = /^.*(?=.*\d).*$/;
@@ -123,6 +124,7 @@ export class ActivationAccountComponent implements OnInit {
       this.passwordMatching(this.repeatedPassword);
     }
   }
+
   public passwordMatching(value) {
     this.repeatedPassword = value;
     if (this.password == this.repeatedPassword) {
@@ -142,17 +144,6 @@ export class ActivationAccountComponent implements OnInit {
       this.btnValue = 'show';
       this.btnType = 'password';
     }
-  }
-  public agreePrivacy(isChecked) {
-    // var regex = new RegExp('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,30}');
-    var regex = new RegExp('(?=.*[0-9])');
-    // var pPattern = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/;
-    var ttt = /^.*(?=.*\d).*$/;
-    var pPattern = /^.*(?=.*[!@#$%^&*?-]).*$/;
-    var nPattern = /^.*(?=.*\d).*$/;
-    console.log("  " + regex.test("DD"));
-    console.log("  " + ttt.test("DD"));
-    // console.log("  " + ttt.test("1212das"));
   }
 
 }

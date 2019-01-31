@@ -2,6 +2,7 @@ import { Attribute, Component, Inject, Renderer2 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
+import {FaqComponent} from '../faq/faq.component'
 
 @Component({
   selector: 'eb-home-header',
@@ -30,6 +31,12 @@ export class HeaderComponent {
   }
 
   public goToHome(): void {
-    this._router.navigate(['/']);
+    if(this._router.url !=='/'){
+      console.log("not in home page");
+      this._router.navigate(['/']);
+      scrollTo(0,-1);
+    }else{
+      this._router.navigate(['/']);
+    }
   }
 }

@@ -29,7 +29,7 @@ export class AccessTokenInterceptor implements HttpInterceptor {
     //       'access_token': localStorage.getItem('access_token'),
     //       'openid': localStorage.getItem('openid')
     //     },
-    //     body: encryptValue
+    //     body: {data:encryptValue}
     //   });
     // } else {
       if(request.url.slice(1,7) == 'assets'){

@@ -283,8 +283,8 @@
           "minimum-pay-amount": "最小起付钱金额设置",
           "set": "设置",
           "cancel": "取消",
-          "minimum-invoice": "You are choosing minimum invoice amount, it means you agree to clear every eligible invoice.",
-          "fixed-inline": "You are setting a fixed line amount at {{paymentValue}}, you can set the line according to your need. But be awared a higher fixed line may decrease your chance to win more early payment amount.",
+          "minimum-invoice": "您选择了最小发票数目，it means you agree to clear every eligible.",
+          "fixed-inline": "您現在設置的Fixed Line Amount 为 {{paymentValue}}, 您可以根据您的需求设置。 但是更高的回报率会为您获得更好的获得提前付款",
           "are-you-sure-to-proceed": "确定执行?",
           "submit": "提交",
           "back": "返回",
@@ -339,10 +339,10 @@
       },
       "activation": {
         "title": "账户激活",
-        "privacy":"EB-CF 隐私条款",
+        "privacy":" EB-CF 隐私条款",
         "agree":"同意",
-        "disagree":"不同意"
-
+        "disagree":"不同意",
+        "privacy-agree":"点击继续按钮说明您同意我们的"
       },
       "forget-password-message": {
         "title": "检查电子邮件",

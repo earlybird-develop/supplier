@@ -50,7 +50,8 @@
       <div class="forgot">
         <div class="col">
           <div class="row privacy">
-            <a style=" text-align: right">{{'supplier.pages.activation.privacy' | translate}}</a>
+            <p>{{'supplier.pages.activation.privacy-agree' | translate}}</p>
+            <a> {{'supplier.pages.activation.privacy' | translate}}</a>
           </div>
           <button type="submit" class="btn-primary continue-btn">{{ 'supplier.pages.forget.continue' | translate }}</button>
           <button class="btn back-to-login" [routerLink]="['/supplier','signin']">{{
