@@ -50,7 +50,6 @@ import {
 } from './components';
 import { SharedModule } from '../shared/shared.module';
 import { MarketAuthorizationComponent } from './pages/market-authorization/market-authorization.component';
-import { FileUploadModule } from 'ng2-file-upload';
 
 
 @NgModule({
@@ -64,7 +63,6 @@ import { FileUploadModule } from 'ng2-file-upload';
     NoopAnimationsModule,
     SupplierRoutingModule,
     TranslateModule,
-    FileUploadModule,
     PaginationModule.forRoot(),
     TooltipModule.forRoot(),
     BsDatepickerModule.forRoot(),
