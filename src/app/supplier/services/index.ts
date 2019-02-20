@@ -7,3 +7,4 @@ export * from './enquiry.service';
 export * from './reset-password.service';
 export * from './activation-account.service';
 export * from './aes.service';
+export * from './market-authorization.service';

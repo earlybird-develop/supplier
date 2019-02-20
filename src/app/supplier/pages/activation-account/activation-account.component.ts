@@ -5,6 +5,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { PrivacyModal } from './privacy';
 import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-activation-account',
@@ -27,16 +28,30 @@ export class ActivationAccountComponent implements OnInit {
   public password: string;
   public repeatedPassword: string;
   public bsModalRef: BsModalRef;
+  public privacyContent:any;
   constructor(
     private route: ActivatedRoute,
     private _activationAccount: ActivationAccountService,
     private modalService: BsModalService, 
     private _router: Router,
-    private _toastr: ToastrService
+    private _toastr: ToastrService,
+    public http: HttpClient
     ) {
   }
 
   ngOnInit() {
+    // var that = this;
+    //check activation is under time limited otherwise route back to singin page and send another email.
+      // this._activationAccount.validActivationCheck({verify_code:this.verifyCode,url_type:this.urlType}).subscribe(
+      //   data=>{},
+      //   error=>{
+      //     this._toastr.error(error, "Error Message", { positionClass: 'toast-center-center'});
+      //     setTimeout(()=>{
+      //       that._router.navigate(['/supplier', 'signin']);
+      //     }
+      //     ,3000);
+      //   }
+      // );
   }
   onSubmit() {
 
@@ -133,7 +148,7 @@ export class ActivationAccountComponent implements OnInit {
       this.passwordCheckedMatch = false;
     }
   }
-
+  
   // 密码框显示隐藏按钮方法
   public check() {
     // 判断按钮是否为显示或隐藏进行密码显示隐藏
@@ -146,4 +161,16 @@ export class ActivationAccountComponent implements OnInit {
     }
   }
 
+  public openPrivacyModal( modal){
+    this.http.get('/assets/privacy.txt', { responseType: 'text' }).subscribe(data => {
+      this.privacyContent = data;
+    }, error => {
+      console.log(error);
+    });
+
+    this.bsModalRef = this.modalService.show(modal);
+  }
+  public agree(){
+    this.bsModalRef.hide();
+  }
 }

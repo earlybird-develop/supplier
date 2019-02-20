@@ -14,8 +14,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { SupplierRoutingModule } from './supplier-routing.module';
 import { DialogMarketOpen } from './pages/dialog-market-open/dialog-market-open.page';
-import {DialogOffer} from './pages/dialog-offer/dialog-offer.page';
-import {PrivacyModal} from './pages/activation-account/privacy';
+import { DialogOffer } from './pages/dialog-offer/dialog-offer.page';
+import { PrivacyModal } from './pages/activation-account/privacy';
 import {
   WrapperPage,
   MarketsPage,
@@ -32,14 +32,15 @@ import {
 } from './pages';
 
 import {
-    AccountService,
-    EnquiryService,
+  AccountService,
+  EnquiryService,
   MarketsService,
   SubheaderService,
   MarketHistoryService,
   ResetPasswordService,
   ActivationAccountService,
-  AESService
+  AESService,
+  MarketAuthorizationService
 } from './services';
 
 import {
@@ -48,6 +49,8 @@ import {
   MarketHeaderComponent
 } from './components';
 import { SharedModule } from '../shared/shared.module';
+import { MarketAuthorizationComponent } from './pages/market-authorization/market-authorization.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 @NgModule({
@@ -61,6 +64,7 @@ import { SharedModule } from '../shared/shared.module';
     NoopAnimationsModule,
     SupplierRoutingModule,
     TranslateModule,
+    FileUploadModule,
     PaginationModule.forRoot(),
     TooltipModule.forRoot(),
     BsDatepickerModule.forRoot(),
@@ -87,7 +91,9 @@ import { SharedModule } from '../shared/shared.module';
     MinPayAmountModal,
     PrivacyModal,
     ActivationAccountComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    MarketAuthorizationComponent
+
   ],
   providers: [
     AccountService,
@@ -97,7 +103,8 @@ import { SharedModule } from '../shared/shared.module';
     EnquiryService,
     ResetPasswordService,
     ActivationAccountService,
-    AESService
+    AESService,
+    MarketAuthorizationService
   ],
   entryComponents: [
     MarketsHeaderComponent,
@@ -108,4 +115,4 @@ import { SharedModule } from '../shared/shared.module';
     DialogOffer
   ]
 })
-export class SupplierModule {}
+export class SupplierModule { }

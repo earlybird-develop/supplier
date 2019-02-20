@@ -203,3 +203,23 @@
       }
     }
   }
+  
+textarea{
+  background-color:white;color:black;
+  height: 450px;
+  width: 100%;
+}
+.div-button{
+  text-align:left;
+  margin-bottom: 10px;
+  .agree-btn{
+      margin-right: 20px;
+      width: 64px;
+  }
+  .disagree-btn{
+      margin-left: 20px;
+  }
+}
+.privacy-container{
+  height: 10% !important;
+}

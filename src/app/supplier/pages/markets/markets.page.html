@@ -1,4 +1,10 @@
 <div class="table-markets">
+  <div class="auth-notification" *ngIf="marketAuthStatus">
+      <div class="alert-box notice">
+        <span>notice: </span>You have new Market requires authorization.
+        <a href="/#/supplier/market-authorization">Check It Now</a>
+      </div>
+  </div>
   <table>
     <thead>
       <tr>
@@ -30,50 +36,39 @@
                 </div>
               </div>
               <div class="configure-offer">
-                <button [hidden]="hideMe[market.id]"
-                        class="btn btn-secondary"
-                        (click)="hideMe[market.id] = !hideMe[market.id]">
+                <button [hidden]="hideMe[market.id]" class="btn btn-secondary"
+                  (click)="hideMe[market.id] = !hideMe[market.id]">
                   {{ 'supplier.pages.markets.config-offer' | translate }}
                 </button>
                 <div class="loader" *ngIf="showProcessing(market)">
-                  {{ 'supplier.pages.markets.offer-processing' | translate }} {{market.availableAmount | currency: market.currencySign }}
+                  {{ 'supplier.pages.markets.offer-processing' | translate }}
+                  {{market.availableAmount | currency: market.currencySign }}
                 </div>
 
                 <div class="filters" [hidden]="!hideMe[market.id] || showProcessing(market)">
-                    <div class="offer-filter">
-                      <div class="input-group offer-persentage">
-                        <input type="number"
-                               pattern="^$|^([0-9]|[1-9][0-9]|[1][0][0])?"
-                               class="input"
-                               maxlength="3"
-                               class="input"
-                               min="1"
-                               max="99"
-                               [(ngModel)]="offerPercent">
-                        <div class="icon">%</div>
-                      </div>
-                      <div class="input-group offer-type">
-                        <eb-custom-select offerSelector
-                                          [placeholder]="offerType.value"
-                                          [options]="offerTypes"
-                                          [(ngModel)]="offerType">
-                        </eb-custom-select>
-                      </div>
-                      <a class="btn btn-primary"
-                         (click)="configureOffer(market)">
-                        {{ 'supplier.pages.markets.set' | translate }}
-                      </a>
+                  <div class="offer-filter">
+                    <div class="input-group offer-persentage">
+                      <input type="number" pattern="^$|^([0-9]|[1-9][0-9]|[1][0][0])?" class="input" maxlength="3"
+                        class="input" min="1" max="99" [(ngModel)]="offerPercent">
+                      <div class="icon">%</div>
                     </div>
+                    <div class="input-group offer-type">
+                      <eb-custom-select offerSelector [placeholder]="offerType.value" [options]="offerTypes"
+                        [(ngModel)]="offerType">
+                      </eb-custom-select>
+                    </div>
+                    <a class="btn btn-primary" (click)="configureOffer(market)">
+                      {{ 'supplier.pages.markets.set' | translate }}
+                    </a>
                   </div>
+                </div>
               </div>
             </div>
           </td>
         </tr>
         <tr *ngSwitchCase="false" [ngClass]="{'row-gray':market.marketStatus == 0}">
-          <td >
-            <eb-checkbox (ngModelChange)="setParticipation(market, $event)"
-                         [(ngModel)]="market.isParticipation"
-                       >
+          <td>
+            <eb-checkbox (ngModelChange)="setParticipation(market, $event)" [(ngModel)]="market.isParticipation">
 
             </eb-checkbox>
           </td>
@@ -90,24 +85,19 @@
           </td>
           <td>{{ market.availableAmount | currency: market.currencySign }}</td>
           <td>
-            <eb-inline-edit [ngModel]="market.offerApr"
-                            (ngModelChange)="setOfferApr(market, $event)"
-                            [disabled]="market.isLocked() || market.marketStatus == 0"
-                            black
-                            #offerAprEdit>
+            <eb-inline-edit [ngModel]="market.offerApr" (ngModelChange)="setOfferApr(market, $event)"
+              [disabled]="market.isLocked() || market.marketStatus == 0" black #offerAprEdit>
             </eb-inline-edit>
             <ng-container *ngIf="!offerAprEdit.isOpen">
               {{ market?.offerApr }}% {{ 'supplier.pages.markets.apr' | translate }}
-                <a class="edit-btn pointer"
-                 (click)="offerAprEdit.open()"
-                 tooltip="{{ 'supplier.pages.markets.waiting-status' | translate }}"
-                 placement="bottom"
-                 [isDisabled]="!market.isLocked()">
+              <a class="edit-btn pointer" (click)="offerAprEdit.open()"
+                tooltip="{{ 'supplier.pages.markets.waiting-status' | translate }}" placement="bottom"
+                [isDisabled]="!market.isLocked()">
                 <img src="assets/icons/pencil-dark.svg">
               </a>
             </ng-container>
             <!--<a href="javascript:void(0);">-->
-              <!--{{ market.offerApr }}% APR-->
+            <!--{{ market.offerApr }}% APR-->
             <!--</a>-->
           </td>
           <td class="turn-on text-center" colspan="3" *ngIf="!market.isParticipation">
@@ -122,9 +112,10 @@
           </ng-container>
 
           <td colspan="3" *ngIf="market.isLocked()">
-                <div style="width:100%;color:#33cc33 !important;text-align: center;">
-                  {{ 'supplier.pages.markets.offer-processing' | translate }} {{market.availableAmount | currency: market.currencySign }}
-                </div>
+            <div style="width:100%;color:#33cc33 !important;text-align: center;">
+              {{ 'supplier.pages.markets.offer-processing' | translate }}
+              {{market.availableAmount | currency: market.currencySign }}
+            </div>
           </td>
 
           <td class="text-center">{{ market.DPE }}</td>

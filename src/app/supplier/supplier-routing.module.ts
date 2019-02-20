@@ -15,6 +15,7 @@ import {
   ResetPasswordComponent,
   ActivationAccountComponent
 } from './pages';
+import { MarketAuthorizationComponent } from './pages/market-authorization/market-authorization.component';
 
 
 const routes: Routes = [
@@ -52,7 +53,12 @@ const routes: Routes = [
                 ]
               }
             ]
+          },
+          {
+            path:'market-authorization',
+            component:MarketAuthorizationComponent
           }
+        
         ]
       }
     ]

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
 const ResetPassword_Url = '/service/flush_password';
-
+const VALID_ACTIVATION_CHECK = '';
 @Injectable()
 export class ActivationAccountService {
 
@@ -31,4 +31,20 @@ export class ActivationAccountService {
         );
     });
   }
+
+  public validActivationCheck(httpParams:any): Observable<boolean> {
+
+    return Observable.create((observer: Observer<any>) => {
+      this._http
+        .get(VALID_ACTIVATION_CHECK,httpParams)
+        .subscribe(
+          data => {
+            observer.next(data);
+            observer.complete();
+          },
+          error => observer.error(error)
+        );
+    });
+  }
+
 }

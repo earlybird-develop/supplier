@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
         this.login_name = resp['data']['name'];
         localStorage.setItem('user_name', resp['data']['name']);
         localStorage.setItem('user_profile', resp['data']['profile']);
+        localStorage.setItem('user_email', resp['data']['email']);
       },
       errors => {
         this.login_name = 'Error';
@@ -50,6 +51,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('user_name');
     localStorage.removeItem('user_profile');
+    localStorage.removeItem('user_email');
     this._router.navigate(['/supplier', 'signin']);
   }
 }

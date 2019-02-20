@@ -51,7 +51,7 @@
         <div class="col">
           <div class="row privacy">
             <p>{{'supplier.pages.activation.privacy-agree' | translate}}</p>
-            <a> {{'supplier.pages.activation.privacy' | translate}}</a>
+            <a href="javascript:void(0);" (click)="openPrivacyModal(myModal)" > {{'supplier.pages.activation.privacy' | translate}}</a>
           </div>
           <button type="submit" class="btn-primary continue-btn">{{ 'supplier.pages.forget.continue' | translate }}</button>
           <button class="btn back-to-login" [routerLink]="['/supplier','signin']">{{
@@ -61,3 +61,13 @@
     </form>
   </div>
 </div>
+
+<ng-template #myModal>
+    <div style=" padding: 15px 30px 15px 30px">
+        <textarea [(ngModel)]='privacyContent'> </textarea>
+        <div class="div-button">
+                <button  class="btn btn-info" (click)="agree()">{{'supplier.pages.activation.agree' | translate}}</button>
+        </div>
+    
+    </div>
+  </ng-template>

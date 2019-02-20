@@ -33,7 +33,7 @@ export class MarketsPage implements OnInit, OnDestroy {
   private _code: string;
   public user_profile: string;  // 用户信息
   public rkey = /^[0-9A-Za-z_@-]*$/;  // localStorage读取对象格式安全封装
-
+  public marketAuthStatus: boolean;
   constructor(
     private _marketsService: MarketsService,
     private _subheader: SubheaderService,
@@ -44,7 +44,7 @@ export class MarketsPage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-
+    this.marketAuthStatus=true;
     this._subheader.show(MarketsHeaderComponent);
     this.load_hash();
     this.load();

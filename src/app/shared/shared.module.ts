@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TimerService } from './timer/timer.service';
 import { SidebarablePageComponent } from './sidebarable-page/sidebarable-page.component';
 import { InlineEditComponent } from './inline-edit/inline-edit.component';
-import { SearchFilterPipe, CapitalizePipe, KeysPipe, InvoiceFilterPipe } from './pipes';
+import { SearchFilterPipe, CapitalizePipe, KeysPipe, InvoiceFilterPipe,SortFilterPipe,NullFilterPipe } from './pipes';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { DialogService, DialogComponent } from './dialog';
 import { CustomSelectComponent } from './custom-select/custom-select.component';
@@ -37,7 +37,9 @@ import { CustomSelectComponent } from './custom-select/custom-select.component';
     SearchFilterPipe,
     CapitalizePipe,
     KeysPipe,
-    CustomSelectComponent
+    CustomSelectComponent,
+    SortFilterPipe,
+    NullFilterPipe
   ],
   providers: [
     TimerService,
@@ -53,7 +55,9 @@ import { CustomSelectComponent } from './custom-select/custom-select.component';
     InvoiceFilterPipe,
     SearchFilterPipe,
     CapitalizePipe,
-    KeysPipe
+    KeysPipe,
+    SortFilterPipe,
+    NullFilterPipe
   ],
   entryComponents: [
     DialogComponent

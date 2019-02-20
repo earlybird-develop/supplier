@@ -1,0 +1,158 @@
+<div class="container">
+
+  <div class="card" *ngFor="let market of marketList | sortFilter: 'invite_time' ;let i = index">
+    <div class="card-body row" [ngClass]=" market.status =='4' ? 'auth-success': '' ">
+      <div class="card-block col-md-3">
+        <p>{{market.invite_time}}</p>
+        <h4 class="card-title">{{market.company_name}}</h4>
+        <p class="card-text">Please authorize new market to participate in the market</p>
+      </div>
+
+      <div class="card-block col-md-9 text-center" [hidden]="market.status !='4'">
+        <h4 class="card-title"> Authorization Completed</h4>
+      </div>
+
+      <div class="col-md-3" *ngIf="market.status != '4'">
+        <div class="text-center">
+          <h5>1
+            <img class="smallImage" src="assets/success.png" *ngIf=" market.status != '0' ">
+          </h5>
+        </div>
+        <input class="vendor-code" [(ngModel)]="market.venderCode" style="width: 130px;height: 20px;" type="text"
+          placeholder="Supplier ID">
+        <button type="button" (click)="submitStepOne($event,market)">Verify</button>
+        <div class="row">
+          <div [ngClass]="market === currentCompany ? 'checked' : 'noChecked'">
+            <p class="errorMsg" *ngIf=" market.status == '0' ">
+              <img class="smallImage" src="assets/error.png">
+              Supplier ID vertification failed, please vertiy with Customer.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3" *ngIf=" market.status != '0' && market.status != '4' ">
+        <div class="text-center">
+          <h5>2
+            <img class="smallImage" src="assets/success.png" *ngIf=" market.status != '0' && market.status != '1' ">
+          </h5>
+        </div>
+        <div>
+          <p class="errorMsg">
+            Supplier ID vertify,Please download authorization letter.
+            <a href="javascript:void(0);"> <img class="smallImage" src="assets/download.png"
+                (click)="openStepTwoForm(myModal,market)"></a>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3" *ngIf="market.status != '0' && market.status != '1' && market.status != '4' ">
+        <div class="text-center">
+          <h5>3</h5>
+        </div>
+        <div>
+          <label> Authorization&nbsp;&nbsp;Letter&nbsp;</label>
+          <label class="custom-file-upload" *ngIf=" market.status != '3' ">
+            <input type="file" accept="application/pdf" (change)="authFileEvent($event,market)" />
+            选择文件
+          </label>
+          <label *ngIf=" market.status == '3' " style="color:blue">审核中...</label>
+          <br />
+          <label *ngIf=" market.status == '-1' "
+            style="color:red">{{market['attach_file']['letter'] | nullFilter:'verify_msg'}}</label>
+          <div [ngClass]="market['attach_file']['letter'] ? 'checked' : 'noChecked'">
+            <label style="color:red">{{market['attach_file']['letter'] | nullFilter:'file_name'}}</label>
+            <div [ngClass]="market == currentCompany  && market['attach_file']['letter'] ? 'checked' : 'noChecked'">
+              <img class="loadingImg" style="width:80px" src="../../../../assets/loading.svg"
+                [hidden]="uploadAuthButtonProcess">
+              <button [hidden]="!uploadAuthButtonProcess" (click)="uploadAuthFile()">上传</button>
+            </div>
+
+          </div>
+          <br />
+          <label> Business Registration </label>
+          <label class="custom-file-upload" *ngIf=" market.status != '3' ">
+            <input type="file" accept="application/pdf" (change)="authRegisterEvent($event,market)" />
+            选择文件
+          </label>
+          <label *ngIf=" market.status == '3' " style="color:blue">审核中...</label>
+          <label *ngIf=" market.status == '-1' "
+            style="color:red">{{market['attach_file']['license'] | nullFilter:'verify_msg'}}</label>
+          <div [ngClass]="market['attach_file']['license'] ? 'checked' : 'noChecked'">
+            <label style="color:red">{{market['attach_file']['license'] | nullFilter:'file_name'}}</label>
+            <div [ngClass]="market == currentCompany && market['attach_file']['license']  ? 'checked' : 'noChecked'">
+              <img class="loadingImg" style="width:80px" src="../../../../assets/loading.svg"
+                [hidden]="uploadRegisterButtonProcess">
+              <button [hidden]="!uploadRegisterButtonProcess" (click)="uploadRegisterFile()">上传</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<ng-template #myModal>
+  <div style=" padding: 15px 30px 15px 30px">
+    <form id="stepTwoForm">
+      <div class="form-group">
+        <label for="validationDefault01">授权委托指定员工姓:</label>
+        <input type="text" [(ngModel)]="supplierInfo.first_name" name="first_name" class="form-control" placeholder="姓"
+          required>
+      </div>
+      <div class="form-group">
+        <label for="validationDefault01">授权委托指定员工名:</label>
+        <input type="text" [(ngModel)]="supplierInfo.last_name" name="last_name" class="form-control" placeholder="名"
+          required>
+      </div>
+      <div class="form-group ">
+        <label for="inputState">证件类型</label>
+        <select id="inputState" [(ngModel)]="supplierInfo.id_type" name="id_type" class="form-control">
+          <option selected value="身份证">身份证</option>
+          <option value="passport">护照</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">授权委托指定员工证件号码</label>
+        <input type="text" [(ngModel)]="supplierInfo.id_number" name="id_number" class="form-control" placeholder="证件号码"
+          required>
+      </div>
+      <div class="form-group">
+        <label>企业名字</label>
+        <input type="text" [(ngModel)]="supplierInfo.company_name" name="company_name" class="form-control"
+          placeholder="供应商名字" required>
+      </div>
+      <div class="form-group">
+        <label>企业证照号码</label>
+        <input type="text" [(ngModel)]="supplierInfo.company_license" name="company_license" class="form-control"
+          placeholder="社会统一信用代码" required>
+      </div>
+      <img class="loadingImg" style="width:100px" src="../../../../assets/loading.svg" [hidden]="pdfBoolean">
+      <button type="submit" class="btn btn-primary" (click)="submitStepTwo(false)" [hidden]="!pdfBoolean">下载文档</button>
+    </form>
+  </div>
+</ng-template>
+
+<div class='pdfContent' id='pdfContent' style="width:756px;" [hidden]="pdfBoolean">
+  <h2 style="text-align: center;"> 供应商授权公函
+  </h2>
+  <h5><br><br>致深圳市信享科技有限公司：
+  </h5>
+  <h5 style="line-height: 2;">&nbsp; &nbsp;&nbsp;
+    &nbsp;【{{supplierInfo.vendorcode}}】同意授权委托指定员工{{supplierInfo.first_name}}{{supplierInfo.last_name}}，{{supplierInfo.id_number}}
+    早鸟金流平台账户名【{{supplierEmail}} 】在【 {{supplierInfo.company_name}}】市场中提交折扣开价等平台内服务的使用及操作。
+    {{supplierInfo.market_id}}无条件承认【 {{supplierEmail}}】在早鸟金流平台中【 {{supplierInfo.company_name}}】市场的全部行为并自愿承受因此而产生的一切后果。
+    <br>
+  </h5>
+  <h5 style=" text-align: left;padding-left: 400px">
+    <br> <br> <br>
+    供应商编号： {{supplierInfo.vendorcode}}<br>
+    供应商名称：{{supplierInfo.company_name}}<br>
+    社会统一信用代码：{{supplierInfo.company_license}}<br>
+    法定代表人：_______________________<br>
+    日期：_______________________________<br>
+  </h5>
+</div>
