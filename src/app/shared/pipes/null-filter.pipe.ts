@@ -8,7 +8,11 @@ export class NullFilterPipe implements PipeTransform {
   transform(value: Object, args: string): String {
     if (value) {
       if (args == "verify_msg") {
-        if (value[args] != "success" && value[args] != "pending") {
+        if (value[args] == "success" && value[args] == "pending") {
+          return value[args];
+        }else if(value[args] == ""){
+          return "";
+        }else{
           return value[args] + " 请从新上传";
         }
       }

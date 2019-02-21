@@ -146,7 +146,8 @@ export class MarketAuthorizationComponent implements OnInit {
     } else {
       this.authFile = file;
       item.attach_file.letter = new Object({
-        file_name: file.name
+        file_name: file.name,
+        verify_msg:""
       });
       this.currentCompany = item;
     }
@@ -161,7 +162,8 @@ export class MarketAuthorizationComponent implements OnInit {
     } else {
       this.registerFile = file;
       item.attach_file.license = new Object({
-        file_name: file.name
+        file_name: file.name,
+        verify_msg:""
       });
       this.currentCompany = item;
     }

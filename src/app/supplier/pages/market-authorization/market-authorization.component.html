@@ -59,7 +59,7 @@
           <label *ngIf=" market.status == '3' " style="color:blue">审核中...</label>
           <br />
           <label *ngIf=" market.status == '-1' "
-            style="color:red">{{market['attach_file']['letter'] | nullFilter:'verify_msg'}}</label>
+            style="color:blue">{{market['attach_file']['letter'] | nullFilter:'verify_msg'}}</label>
           <div [ngClass]="market['attach_file']['letter'] ? 'checked' : 'noChecked'">
             <label style="color:red">{{market['attach_file']['letter'] | nullFilter:'file_name'}}</label>
             <div [ngClass]="market == currentCompany  && market['attach_file']['letter'] ? 'checked' : 'noChecked'">
@@ -77,7 +77,7 @@
           </label>
           <label *ngIf=" market.status == '3' " style="color:blue">审核中...</label>
           <label *ngIf=" market.status == '-1' "
-            style="color:red">{{market['attach_file']['license'] | nullFilter:'verify_msg'}}</label>
+            style="color:blue">{{market['attach_file']['license'] | nullFilter:'verify_msg'}}</label>
           <div [ngClass]="market['attach_file']['license'] ? 'checked' : 'noChecked'">
             <label style="color:red">{{market['attach_file']['license'] | nullFilter:'file_name'}}</label>
             <div [ngClass]="market == currentCompany && market['attach_file']['license']  ? 'checked' : 'noChecked'">

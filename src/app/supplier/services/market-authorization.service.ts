@@ -37,9 +37,9 @@ export class MarketAuthorizationService {
       this._http.post(VERIFY_VERDOR_CODE, { vendorcode: httpParams['vendorcode'] }, { params }).subscribe(
         resp => {
           console.log(resp);
-          if(resp['code'] ==1 ){
+          if (resp['code'] == 1) {
             observer.next(true);
-          }else{
+          } else {
             observer.next(false);
           }
           observer.complete();
@@ -92,7 +92,7 @@ export class MarketAuthorizationService {
     let formData = new FormData();
     formData.append('attach', file, file.name);
     return Observable.create((observer: Observer<Object>) => {
-      this._http.post(UPLOAD_FILE, formData,{params}).subscribe(
+      this._http.post(UPLOAD_FILE, formData, { params }).subscribe(
         resp => {
           observer.next(resp);
           observer.complete();
@@ -113,7 +113,7 @@ export class MarketAuthorizationService {
     formData.append('attach', file, file.name);
 
     return Observable.create((observer: Observer<Object>) => {
-      this._http.post(UPLOAD_FILE, formData,{params}).subscribe(
+      this._http.post(UPLOAD_FILE, formData, { params }).subscribe(
         resp => {
           observer.next(resp);
           observer.complete();

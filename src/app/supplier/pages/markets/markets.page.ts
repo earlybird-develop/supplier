@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Market } from '../../models';
 import { MarketsHeaderComponent } from '../../components';
 import { ISelectOption } from '../../../shared/custom-select/custom-select.component';
-import { MarketsService, SubheaderService } from '../../services';
+import { MarketsService, SubheaderService, MarketAuthorizationService } from '../../services';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { DialogMarketOpen } from '../dialog-market-open/dialog-market-open.page';
@@ -40,11 +40,12 @@ export class MarketsPage implements OnInit, OnDestroy {
     private _toastr: ToastrService,
     private modalService: BsModalService,
     private translate: TranslateService,
-    private _http: HttpClient
+    private _http: HttpClient,
+    private marketAuthService: MarketAuthorizationService
   ) { }
 
   ngOnInit() {
-    this.marketAuthStatus=true;
+
     this._subheader.show(MarketsHeaderComponent);
     this.load_hash();
     this.load();
@@ -107,6 +108,18 @@ export class MarketsPage implements OnInit, OnDestroy {
       },
       error => console.error(error)
     );
+    this.marketAuthService.loadMarketsList().subscribe(
+      resp => {
+        if (resp['data'].length>0) {
+          this.marketAuthStatus = true;
+        } else {
+          this.marketAuthStatus = false;
+        }
+      },
+      error => {
+        this._toastr.error(error, "Error Message", { positionClass: 'toast-center-center' });
+      }
+    )
   }
 
   public showProcessing(market: Market): boolean {
